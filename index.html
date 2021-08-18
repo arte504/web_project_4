@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Author" content="Artiom Shlyusberg">
+  <title>Around The U.S.</title>
+  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="icon" type="image" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
+</head>
+
+<body class="body">
+
+  <!-- Page starts -->
+  <div class="page">
+    <!-- 'Header' -->
+    <header class="header">
+      <img 
+      src="./images/logo.svg" 
+      class="header__logo" 
+      alt="Around the U.S.">
+    </header>
+
+    <main class="page-content">
+
+      <!-- 'Profile' -->
+      <section class="profile">
+        <div class="profile__container">
+          <!-- Profile image and info -->
+          <img 
+          class="profile__avatar" 
+          src="./images/profileImg.jpg" 
+          alt="Profile image">
+          <div class="profile__info">
+            <h1 class="profile__name">Artiom Shlyusberg</h1>
+            <p class="profile__about-me">Junior web dev</p>
+            <!-- 'Edit' button -->
+            <button class="profile__edit-button" type="button" aria-label="Edit Profile"></button>
+          </div>
+        </div>
+        <!-- 'Add' button -->
+        <button class="profile__post-button" type="button" aria-label="Add to Gallery"></button>
+      </section>
+
+      <!-- 'Gallery' -->
+      <section class="gallery">
+        <ul class="gallery__grid">
+          <!-- 'Card' template used here -->
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- 'Footer' -->
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2021 Artiom Shlyusberg</p>
+    </footer>
+
+  </div>
+  <!-- Page ends -->
+
+<!-- Popup menus starts -->
+
+  <!-- Profile popup edit-->
+  <div class="popup popup_type_edit-profile">
+    <form action="#" class="popup__form popup__edit-form" name="editProfile" method="post">
+      <!-- Close button -->
+      <button class="popup__close-button" type="button" aria-label="Close Window"></button>
+      <h3 class="popup__title">Edit Profile</h3>
+      <!-- 'Name' input -->
+      <input 
+      type="text" class="popup__input popup__input_type_name" 
+      name="profileName" id="profile-name" placeholder="Name" value="Jacques Cousteau">
+      <span class="popup__error" id="profile-name-error"></span>
+      <!-- 'About' input-->
+      <input 
+      type="text" class="popup__input popup__input_type_about" 
+      name="profileAbout" id="profile-about" placeholder="About" value="Explorer">
+      <span class="popup__error" id="profile-about-error"></span>
+      <!-- Save changes button -->
+      <button class="popup__save-button" type="submit">Save</button>
+    </form>
+  </div>
+
+  <!-- Card adding popup -->
+  <div class="popup popup_type_add-card">
+    <form action="#" class="popup__form popup__add-form" name="newPlace" method="post">
+      <!-- Close button -->
+      <button class="popup__close-button" type="button" aria-label="Close Window"></button>
+      <h3 class="popup__title">New Place</h3>
+      <!-- 'Name' input -->
+      <input 
+      type="text" class="popup__input popup__input_type_card-title" 
+      name="placeTitle" id="place-title" placeholder="Title" value="" required minlength="2">
+      <span class="popup__error" id="place-title-error"></span>
+      <!-- 'Image url' input -->
+      <input 
+      type="url" class="popup__input popup__input_type_url" 
+      name="imageLink" id="place-url" placeholder="Image Link" value="" required>
+      <span class="popup__error" id="place-url-error"></span>
+      <!-- Save changes button -->
+      <button class="popup__save-button popup__save-button_disabled" type="submit">Save</button>
+    </form>
+  </div>
+
+  <!-- Card open to big picture popup -->
+  <div class="popup popup_type_image">
+    <div class="popup__container">
+      <!-- Close button -->
+      <button class="popup__close-button" type="button" aria-label="Close Window"></button>
+      <figure class="popup__figure">
+        <img class="popup__image" src="" alt="">
+        <figcaption class="popup__image-title"></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Popup menus ends-->
+
+  <!-- Card template starts -->
+  <template class="card-template">
+    <li class="card">
+      <img class="card__image">
+      <div class="card__details">
+        <h2 class="card__title"></h2>
+        <button class="like card__like-button" type="button" aria-label="Like"></button>
+      </div>
+    </li>      
+  </template>
+  <!-- Card template ends -->
+
+  <script type="module" src="./js/index.js" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+.profile__name {
+  grid-area: name;
+  max-width: 380px;
+  margin: 0;
+  padding: 0;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 56px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  align-self: end;
+}
+
+
+/* -----------------------------------
+ Media Queries to adjust the font size
+ and alignment of the Name content
+----------------------------------- */
+
+
+/* Medium Smartphone to Tablet Landscape */
+@media screen and (max-width: 960px) {
+  .profile__name {
+    font-size: 34px;
+  }
+}
+
+/* Extra-small Mobile Dvices to Medium Smart Phones */
+@media screen and (max-width: 661px) {
+  .profile__name {
+    max-width: 220px;
+    font-size: 22px;
+    text-align: center;
+    align-self: center;
+    padding-left: 22px;
+  }
+}

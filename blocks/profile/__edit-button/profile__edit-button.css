@@ -1,0 +1,45 @@
+.profile__edit-button {
+  grid-area: edit;
+  width: 24px; 
+  height: 24px; 
+  margin-top: 24px;
+  margin-left: 30px;
+  border: 1px solid #FFF; 
+  background-image: url('../../../images/editIcon.svg');
+  background-repeat: no-repeat; 
+  background-color: transparent; 
+  background-position: center;
+  outline: none;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  transition: all ease 0.2s;
+  cursor: pointer;
+}
+
+
+/* ----------------------------------------
+ Media Queries to adjust the dimensions and 
+ spacing for the profile edit button
+---------------------------------------- */
+
+
+/* Medium Smartphone to Tablet Landscape */
+@media screen and (max-width: 960px) {
+  .profile__edit-button {
+    margin-left: 16px;
+  }
+}
+
+/* Extra-small Mobile Dvices to Medium Smart Phones */
+@media screen and (max-width: 661px) {
+  .profile__edit-button {
+    height: 18px; 
+    width: 18px; 
+    margin-top: 0;
+    margin-left: 12px;
+    padding: 5.25px; 
+    align-self: center;
+  }
+}

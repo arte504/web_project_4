@@ -1,0 +1,19 @@
+@import url(./__grid/gallery__grid.css);
+
+.gallery {
+  margin: 47.25px auto 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .gallery {
+    padding: 0 2%;
+  }
+}
+
+@media screen and (max-width: 661px) {
+  .gallery {
+    margin: 36px auto;
+    padding: 0 6%;
+  }
+}

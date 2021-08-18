@@ -1,0 +1,25 @@
+.profile__info {
+  display: grid;
+  margin-left: 30px; 
+  grid-template-areas: 
+    "name edit"
+    "about .";
+  align-items: center;
+}
+
+
+/* -----------------------------------------------
+ Media Query to adjust the margins and alignment 
+ of text-based profile elements on mobile devices.
+----------------------------------------------- */
+
+
+/* Extra-small Mobile Dvices to Medium Smart Phones */
+@media screen and (max-width: 661px) {
+  .profile__info {
+    margin: 0 auto; 
+    justify-content: center; 
+    height: 66px; 
+    width: 100%; 
+  }
+}

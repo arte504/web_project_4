@@ -1,0 +1,21 @@
+.popup__container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex: 0 0 auto;
+    padding: 0;
+    background: transparent;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.52px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 661px) {
+    .popup__container {
+        width: calc(80% - 20px);
+        max-width: 430px;
+    }
+}

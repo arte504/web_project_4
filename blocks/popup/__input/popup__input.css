@@ -1,0 +1,21 @@
+.popup__input {
+  width: 358px;
+  display: block;
+  padding-bottom: 29.74px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 13.26px;
+}
+
+.popup__input:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 661px) {
+  .popup__input {
+    width: calc(80% - 20px);
+  }
+}

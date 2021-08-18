@@ -1,0 +1,18 @@
+.profile__container {
+  display: flex; 
+  flex-direction: row;
+}
+
+
+/* -------------------------------
+ Media Query to stack all profile 
+ elements on mobile devices
+------------------------------- */
+
+
+/* Extra-small Mobile Dvices to Medium Smart Phones */
+@media screen and (max-width: 661px){
+  .profile__container {
+    flex-direction: column;
+  }
+}
