@@ -1,13 +1,13 @@
 .profile__post-button {
-  height: 50px; 
-  width: 150px; 
-  border: 2px solid #FFF; 
-  border-radius: 2px; 
+  height: 50px;
+  width: 150px;
+  border: 2px solid #FFF;
+  border-radius: 2px;
   background-image: url('../../../images/addIcon.svg');
-  background-repeat: no-repeat; 
-  background-color: transparent; 
+  background-repeat: no-repeat;
+  background-color: transparent;
   background-position: center;
-  align-self: center; 
+  align-self: center;
   outline: none;
 }
 
@@ -17,21 +17,12 @@
   cursor: pointer;
 }
 
-
-/* -----------------------------------
- Media Queries to Adjust width and top
- margin for the New Post Button.
------------------------------------ */
-
-
-/* Medium Smartphone to Tablet Landscape */
 @media screen and (max-width: 960px) {
   .profile__post-button {
     width: 50px;
   }
 }
 
-/* Extra-small mobile devices to Medium Smartphones */
 @media screen and (max-width: 661px) {
   .profile__post-button {
     width: 282px;

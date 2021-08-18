@@ -1,13 +1,12 @@
 .popup__input {
   width: 358px;
   display: block;
-  padding-bottom: 29.74px;
+  padding-bottom: 30px;
   font-size: 14px;
   line-height: 17px;
   color: #000;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 13.26px;
 }
 
 .popup__input:last-of-type {
