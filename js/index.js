@@ -1,5 +1,5 @@
 import Card from './card.js';
-import initialCards from './initialCards.js';
+import initCards from './initCards.js';
 import {togglePopup, saveButtonDisabled} from './utils.js';
 
 // ---- Consts  ---- //
@@ -12,10 +12,10 @@ const defaultConfig = {
   errorClass: '.popup__error_visible'
 };
 
-// ---- Modal containers ---- //
+// ---- 'Add card' container ---- //
 const addCardModalWindow = document.querySelector('.popup_type_add-card');
+// ---- 'Edit profile' container ---- //
 const editProfileModalWindow = document.querySelector('.popup_type_edit-profile');
-const imageModalWindow = document.querySelector('.popup_type_image');
 
 // ---- Input fields ---- //
 const inputName = document.querySelector('.popup__input_type_name');
@@ -25,12 +25,12 @@ const profileAboutme = document.querySelector('.profile__about-me');
 const inputTitle = document.querySelector('.popup__input_type_card-title');
 const inputLink = document.querySelector('.popup__input_type_url'); 
 
-// ---- Buttons ---- //
+// ---- 'Edit profile' buttons ---- //
 const editButton = document.querySelector('.profile__edit-button');
 const closeProfileButton = editProfileModalWindow.querySelector('.popup__close-button');
+// ---- 'Add card' buttons ---- //
 const addButton = document.querySelector('.profile__post-button');
 const closeCardButton = addCardModalWindow.querySelector('.popup__close-button');
-const closeImageButton = imageModalWindow.querySelector('.popup__close-button');
 
 // ---- Card list ---- //
 const list = document.querySelector('.gallery__grid');
@@ -49,6 +49,7 @@ function fillDefaultCardModalValues() {
     }    
 }
 
+// ---- 'Profile' filling function ---- //
 function fillProfileValues(event) {
   event.preventDefault();       
   profileName.textContent = inputName.value;
@@ -56,6 +57,7 @@ function fillProfileValues(event) {
   togglePopup(editProfileModalWindow);
 }
 
+// ---- 'Card' filling function ---- //
 function fillCardValues(event) {
   event.preventDefault();
   const tempObject = {};
@@ -66,7 +68,9 @@ function fillCardValues(event) {
   togglePopup(addCardModalWindow);
 }
 
-initialCards.forEach((data) => list.prepend(new Card(data, '.card-template').renderNewCard()));
+// ---- Cards initialization function ---- //
+initCards.forEach((data) => 
+list.prepend(new Card(data, '.card-template').renderNewCard()));
 
 // ---- Edit profile modal events listeners ---- //
 editButton.addEventListener('click', ()=> {  
@@ -94,8 +98,3 @@ closeCardButton.addEventListener('click', ()=> {
 });
 
 addCardModalWindow.addEventListener('submit', fillCardValues);
-
-// ---- Image modal event listener ---- //
-closeImageButton.addEventListener('click', ()=> {
-  togglePopup(imageModalWindow);
-});

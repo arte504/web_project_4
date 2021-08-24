@@ -1,5 +1,5 @@
 //Initial array of cards
-const initialCards = [
+const initCards = [
     {
       name: "Lago di Braies",
       link: "https://code.s3.yandex.net/web-code/lago.jpg"
@@ -26,4 +26,4 @@ const initialCards = [
     }
   ]; 
 
-  export default initialCards;
+  export default initCards;
