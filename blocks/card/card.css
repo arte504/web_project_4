@@ -1,11 +1,21 @@
+@import url(./__container/card__container.css);
 @import url(./__image/card__image.css);
-@import url(./__details/card__details.css);
+@import url(./__text/card__text.css);
 @import url(./__title/card__title.css);
 @import url(./__like-button/card__like-button.css);
+@import url(./__like-button/_active/card__like-button_active.css);
 
 .card {
-  max-width: 282px;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
+  border-radius: 10px;
+  background-color: #ffffff;
+  height: 361px;
+  width: 282px;
+  border: 1px solid #000000;
+  position: relative;
+}
+
+@media screen and (max-width: 375px) {
+  .card {
+    margin-bottom: 20px;
+  }
 }

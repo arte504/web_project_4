@@ -1,10 +1,6 @@
 .profile__container {
-  display: flex;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 661px){
-  .profile__container {
-    flex-direction: column;
-  }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 0;
 }
