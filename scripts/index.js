@@ -26,7 +26,7 @@ const initCards = [
 ];
 
 // -- Profile consts -- //
-const editModal = document.querySelector('.modal__edit-profile');
+const editModal = document.querySelector('.modal__edit_profile');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
