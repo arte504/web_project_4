@@ -25,8 +25,6 @@ const initCards = [
     },
 ];
 
-// ---- Consts starts ---- //
-
 // -- Profile consts -- //
 const editModal = document.querySelector('.modal__edit-profile');
 const editButton = document.querySelector('.profile__edit-button');
@@ -41,8 +39,6 @@ const templateCard = document.querySelector('.card-template').content.querySelec
 
 // -- Close button -- //
 const editCloseIcon = editModal.querySelector('.modal__close-button');
-
-// ---- Consts ends ---- //
 
 // --- 'Modal' toggle function --- //
 function toggleModal (card) {
@@ -81,9 +77,10 @@ function fillProfileValues(edit) {
   toggleModal(editModal);
 }
 
+// --- 'Profile edit' event listener --- //
 editModal.addEventListener('submit', fillProfileValues);
 
-// --- --- //
+// --- Close modal on ESC press --- //
 function closeModalEscapeKey(esc) {
   const modalEscape = document.querySelector(".modal_visible");
   if (esc.key === "Escape") {
@@ -92,6 +89,7 @@ function closeModalEscapeKey(esc) {
   esc.target.removeEventListener("keydown", closeModalEscapeKey);
 }
 
+// --- Close modal on click press --- //
 function closeModalClick(click) {
   const modalClick = click.target;
   if(!modalClick.classList.contains("modal_visible")) {
@@ -100,16 +98,21 @@ function closeModalClick(click) {
   toggleModal(modalClick);
 }
 
+// --- Open modal on edit button press --- //
 editButton.addEventListener('click', () => {
   toggleModal(editModal);
 });
+
+// --- Close modal on close button press --- //
 editCloseIcon.addEventListener('click', () => {
   toggleModal(editModal);
 });
 
+// --- Close modal event listeners --- //
 document.addEventListener("keydown", closeModalEscapeKey);
 document.addEventListener("click", closeModalClick);
 
+// --- Init default cards --- //
 initCards.forEach((card) => {
   renderCard(card);
 });
