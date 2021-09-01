@@ -8,6 +8,7 @@
   background-position: center;
   background-size: 50% 50%;
   margin: -15px 0 4px 24px;
+  cursor: url('../../../images/pointer.png');
 }
   
 .profile__edit-button:hover {

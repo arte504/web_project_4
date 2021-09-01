@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Around the U.S.</title>
     <meta name="author" content="Artiom Shlyusberg">
-    <link rel="icon" type="image" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
+    <link rel="icon" type="image/ico" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
 </head>
 
 <body class="page">
@@ -46,7 +46,77 @@
         <!-- 'Cards' starts -->
         <section class="cards">
             <ul class="cards__grid">
-                <!-- Card template used here! -->
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/yosemite-valley.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Yosemite Valley</h2>
+                            <button type="button" class="card__like-button"></button> 
+                        </div>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/lake-louise.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Lake Louise</h2>
+                            <button type="button" class="card__like-button"></button>  
+                        </div>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/bald-mountains.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Bald Mountains</h2>
+                            <button type="button" class="card__like-button"></button> 
+                        </div>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/latemar.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Latemar</h2>
+                            <button type="button" class="card__like-button"></button>  
+                        </div>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/vanois-national-park.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Vanoise National Park</h2>
+                            <button type="button" class="card__like-button"></button>  
+                        </div>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <div class="card__container">
+                        <div class="card__image"
+                        style="background-image: url(./images/lago-di-braies.jpg);">
+                        </div>
+                        <div class="card__text">
+                            <h2 class="card__title">Lago di Braies</h2>
+                             <button type="button" class="card__like-button"></button> 
+                        </div>
+                    </div>
+                </li>
             </ul>
         </section>
         <!-- 'Cards' ends -->
@@ -67,13 +137,13 @@
             <button class="modal__close-button" type="reset"></button>
             <h2 class="modal__header">Edit profile</h2>
             <fieldset class="modal__fields">
-                <label for="modal__field">
+                <label for="nameInput">
                     <input 
                     type="text" class="modal__input modal__title" 
                     id="nameInput" value="Artiom Shlyusberg"
                     name="name" placeholder="Name">
                 </label>
-                <label for="job-input">
+                <label for="jobInput">
                     <input 
                     type="text" class="modal__input modal__subtitle" 
                     id="jobInput" value="Junior Web Dev"
@@ -84,20 +154,6 @@
         </form>
     </section>
     <!-- Edit profile modal ends -->
-
-    <!-- 'Card' template starts -->
-    <template class="card-template">
-        <li class="card">
-            <div class="card__container">
-                <div class="card__image"></div>
-                <div class="card__text">
-                    <h2 class="card__title"></h2>
-                    <button type="button" class="card__like-button"></button> 
-                </div>
-            </div>
-        </li>
-    </template>
-    <!-- 'Card' template ends -->
     
     <!-- JS script/s import -->
     <script src="./scripts/index.js"></script>

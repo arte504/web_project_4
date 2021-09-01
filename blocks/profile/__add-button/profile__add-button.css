@@ -10,6 +10,7 @@
   box-sizing: border-box;
   border-radius: 2px;
   margin: 33px 0 0 auto;
+  cursor: url('../../../images/pointer.png');
 }
   
 .profile__add-button:hover {
