@@ -11,12 +11,11 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    cursor: url('../../../images/pointer.png');
 }
 
 .card__like-button:hover {
   opacity: .6;
-  cursor: pointer;
+  cursor: url('../../../images/pointer.png');
 }
 
 @media screen and (max-width: 420px) {
