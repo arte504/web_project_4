@@ -1,5 +1,3 @@
-@import url(./_visible/modal__container_visible.css);
-
 .modal__container {
   max-width: 430px;
   min-height: 330px;

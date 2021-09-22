@@ -3,7 +3,6 @@
 @import url(../modal/__header/modal__header.css);
 @import url(../modal/__fields/modal__fields.css);
 @import url(../modal/__input/modal__input.css);
-@import url(../modal/__submit-button/modal__submit-button.css);
 
 .modal {
   position: fixed;
