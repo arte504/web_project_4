@@ -1,3 +1,4 @@
+@import url(../modal/_visible/modal_visible.css);
 @import url(../modal/__container/modal__container.css);
 @import url(../modal/__close-button/modal__close-button.css);
 @import url(../modal/__header/modal__header.css);
@@ -17,10 +18,4 @@
   opacity: 0;
   transition: visibility .3s, opacity .3s linear;
   z-index: 1;
-}
-
-.modal_visible {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
 }

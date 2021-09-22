@@ -1,0 +1,5 @@
+.modal_visible {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}

@@ -8,11 +8,11 @@
   background-position: center;
   background-size: 50% 50%;
   margin: -15px 0 4px 24px;
-  cursor: url('../../../images/pointer.png');
+  cursor: pointer;
 }
   
 .profile__edit-button:hover {
-  opacity: .8;
+  opacity: .6;
   cursor: pointer;
 }
 

@@ -132,27 +132,23 @@
 <!-- 'Page content' ends -->
 
     <!-- Edit profile modal -->
-    <section class="modal modal_edit-profile">
-        <form class="modal__container" name="modal__edit-profile">
+    <div class="modal modal_edit-profile">
+        <form class="modal__container" name="modal__edit-profile" method="POST">
             <button class="modal__close-button" type="reset"></button>
             <h2 class="modal__header">Edit profile</h2>
             <fieldset class="modal__fields">
-                <label for="nameInput">
                     <input 
                     type="text" class="modal__input modal__title" 
                     id="nameInput" value="Artiom Shlyusberg"
                     name="name" placeholder="Name">
-                </label>
-                <label for="jobInput">
                     <input 
                     type="text" class="modal__input modal__subtitle" 
                     id="jobInput" value="Junior Web Dev"
                     name="job" placeholder="Job">
-                </label>
-                <button class="modal__submit-button" type="submit" value="Save">Save</button>
             </fieldset>
+            <button class="modal__submit-button" type="submit">Save</button>
         </form>
-    </section>
+    </div>
     <!-- Edit profile modal ends -->
     
     <!-- JS script/s import -->
