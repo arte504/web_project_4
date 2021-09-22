@@ -1,5 +1,4 @@
 @import url(./__grid/cards__grid.css);
-@import url(../card/card.css);
 
 .cards {
     margin: 51px 0 66px 0;
