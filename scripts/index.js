@@ -1,17 +1,22 @@
 // -- Profile consts -- //
-const editModal = document.querySelector('.modal_edit-profile');
+const modal = document.querySelector('.modal');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.modal__title');
-const jobInput = document.querySelector('.modal__subtitle');
+const nameInput = document.querySelector('.modal__input_title');
+const jobInput = document.querySelector('.modal__input_subtitle');
+const formModal = document.querySelector('.modal__container')
 
 // -- Close button -- //
-const editCloseIcon = editModal.querySelector('.modal__close-button');
+const editCloseIcon = modal.querySelector('.modal__close-button');
 
 // --- 'Modal' toggle function --- //
-function toggleModal (card) {
-  card.classList.toggle('modal_visible');
+function openModal (card) {
+  card.classList.add('modal_visible');
+}
+
+function closeModal (card) {
+  card.classList.remove('modal_visible')
 }
 
 // --- 'Profile edit' function --- //
@@ -21,18 +26,18 @@ function fillProfileValues(edit) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;  
 
-  toggleModal(editModal);
+  closeModal(modal);
 }
 
 // --- 'Profile edit' event listener --- //
-editModal.addEventListener('submit', fillProfileValues);
+formModal.addEventListener('submit', fillProfileValues);
 
 // --- Open modal on edit button press --- //
 editButton.addEventListener('click', () => {
-  toggleModal(editModal);
+  openModal(modal);
 });
 
 // --- Close modal on close button press --- //
 editCloseIcon.addEventListener('click', () => {
-  toggleModal(editModal);
+  closeModal(modal);
 });

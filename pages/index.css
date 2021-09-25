@@ -22,7 +22,6 @@
 @import url(../blocks/cards/__grid/cards__grid.css);
 
 @import url(../blocks/card/card.css);
-@import url(../blocks/card/__container/card__container.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__text/card__text.css);
 @import url(../blocks/card/__title/card__title.css);
@@ -39,5 +38,4 @@
 @import url(../blocks/modal/__fields/modal__fields.css);
 @import url(../blocks/modal/__input/modal__input.css);
 @import url(../blocks/modal/__submit-button/modal__submit-button.css);
-@import url(../blocks/modal/__container/_visible/modal__container_visible.css);
 @import url(../blocks/modal/_visible/modal_visible.css);

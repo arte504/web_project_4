@@ -19,9 +19,8 @@
 
 @media screen and (max-width: 500px) {
   .modal__container {
-    flex-direction: column;
     padding: 20px;
     max-width: 240px;
-    max-height: 258px;
+    min-height: 258px;
   }
 }

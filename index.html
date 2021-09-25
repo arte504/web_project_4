@@ -37,9 +37,9 @@
                 <h1 class="profile__title">Artiom Shlyusberg</h1>
                 <p class="profile__subtitle">Junior Web Dev</p>
               </div>
-              <button class="button profile__edit-button"></button>
+              <button class="button profile__edit-button" type="button"></button>
             </div>
-            <button class="button profile__add-button"></button>
+            <button class="button profile__add-button" type="button"></button>
         </section>
         <!-- 'Profile' ends -->
 
@@ -47,74 +47,62 @@
         <section class="cards">
             <ul class="cards__grid">
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/yosemite-valley.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Yosemite Valley</h2>
-                            <button type="button" class="card__like-button"></button> 
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/yosemite-valley.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Yosemite Valley</h2>
+                        <button type="button" class="card__like-button"></button> 
                     </div>
                 </li>
 
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/lake-louise.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Lake Louise</h2>
-                            <button type="button" class="card__like-button"></button>  
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/lake-louise.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Lake Louise</h2>
+                        <button type="button" class="card__like-button"></button>  
                     </div>
                 </li>
 
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/bald-mountains.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Bald Mountains</h2>
-                            <button type="button" class="card__like-button"></button> 
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/bald-mountains.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Bald Mountains</h2>
+                        <button type="button" class="card__like-button"></button> 
                     </div>
                 </li>
 
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/latemar.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Latemar</h2>
-                            <button type="button" class="card__like-button"></button>  
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/latemar.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Latemar</h2>
+                        <button type="button" class="card__like-button"></button>  
                     </div>
                 </li>
 
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/vanois-national-park.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Vanoise National Park</h2>
-                            <button type="button" class="card__like-button"></button>  
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/vanois-national-park.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Vanoise National Park</h2>
+                        <button type="button" class="card__like-button"></button>  
                     </div>
                 </li>
 
                 <li class="card">
-                    <div class="card__container">
-                        <div class="card__image"
-                        style="background-image: url(./images/lago-di-braies.jpg);">
-                        </div>
-                        <div class="card__text">
-                            <h2 class="card__title">Lago di Braies</h2>
-                             <button type="button" class="card__like-button"></button> 
-                        </div>
+                    <div class="card__image"
+                    style="background-image: url(./images/lago-di-braies.jpg);">
+                    </div>
+                    <div class="card__text">
+                        <h2 class="card__title">Lago di Braies</h2>
+                        <button type="button" class="card__like-button"></button> 
                     </div>
                 </li>
             </ul>
@@ -132,19 +120,17 @@
 <!-- 'Page content' ends -->
 
     <!-- Edit profile modal -->
-    <div class="modal modal_edit-profile">
-        <form class="modal__container" name="modal__edit-profile" method="POST">
+    <div class="modal">
+        <form class="modal__container" name="modal__container" method="POST">
             <button class="modal__close-button" type="reset"></button>
             <h2 class="modal__header">Edit profile</h2>
             <fieldset class="modal__fields">
                     <input 
-                    type="text" class="modal__input modal__title" 
-                    id="nameInput" value="Artiom Shlyusberg"
-                    name="name" placeholder="Name">
+                    type="text" class="modal__input modal__input_title" 
+                    id="nameInput" name="name" placeholder="Name">
                     <input 
-                    type="text" class="modal__input modal__subtitle" 
-                    id="jobInput" value="Junior Web Dev"
-                    name="job" placeholder="Job">
+                    type="text" class="modal__input modal__input_subtitle" 
+                    id="jobInput" name="job" placeholder="Job">
             </fieldset>
             <button class="modal__submit-button" type="submit">Save</button>
         </form>
