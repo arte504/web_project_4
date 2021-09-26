@@ -3,8 +3,8 @@ const modal = document.querySelector('.modal');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.modal__input-title');
-const jobInput = document.querySelector('.modal__input-subtitle');
+const nameInput = document.querySelector('.modal__input_type_title');
+const jobInput = document.querySelector('.modal__input_type_subtitle');
 const formModal = document.querySelector('.modal__container')
 
 // -- Close button -- //
