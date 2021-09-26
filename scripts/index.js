@@ -3,8 +3,8 @@ const modal = document.querySelector('.modal');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.modal__input_title');
-const jobInput = document.querySelector('.modal__input_subtitle');
+const nameInput = document.querySelector('.modal__input-title');
+const jobInput = document.querySelector('.modal__input-subtitle');
 const formModal = document.querySelector('.modal__container')
 
 // -- Close button -- //
@@ -13,6 +13,8 @@ const editCloseIcon = modal.querySelector('.modal__close-button');
 // --- 'Modal' toggle function --- //
 function openModal (card) {
   card.classList.add('modal_visible');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;  
 }
 
 function closeModal (card) {
