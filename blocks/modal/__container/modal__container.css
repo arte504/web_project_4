@@ -20,7 +20,9 @@
 @media screen and (max-width: 500px) {
   .modal__container {
     padding: 20px;
-    max-width: 240px;
+    width: 100%;;
+    max-width: 282px;
     min-height: 258px;
+    margin: auto 19px auto 19px;
   }
 }

@@ -5,10 +5,15 @@
   color: #545454;
 }
   
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 320px) {
   .footer__copyright {
     font-size: 14px;
     line-height: 17px;
-    margin-left: 19px;
+  }
+}
+
+@media screen and (mix-width: 321px) {
+  .footer__copyright {
+    margin-left:19px;
   }
 }

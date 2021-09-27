@@ -12,9 +12,9 @@ const editCloseIcon = modal.querySelector('.modal__close-button');
 
 // --- 'Modal' toggle function --- //
 function openModal (card) {
-  card.classList.add('modal_visible');
   nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;  
+  jobInput.value = profileJob.textContent;
+  card.classList.add('modal_visible');
 }
 
 function closeModal (card) {
