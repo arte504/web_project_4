@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (mix-width: 321px) {
+@media screen and (min-width: 321px) {
   .footer__copyright {
     margin-left:19px;
   }
