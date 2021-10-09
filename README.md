@@ -30,9 +30,9 @@ You can visit the site [here](https://arte504.github.io/web_project_4/)
 
 - "Around The U.S." — an interactive page where users can add, remove, or like photos.
 
-- You can edit the profile, add new photos, view added photos in big-picture mode
+- You can edit the profile, add new photos, view added photos in big-picture mode.
 
--  *P.S. By now it's only update the page till you refresh it(no server saves).*
+- *P.S. By now it's only update the page till you refresh it(no server saves).*
 
   
 
@@ -42,7 +42,7 @@ You can visit the site [here](https://arte504.github.io/web_project_4/)
 
 **The project is currently deployed using vanilla:**
 
-* [*HTML*](https://developer.mozilla.org/en-US/docs/Glossary/HTML)
+* [*HTML*](https://developer.mozilla.org/en-US/docs/Glossary/HTML) - Semantic HTML used in project/s. 
 
 * [*CSS*](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
@@ -52,11 +52,11 @@ You can visit the site [here](https://arte504.github.io/web_project_4/)
 
 **And none vanilla:**
 
-* [*FlexBox*](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
+* [*FlexBox*](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) - Used to organize on page elements.
 
-* [*Grids*](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
+* [*Grids*](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids) - Used to organize image cards.
 
-* [*BEM*](http://getbem.com/naming/)
+* [*BEM*](http://getbem.com/naming/) - Used to organize all blocks/elements.
 
 * *Responsive/adaptive design* with meadia query usage.
 
