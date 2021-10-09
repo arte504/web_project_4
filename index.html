@@ -45,66 +45,8 @@
 
         <!-- 'Cards' starts -->
         <section class="cards">
-            <ul class="cards__grid">
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/yosemite-valley.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Yosemite Valley</h2>
-                        <button type="button" class="card__like-button"></button> 
-                    </div>
-                </li>
-
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/lake-louise.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Lake Louise</h2>
-                        <button type="button" class="card__like-button"></button>  
-                    </div>
-                </li>
-
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/bald-mountains.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Bald Mountains</h2>
-                        <button type="button" class="card__like-button"></button> 
-                    </div>
-                </li>
-
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/latemar.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Latemar</h2>
-                        <button type="button" class="card__like-button"></button>  
-                    </div>
-                </li>
-
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/vanois-national-park.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Vanoise National Park</h2>
-                        <button type="button" class="card__like-button"></button>  
-                    </div>
-                </li>
-
-                <li class="card">
-                    <div class="card__image"
-                    style="background-image: url(./images/lago-di-braies.jpg);">
-                    </div>
-                    <div class="card__text">
-                        <h2 class="card__title">Lago di Braies</h2>
-                        <button type="button" class="card__like-button"></button> 
-                    </div>
-                </li>
+            <ul class="cards__grid" id="cards__grid">
+                
             </ul>
         </section>
         <!-- 'Cards' ends -->
@@ -119,27 +61,74 @@
 
 <!-- 'Page content' ends -->
 
-    <!-- Edit profile modal -->
-    <div class="modal">
-        <form class="modal__container" name="modal__container" method="POST">
-            <button class="modal__close-button" type="reset"></button>
+    <!-- Edit profile modal starts -->
+    <div class="modal modal_type_edit">
+        <form class="modal__container modal__container_type_form" name="modal__container" method="POST">
+            <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
             <h2 class="modal__header">Edit profile</h2>
-            <fieldset class="modal__fields">
+            <fieldset class="modal__fields modal__fields_type_edit">
                     <input 
                     type="text" class="modal__input modal__input_type_title" 
-                    id="nameInput" name="name" placeholder="Name">
+                    id="nameInput" name="author-name" placeholder="Name">
                     <input 
                     type="text" class="modal__input modal__input_type_subtitle" 
-                    id="jobInput" name="job" placeholder="Job">
+                    id="jobInput" name="author-job" placeholder="Job">
             </fieldset>
             <button class="modal__submit-button" type="submit">Save</button>
         </form>
     </div>
     <!-- Edit profile modal ends -->
-    
-    <!-- JS script/s import -->
-    <script src="./scripts/index.js"></script>
 
+    <!-- Add card modal starts -->
+    <div class="modal modal_type_add-card">
+        <form class="modal__container modal__container_type_form">
+            <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
+            <h2 class="modal__header">New place</h2>
+            <fieldset class="modal__fields modal__fields_type_add-card">
+              <input
+                type="text" name="card-title" id="card-title-input"
+                class="modal__input modal__input_type_name" value="" minlength="2" 
+                maxlength="40" required placeholder="Title">
+        
+              <input
+                type="text" name="card-image-link" id="card-link-input"
+                value="" class="modal__input modal__input_type_link" minlength="2" 
+                maxlength="200" required placeholder="Image link">
+
+              <button class="modal__submit-button" type="submit">Create</button>
+            </fieldset>
+        </form>
+    </div>
+    <!-- Add card modal ends -->
+
+    <!-- Big image modal starts -->
+    <div class="modal modal_type_big-image">
+        <div class="modal__container modal__container_type_big-image">
+            <button class="modal__close-button modal__close-button_type_big-image"></button>
+            <figure class="modal__image">
+                <img src="#" alt="default" class="modal__big-image">
+                <figcaption class="modal__image-caption"></figcaption>
+            </figure>
+        </div>
+    </div>
+    <!-- Big image modal ends-->
+
+    <!-- Card template starts -->
+    <template class="card__template" id="card__template">
+        <li class="card">
+            <img src="#" alt="default" class="card__image">
+            <button type="button" class="card__delete-button"></button>
+            <div class="card__text">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like-button"></button>
+            </div>
+        </li>
+    </template>
+    <!-- Card template ends -->
+
+    <!-- JS script/s import -->
+    <script type="module" src="./scripts/index.js"></script>
+    <script src="./scripts/initCards.js"></script>
 </body>
 
 </html>

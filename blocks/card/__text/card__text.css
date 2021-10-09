@@ -1,4 +1,6 @@
 .card__text {
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 18px 25px 21px;
 }

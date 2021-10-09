@@ -1,0 +1,6 @@
+.modal__big-image{
+  object-fit: contain;
+  max-width: 75vw;
+  max-height: 75vh;
+  min-width: 240px;
+}

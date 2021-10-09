@@ -1,24 +1,14 @@
 .cards {
-    margin: 46.25px 0 0;
-    background-color: #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: grid;
+  column-gap: 17px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  padding: 50px 0 0;
 }
 
-@media screen and (min-width: 1281px) {
+@media screen and (max-width: 720px) {
   .cards {
-    width: 882px;
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .cards {
-    margin: 36px 0 28px 0;
-  }
-}
- @media screen and (max-width: 375px) {
-  .cards {
-    margin: 36px 20px 20px 20px;
+    padding: 36px 0 0;
   }
 }

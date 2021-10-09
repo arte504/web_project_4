@@ -1,0 +1,15 @@
+.modal__close-button_type_big-image {
+  right: -45px;
+}
+
+@media screen and (max-width: 530px) {
+  .modal__close-button_type_big-image {
+    right: -29px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .modal__close-button_type_big-image {
+    right: -24px;
+  }
+}

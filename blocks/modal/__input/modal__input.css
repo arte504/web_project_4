@@ -10,8 +10,9 @@
   background-color: rgba(0, 0, 0, 0);
   font-size: 14px;
   line-height: 17px;
-  padding-top: 39px;
+  padding-top: 10px;
   padding-bottom: 10px;
+  margin-top: 29px;
 }
 
 @media screen and (max-width: 500px) {

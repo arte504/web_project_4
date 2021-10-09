@@ -1,28 +1,6 @@
 .modal__container {
-  max-width: 430px;
-  min-height: 330px;
-  background-color: #FFFFFF;
-  color: #000000;
-  box-shadow: 0 0 25px rgba(0, 0, 0, .15);
-  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  box-sizing: border-box;
-  margin: auto;
-  padding: 34px 36px 0 36px;
-  z-index: 2;
-  position: relative;
-  left: 0;
-  top: 0;
-}
-
-@media screen and (max-width: 500px) {
-  .modal__container {
-    padding: 20px 20px 0 20px;
-    width: 100%;
-    max-width: 282px;
-    min-height: 322px;
-    margin: auto 19px auto 19px;
-  }
 }
