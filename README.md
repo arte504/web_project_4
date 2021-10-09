@@ -65,9 +65,10 @@ You can visit the site [here](https://arte504.github.io/web_project_4/)
 ##  **Info**
 
   
+***FlexBox*** is used to put modules/blocks in their places and create the overall page layout.
 
-As well **FlexBox** is used to put modules/blocks in their places and create the overall page layout.
+***Grid*** is used to put all the cards(places cards) in order to make it look fine.
 
-The *BEM* methodology used for styling page blocks and components, also used to organiz the CSS files.
+The ***BEM*** methodology used for styling page blocks and components, also used to organiz the CSS files.
 
 Of course the website is responsive for various screen sizes.
