@@ -69,10 +69,10 @@
             <fieldset class="modal__fields modal__fields_type_edit">
                     <input 
                     type="text" class="modal__input modal__input_type_title" 
-                    id="nameInput" name="author-name" placeholder="Name">
+                    id="nameInput" name="author-name" placeholder="Name" required>
                     <input 
                     type="text" class="modal__input modal__input_type_subtitle" 
-                    id="jobInput" name="author-job" placeholder="Job">
+                    id="jobInput" name="author-job" placeholder="Job" required>
             </fieldset>
             <button class="modal__submit-button" type="submit">Save</button>
         </form>
@@ -93,7 +93,7 @@
               <input
                 type="text" name="card-image-link" id="card-link-input"
                 value="" class="modal__input modal__input_type_link" minlength="2" 
-                maxlength="200" required placeholder="Image link">
+                maxlength="200" required placeholder="Image link" type="url">
 
               <button class="modal__submit-button" type="submit">Create</button>
             </fieldset>
@@ -114,7 +114,7 @@
     <!-- Big image modal ends-->
 
     <!-- Card template starts -->
-    <template class="card__template" id="card__template">
+    <template id="card__template">
         <li class="card">
             <img src="#" alt="default" class="card__image">
             <button type="button" class="card__delete-button"></button>
@@ -128,7 +128,7 @@
 
     <!-- JS script/s import -->
     <script type="module" src="./scripts/index.js"></script>
-    <script src="./scripts/initCards.js"></script>
+    <script type="module" src="./scripts/initCards.js"></script>
 </body>
 
 </html>
