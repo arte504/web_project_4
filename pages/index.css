@@ -21,6 +21,7 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
 @import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__grid/cards__grid.css);
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__image/card__image.css);
