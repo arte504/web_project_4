@@ -12,6 +12,7 @@ const editCloseButton = document.querySelector('.modal__close-button_type_edit')
 // -- 'Add-card' consts -- //
 const cards = document.querySelector('.cards__grid');
 const cardTemplate = document.querySelector('#card__template').content;
+const cardSelector = cardTemplate.querySelector('.card');
 const openAddCardModal = document.querySelector('.profile__add-button');
 const addCardCloseButton = document.querySelector('.modal__close-button_type_add-card');
 const cardInputTitle = document.querySelector('.modal__input_type_name');
@@ -43,7 +44,7 @@ function addCard(name,link) {
 }
 
 function createCard(name,link){
-  const newCard = cardTemplate.querySelector('.card').cloneNode(true);
+  const newCard = cardSelector.cloneNode(true);
   const newCardImg = newCard.querySelector('.card__image');
     newCardImg.alt = name;
     newCardImg.src = link;
