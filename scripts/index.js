@@ -38,7 +38,12 @@ function closeModal (modal) {
 
 // --- Adding card function --- //
 function addCard(name,link) {
-  const newCard = cardTemplate.cloneNode(true);
+  const newCard = createCard(name,link);
+  renderCard(newCard);
+}
+
+function createCard(name,link){
+  const newCard = cardTemplate.querySelector('.card').cloneNode(true);
   const newCardImg = newCard.querySelector('.card__image');
     newCardImg.alt = name;
     newCardImg.src = link;
@@ -62,8 +67,8 @@ function addCard(name,link) {
     newCard.querySelector('.card__delete-button').addEventListener('click',() => {
       newCard.remove();
     });
-    
-    renderCard(newCard);
+
+  return newCard;
 }
 
 function renderCard(newCard) {
