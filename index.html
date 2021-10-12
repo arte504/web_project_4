@@ -63,16 +63,18 @@
 
     <!-- Edit profile modal starts -->
     <div class="modal modal_type_edit">
-        <form class="modal__container modal__container_type_form" name="modal__container" method="POST">
+        <form class="modal__container modal__container_type_form" method="POST">
             <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
             <h2 class="modal__header">Edit profile</h2>
             <fieldset class="modal__fields modal__fields_type_edit">
                     <input 
                     type="text" class="modal__input modal__input_type_title" 
-                    id="nameInput" name="author-name" placeholder="Name" required>
+                    id="nameInput" name="author-name" placeholder="Name"
+                    minlength="2" maxlength="40" required>
                     <input 
                     type="text" class="modal__input modal__input_type_subtitle" 
-                    id="jobInput" name="author-job" placeholder="Job" required>
+                    id="jobInput" name="author-job" placeholder="Job"
+                    minlength="2" maxlength="200" required>
             </fieldset>
             <button class="modal__submit-button" type="submit">Save</button>
         </form>
@@ -81,21 +83,21 @@
 
     <!-- Add card modal starts -->
     <div class="modal modal_type_add-card">
-        <form class="modal__container modal__container_type_form">
+        <form class="modal__container modal__container_type_form" id="modalFormTypeAddCard">
             <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
             <h2 class="modal__header">New place</h2>
             <fieldset class="modal__fields modal__fields_type_add-card">
-              <input
-                type="text" name="card-title" id="card-title-input"
-                class="modal__input modal__input_type_name" value="" minlength="2" 
-                maxlength="40" required placeholder="Title">
+                <input
+                type="text" name="card-title" id="cardTitleInput"
+                class="modal__input modal__input_type_name" value="" minlength="1" 
+                maxlength="30" required placeholder="Title">
         
-              <input
-                type="url" name="card-image-link" id="card-link-input"
+                <input
+                type="url" name="card-image-link" id="cardLinkInput"
                 value="" class="modal__input modal__input_type_link" minlength="2" 
-                maxlength="200" required placeholder="Image link" >
+                maxlength="200" required placeholder="Image link">
 
-              <button class="modal__submit-button" type="submit">Create</button>
+                <button class="modal__submit-button" type="submit">Create</button>
             </fieldset>
         </form>
     </div>
@@ -129,6 +131,7 @@
     <!-- JS script/s import -->
     <script type="module" src="./scripts/index.js"></script>
     <script type="module" src="./scripts/initCards.js"></script>
+    <script type="module" src="./scripts/utils.js"></script>
 </body>
 
 </html>

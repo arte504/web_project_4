@@ -1,5 +1,5 @@
 import initCards from '../scripts/initCards.js';
-
+import {toggleModal, fillDefaultCardModalValues} from '../scripts/utils.js';
 // -- 'Edit profile' consts -- //
 const editButton = document.querySelector('.profile__edit-button');
 const profileModal = document.querySelector('.modal_type_edit')
@@ -8,7 +8,6 @@ const profileJob = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('.modal__input_type_title');
 const jobInput = document.querySelector('.modal__input_type_subtitle');
 const editCloseButton = document.querySelector('.modal__close-button_type_edit');
-
 // -- 'Add-card' consts -- //
 const cards = document.querySelector('.cards__grid');
 const cardTemplate = document.querySelector('#card__template').content;
@@ -18,25 +17,14 @@ const addCardCloseButton = document.querySelector('.modal__close-button_type_add
 const cardInputTitle = document.querySelector('.modal__input_type_name');
 const cardInputLink = document.querySelector('.modal__input_type_link');
 const addCardModal = document.querySelector('.modal_type_add-card');
-
 // --- 'Big image' consts --- //
 const cardBigModal = document.querySelector('.modal_type_big-image');
 const cardBigModalFigure = document.querySelector('.modal__image');
 const cardBigModalCloseIcon = document.querySelector('.modal__close-button_type_big-image');
-
 // --- Initial cards array adding to page --- //
 initCards.slice().forEach((card) => {
   addCard(card.name, card.link);
 });
-
-// --- 'Modal' open/close functions --- //
-function openModal (modal) {
-  modal.classList.add('modal_visible');
-}
-function closeModal (modal) {
-  modal.classList.remove('modal_visible')
-}
-
 // --- Adding card function --- //
 function addCard(name,link) {
   const newCard = createCard(name,link);
@@ -58,7 +46,7 @@ function createCard(name,link){
       bigImage.alt = newCardImg.alt;
       bigImageCaption.textContent = newCardImg.alt;
 
-      openModal(cardBigModal);
+      toggleModal(cardBigModal);
     });
 
     newCard.querySelector('.card__like-button').addEventListener('click', (event) => {
@@ -75,16 +63,14 @@ function createCard(name,link){
 function renderCard(newCard) {
   cards.prepend(newCard);
 }
-
 // --- Open/close 'Edit' modal on edit button press --- //
-editButton.addEventListener('click', () => {openModal(profileModal);});
-editCloseButton.addEventListener('click', () => {closeModal(profileModal);});
+editCloseButton.addEventListener('click', () => {toggleModal(profileModal);});
 // --- 'Edit' modal open up with pre-entered info --- //
 editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
-  openModal(profileModal);
+  toggleModal(profileModal);
 });
 // --- 'Edit' modal input submition --- // 
 profileModal.addEventListener('submit', (submit) => {
@@ -93,12 +79,11 @@ profileModal.addEventListener('submit', (submit) => {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closeModal(profileModal);
+  toggleModal(profileModal);
 });
-
 // --- Open/close 'Add card' modal on '+' button press --- //
-openAddCardModal.addEventListener('click', () => {openModal(addCardModal);});
-addCardCloseButton.addEventListener('click', () => {closeModal(addCardModal);});
+openAddCardModal.addEventListener('click', () => {toggleModal(addCardModal);});
+addCardCloseButton.addEventListener('click', () => {toggleModal(addCardModal);});
 // --- 'Add card' modal input submition --- //
 addCardModal.addEventListener('submit',(submit) => {
   submit.preventDefault();
@@ -107,8 +92,7 @@ addCardModal.addEventListener('submit',(submit) => {
   cardInputTitle.value = "";
   cardInputLink.value = "";
 
-  closeModal(addCardModal);
+  toggleModal(addCardModal);
 });
-
 // --- 'Big image' ---//
-cardBigModalCloseIcon.addEventListener('click', () => closeModal(cardBigModal));
+cardBigModalCloseIcon.addEventListener('click', () => toggleModal(cardBigModal));

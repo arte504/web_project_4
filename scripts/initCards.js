@@ -25,4 +25,4 @@ const initCards = [
   }
 ]; 
 
-  export default initCards;
+export default initCards;
