@@ -23,11 +23,6 @@ export function escCloseModal(event) {
   }
 }
 
-export function submitButtonDisabled(modal) { 
-  const inactiveButton = modal.querySelector('.modal__submit-button');
-  inactiveButton.classList.add('modal__submit-button_disabled');
-}
-
 export function fillDefaultCardModalValues(){
   if(!addCardModal.classList.contains("modal_visible")){
     document.getElementById("modalFormTypeAddCard").reset();

@@ -1,122 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
-    <title>Around the U.S.</title>
-    <meta name="author" content="Artiom Shlyusberg">
-    <link rel="icon" type="image/ico" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Around the U.S.</title>
+  <meta name="author" content="Artiom Shlyusberg">
+  <link rel="icon" type="image/ico" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
 </head>
 
 <body class="page">
-<!-- 'Page content' start -->
+  <!-- 'Page content' start -->
 
-    <!-- 'Header' starts -->
-    <header class="header">
-        <a href="#" target="_self">
-            <img 
-            class="header__logo" 
-            src="./images/logo.svg" 
-            alt="Site logo">
-        </a>
-    </header>
-    <!-- 'Header' ends -->
+  <!-- 'Header' starts -->
+  <header class="header">
+    <a href="#" target="_self">
+      <img class="header__logo" src="./images/logo.svg" alt="Site logo">
+    </a>
+  </header>
+  <!-- 'Header' ends -->
 
-    <!-- 'Main' starts -->
-    <main class="content">
-        <!-- 'Profile' starts -->
-       <section class="profile">
-            <img 
-            class="profile__image" 
-            src="./images/profileImg.jpg" 
-            alt="Profile image"/>
+  <!-- 'Main' starts -->
+  <main class="content">
+    <!-- 'Profile' starts -->
+    <section class="profile">
+      <img class="profile__image" src="./images/profileImg.jpg" alt="Profile image" />
 
-            <div class="profile__info">
-              <div class="profile__text">
-                <h1 class="profile__title">Artiom Shlyusberg</h1>
-                <p class="profile__subtitle">Junior Web Dev</p>
-              </div>
-              <button class="button profile__edit-button" type="button"></button>
-            </div>
-            <button class="button profile__add-button" type="button"></button>
-        </section>
-        <!-- 'Profile' ends -->
-
-        <!-- 'Cards' starts -->
-        <section class="cards">
-            <ul class="cards__grid">
-                
-            </ul>
-        </section>
-        <!-- 'Cards' ends -->
-    </main>
-    <!-- 'Main' ends -->
-
-    <!-- 'Footer' starts -->
-    <footer class="footer">
-        <p class="footer__copyright">© 2021 Artiom Shlyusberg.</p>
-    </footer>
-    <!-- 'Footer' ends -->
-
-<!-- 'Page content' ends -->
-
-    <!-- Edit profile modal starts -->
-    <div class="modal modal_type_edit">
-        <form class="modal__container modal__container_type_form" method="POST">
-            <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
-            <h2 class="modal__header">Edit profile</h2>
-            <fieldset class="modal__fields modal__fields_type_edit">
-                    <input 
-                    type="text" class="modal__input modal__input_type_title" 
-                    id="nameInput" name="author-name" placeholder="Name"
-                    minlength="2" maxlength="40" required>
-                    <input 
-                    type="text" class="modal__input modal__input_type_subtitle" 
-                    id="jobInput" name="author-job" placeholder="Job"
-                    minlength="2" maxlength="200" required>
-            </fieldset>
-            <button class="modal__submit-button" type="submit">Save</button>
-        </form>
-    </div>
-    <!-- Edit profile modal ends -->
-
-    <!-- Add card modal starts -->
-    <div class="modal modal_type_add-card">
-        <form class="modal__container modal__container_type_form" id="modalFormTypeAddCard">
-            <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
-            <h2 class="modal__header">New place</h2>
-            <fieldset class="modal__fields modal__fields_type_add-card">
-                <input
-                type="text" name="card-title" id="cardTitleInput"
-                class="modal__input modal__input_type_name" value="" minlength="1" 
-                maxlength="30" required placeholder="Title">
-        
-                <input
-                type="url" name="card-image-link" id="cardLinkInput"
-                value="" class="modal__input modal__input_type_link" minlength="2" 
-                maxlength="200" required placeholder="Image link">
-
-                <button class="modal__submit-button" type="submit">Create</button>
-            </fieldset>
-        </form>
-    </div>
-    <!-- Add card modal ends -->
-
-    <!-- Big image modal starts -->
-    <div class="modal modal_type_big-image">
-        <div class="modal__container modal__container_type_big-image">
-            <button class="modal__close-button modal__close-button_type_big-image"></button>
-            <figure class="modal__image">
-                <img src="#" alt="default" class="modal__big-image">
-                <figcaption class="modal__image-caption"></figcaption>
-            </figure>
+      <div class="profile__info">
+        <div class="profile__text">
+          <h1 class="profile__title">Artiom Shlyusberg</h1>
+          <p class="profile__subtitle">Junior Web Dev</p>
         </div>
-    </div>
-    <!-- Big image modal ends-->
+        <button class="button profile__edit-button" type="button"></button>
+      </div>
+      <button class="button profile__add-button" type="button"></button>
+    </section>
+    <!-- 'Profile' ends -->
 
-    <!-- Card template starts -->
-    <template id="card__template">
+    <!-- 'Cards' starts -->
+    <section class="cards">
+      <ul class="cards__grid">
+
+      </ul>
+    </section>
+    <!-- 'Cards' ends -->
+  </main>
+  <!-- 'Main' ends -->
+
+  <!-- 'Footer' starts -->
+  <footer class="footer">
+    <p class="footer__copyright">© 2021 Artiom Shlyusberg.</p>
+  </footer>
+  <!-- 'Footer' ends -->
+
+  <!-- 'Page content' ends -->
+
+  <!-- Edit profile modal starts -->
+  <div class="modal modal_type_edit">
+    <form class="modal__container modal__container_type_form" method="POST" id="modalFormTypeEdit" novalidate>
+      <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
+      <h2 class="modal__header">Edit profile</h2>
+      <fieldset class="modal__fields modal__fields_type_edit">
+        <input type="text" class="modal__input modal__input_type_title" id="nameInput" name="author-name" placeholder="Name" minlength="2" maxlength="40" required>
+        <span id="modal__name_error" class="modal__error"></span>
+
+        <input type="text" class="modal__input modal__input_type_subtitle" id="jobInput" name="author-job" placeholder="Job" minlength="2" maxlength="200" required>
+        <span id="modal__job_error" class="modal__error"></span>
+      </fieldset>
+      <input class="modal__submit-button" id="button" type="submit" type="button" value="Save">
+    </form>
+  </div>
+  <!-- Edit profile modal ends -->
+
+  <!-- Add card modal starts -->
+  <div class="modal modal_type_add-card">
+    <form class="modal__container modal__container_type_form" id="modalFormTypeAddCard" novalidate>
+      <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
+      <h2 class="modal__header">New place</h2>
+      <fieldset class="modal__fields modal__fields_type_add-card">
+        <input type="text" name="card-title" id="card_TitleInput" class="modal__input modal__input_type_name" value="" minlength="1" maxlength="30" required placeholder="Title">
+        <span id="modal__title_error" class="modal__error"></span>
+
+        <input type="url" name="card-image-link" id="card_LinkInput" value="" class="modal__input modal__input_type_link" minlength="2" maxlength="200" required placeholder="Image link">
+        <span id="modal__url_error" class="modal__error"></span>
+
+        <input class="modal__submit-button" id="button" type="submit" type="button" value="Create">
+      </fieldset>
+    </form>
+  </div>
+  <!-- Add card modal ends -->
+
+  <!-- Big image modal starts -->
+  <div class="modal modal_type_big-image">
+    <div class="modal__container modal__container_type_big-image">
+      <button class="modal__close-button modal__close-button_type_big-image"></button>
+      <figure class="modal__image">
+        <img src="#" alt="default" class="modal__big-image">
+        <figcaption class="modal__image-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+  <!-- Big image modal ends-->
+
+  <!-- Card template starts -->
+  <template id="card__template">
         <li class="card">
             <img src="#" alt="default" class="card__image">
             <button type="button" class="card__delete-button" onclick=""></button>
@@ -126,12 +114,13 @@
             </div>
         </li>
     </template>
-    <!-- Card template ends -->
+  <!-- Card template ends -->
 
-    <!-- JS script/s import -->
-    <script type="module" src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/initCards.js"></script>
-    <script type="module" src="./scripts/utils.js"></script>
+  <!-- JS script/s import -->
+  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/initCards.js"></script>
+  <script type="module" src="./scripts/utils.js"></script>
+  <script type="module" src="./scripts/validate.js"></script>
 </body>
 
 </html>

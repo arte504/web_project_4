@@ -42,6 +42,7 @@
 @import url(../blocks/modal/__fields/modal__fields.css);
 @import url(../blocks/modal/__input/modal__input.css);
 @import url(../blocks/modal/__input/_error/modal__input_error.css);
+@import url(../blocks/modal/__error/_visible/modal__error_visible.css);
 @import url(../blocks/modal/__submit-button/modal__submit-button.css);
 @import url(../blocks/modal/__submit-button/_disabled/modal__submit-button_disabled.css);
 @import url(../blocks/modal/_visible/modal_visible.css);

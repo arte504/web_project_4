@@ -1,5 +1,5 @@
 import initCards from '../scripts/initCards.js';
-import {toggleModal, fillDefaultCardModalValues} from '../scripts/utils.js';
+import {toggleModal} from '../scripts/utils.js';
 // -- 'Edit profile' consts -- //
 const editButton = document.querySelector('.profile__edit-button');
 const profileModal = document.querySelector('.modal_type_edit')
@@ -26,50 +26,49 @@ initCards.slice().forEach((card) => {
   addCard(card.name, card.link);
 });
 // --- Adding card function --- //
-function addCard(name,link) {
-  const newCard = createCard(name,link);
+function addCard(name, link) {
+  const newCard = createCard(name, link);
   renderCard(newCard);
 }
-
-function createCard(name,link){
+// --- Card creation function --- //
+function createCard(name, link) {
   const newCard = cardSelector.cloneNode(true);
   const newCardImg = newCard.querySelector('.card__image');
-    newCardImg.alt = name;
-    newCardImg.src = link;
-    newCard.querySelector('.card__title').textContent = name;
+  newCardImg.alt = name;
+  newCardImg.src = link;
+  newCard.querySelector('.card__title').textContent = name;
 
-    newCardImg.addEventListener('click',() => {
-      const bigImage = cardBigModalFigure.querySelector('.modal__big-image');
-      const bigImageCaption = cardBigModalFigure.querySelector('.modal__image-caption');
+  newCardImg.addEventListener('click', () => {
+    const bigImage = cardBigModalFigure.querySelector('.modal__big-image');
+    const bigImageCaption = cardBigModalFigure.querySelector('.modal__image-caption');
 
-      bigImage.src = newCardImg.src;
-      bigImage.alt = newCardImg.alt;
-      bigImageCaption.textContent = newCardImg.alt;
+    bigImage.src = newCardImg.src;
+    bigImage.alt = newCardImg.alt;
+    bigImageCaption.textContent = newCardImg.alt;
 
-      toggleModal(cardBigModal);
-    });
+    toggleModal(cardBigModal);
+  });
 
-    newCard.querySelector('.card__like-button').addEventListener('click', (event) => {
-      event.target.classList.toggle('card__like-button_active');
-    });
+  newCard.querySelector('.card__like-button').addEventListener('click', (event) => {
+    event.target.classList.toggle('card__like-button_active');
+  });
 
-    newCard.querySelector('.card__delete-button').addEventListener('click',() => {
-      newCard.remove();
-    });
+  newCard.querySelector('.card__delete-button').addEventListener('click', () => {
+    newCard.remove();
+  });
 
   return newCard;
 }
-
+// --- Card render to page function --- //
 function renderCard(newCard) {
   cards.prepend(newCard);
 }
 // --- Open/close 'Edit' modal on edit button press --- //
-editCloseButton.addEventListener('click', () => {toggleModal(profileModal);});
+editCloseButton.addEventListener('click', () => { toggleModal(profileModal); });
 // --- 'Edit' modal open up with pre-entered info --- //
 editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-
   toggleModal(profileModal);
 });
 // --- 'Edit' modal input submition --- // 
@@ -78,21 +77,24 @@ profileModal.addEventListener('submit', (submit) => {
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-
   toggleModal(profileModal);
 });
-// --- Open/close 'Add card' modal on '+' button press --- //
-openAddCardModal.addEventListener('click', () => {toggleModal(addCardModal);});
-addCardCloseButton.addEventListener('click', () => {toggleModal(addCardModal);});
-// --- 'Add card' modal input submition --- //
-addCardModal.addEventListener('submit',(submit) => {
-  submit.preventDefault();
-
-  addCard(cardInputTitle.value, cardInputLink.value);
-  cardInputTitle.value = "";
-  cardInputLink.value = "";
-
+// --- 'Add card' modal all in one event --- //
+openAddCardModal.addEventListener('click', () => {
   toggleModal(addCardModal);
+
+  addCardCloseButton.addEventListener('click', () => {
+    toggleModal(addCardModal);
+  });
+
+  addCardModal.addEventListener('submit', (submit) => {
+    submit.preventDefault();
+
+    addCard(cardInputTitle.value, cardInputLink.value);
+    cardInputTitle.value = "";
+    cardInputLink.value = "";
+    toggleModal(addCardModal);
+  });
 });
 // --- 'Big image' ---//
 cardBigModalCloseIcon.addEventListener('click', () => toggleModal(cardBigModal));
