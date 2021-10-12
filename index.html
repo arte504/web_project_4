@@ -75,7 +75,7 @@
 
   <!-- Add card modal starts -->
   <div class="modal modal_type_add-card">
-    <form class="modal__container modal__container_type_form" id="modalFormTypeAddCard" novalidate>
+    <form class="modal__container modal__container_type_form" id="modalFormTypeAddCard" novalidate method="POST">
       <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
       <h2 class="modal__header">New place</h2>
       <fieldset class="modal__fields modal__fields_type_add-card">
@@ -85,7 +85,7 @@
         <input type="url" name="card-image-link" id="card_LinkInput" value="" class="modal__input modal__input_type_link" minlength="2" maxlength="200" required placeholder="Image link">
         <span id="modal__url_error" class="modal__error"></span>
 
-        <input class="modal__submit-button" id="button" type="submit" type="button" value="Create">
+        <button class="modal__submit-button" id="button" type="submit" disabled="true">Create</button>
       </fieldset>
     </form>
   </div>
@@ -121,6 +121,7 @@
   <script type="module" src="./scripts/initCards.js"></script>
   <script type="module" src="./scripts/utils.js"></script>
   <script type="module" src="./scripts/validate.js"></script>
+
 </body>
 
 </html>

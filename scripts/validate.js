@@ -29,13 +29,14 @@ const isValid = (form, input, rest) => {
 
 const toggleButtonState = (button, inputs, {inactiveButtonClass}) => {
   const hasInvalidInput = inputs.every((input) => input.validity.valid);
-  var submitButton = document.getElementById("button");
-  submitButton.disabled = true;
   if (hasInvalidInput) {
-    submitButton.disabled = false;
     button.classList.remove(inactiveButtonClass);
+    button.disabled = false;
+    console.log("Active");
   } else {
     button.classList.add(inactiveButtonClass);
+    button.disabled = true;
+    console.log("Inactive");
   }
 };
 
