@@ -10,9 +10,8 @@ export function toggleModal(modal) {
 }
 
 export function closeModalOutside(event) {  
-  if(event.target.classList.contains('modal')) { 
-    const openModal = document.querySelector('.modal_visible');
-    toggleModal(openModal);
+  if(event.target.classList.contains('modal')) {
+    toggleModal(event.target);
   }
 }
 
@@ -20,11 +19,5 @@ export function escCloseModal(event) {
   if (event.key === 'Escape') {  
     const openModal = document.querySelector('.modal_visible');
     toggleModal(openModal);
-  }
-}
-
-export function fillDefaultCardModalValues(){
-  if(!addCardModal.classList.contains("modal_visible")){
-    document.getElementById("modalFormTypeAddCard").reset();
   }
 }

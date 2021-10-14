@@ -1,5 +1,5 @@
 const showInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const error = document.querySelector(`#${input.id}_error`);
+  const error = formSelector.querySelector(`#${input.id}_error`);
   input.classList.add(inputErrorClass);
 
   if (error) {
@@ -10,7 +10,7 @@ const showInputError = (formSelector, input, {errorClass, inputErrorClass, ...re
 };
 
 const hideInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const error = document.querySelector(`#${input.id}_error`);
+  const error = formSelector.querySelector(`#${input.id}_error`);
   input.classList.remove(inputErrorClass);
 
   if (error) {
@@ -55,12 +55,6 @@ function enableValidation ({formSelector, inputSelector, submitButtonSelector, .
       input.addEventListener("input", () => {
         isValid(form, input, rest);
         toggleButtonState(button, inputs, rest);
-      });
-      inputs.forEach((input) => {
-        input.addEventListener("click", () => {
-          isValid(form, input, rest);
-          toggleButtonState(button, inputs, rest);
-        });
     });
   });
 });
