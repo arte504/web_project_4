@@ -10,7 +10,7 @@ export function toggleModal(modal) {
 }
 
 export function closeModalOutside(event) {  
-  if(event.target.classList.contains('modal')) {
+  if(event.target.classList.contains('.modal_visible')) {
     toggleModal(event.target);
   }
 }

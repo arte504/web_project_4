@@ -17,6 +17,8 @@ const addCardCloseButton = document.querySelector('.modal__close-button_type_add
 const cardInputTitle = document.querySelector('.modal__input_type_name');
 const cardInputLink = document.querySelector('.modal__input_type_link');
 const addCardModal = document.querySelector('.modal_type_add-card');
+// --- General const --- //
+const submitButton = document.querySelector('.modal__submit-button');
 // --- 'Big image' consts --- //
 const cardBigModal = document.querySelector('.modal_type_big-image');
 const cardBigModalFigure = document.querySelector('.modal__image');
@@ -94,6 +96,7 @@ openAddCardModal.addEventListener('click', () => {
     cardInputTitle.value = "";
     cardInputLink.value = "";
     toggleModal(addCardModal);
+    submitButton.disabled = true;
   });
 });
 // --- 'Big image' ---//
