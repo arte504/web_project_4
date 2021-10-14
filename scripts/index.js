@@ -84,20 +84,18 @@ profileModal.addEventListener('submit', (submit) => {
 // --- 'Add card' modal all in one event --- //
 openAddCardModal.addEventListener('click', () => {
   toggleModal(addCardModal);
+});
+addCardModal.addEventListener('submit', (submit) => {
+  submit.preventDefault();
 
-  addCardCloseButton.addEventListener('click', () => {
-    toggleModal(addCardModal);
-  });
-
-  addCardModal.addEventListener('submit', (submit) => {
-    submit.preventDefault();
-
-    addCard(cardInputTitle.value, cardInputLink.value);
-    cardInputTitle.value = "";
-    cardInputLink.value = "";
-    toggleModal(addCardModal);
-    submitButton.disabled = true;
-  });
+  addCard(cardInputTitle.value, cardInputLink.value);
+  cardInputTitle.value = "";
+  cardInputLink.value = "";
+  toggleModal(addCardModal);
+  submitButton.disabled = true;
+});
+addCardCloseButton.addEventListener('click', () => {
+  toggleModal(addCardModal);
 });
 // --- 'Big image' ---//
 cardBigModalCloseIcon.addEventListener('click', () => toggleModal(cardBigModal));

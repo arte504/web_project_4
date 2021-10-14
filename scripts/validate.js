@@ -1,22 +1,28 @@
 const showInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const error = formSelector.querySelector(`#${input.id}_error`);
+  const titleSpan = document.getElementById('modal__span__title_error');
+  const urlSpan = document.getElementById('modal__span__url_error');
   input.classList.add(inputErrorClass);
 
-  if (error) {
-    error.textContent = input.validationMessage;
-    error.classList.add(errorClass);
+  if (input.id === 'cardTitleInput') {
+    titleSpan.classList.add(errorClass);
   }
-  
+  if(input.id === 'cardLinkInput'){
+    urlSpan.classList.add(errorClass)
+  }
 };
 
 const hideInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const error = formSelector.querySelector(`#${input.id}_error`);
+  const titleSpan = document.getElementById('modal__span__title_error');
+  const urlSpan = document.getElementById('modal__span__url_error');
   input.classList.remove(inputErrorClass);
 
-  if (error) {
-    error.classList.remove(errorClass);
-    error.textContent = '';
+  if (input.id === 'cardTitleInput') {
+    titleSpan.classList.remove(errorClass);
   }
+  if(input.id === 'cardLinkInput'){
+    urlSpan.classList.remove(errorClass)
+  }
+  console.log("Active");
 };
 
 const isValid = (form, input, rest) => {
@@ -32,11 +38,9 @@ const toggleButtonState = (button, inputs, {inactiveButtonClass}) => {
   if (hasInvalidInput) {
     button.classList.remove(inactiveButtonClass);
     button.disabled = false;
-    console.log("Active");
   } else {
     button.classList.add(inactiveButtonClass);
     button.disabled = true;
-    console.log("Inactive");
   }
 };
 
@@ -52,7 +56,7 @@ function enableValidation ({formSelector, inputSelector, submitButtonSelector, .
     const button = form.querySelector(submitButtonSelector);
 
     inputs.forEach((input) => {
-      input.addEventListener("input", () => {
+      input.addEventListener("keyup", () => {
         isValid(form, input, rest);
         toggleButtonState(button, inputs, rest);
     });
@@ -66,5 +70,6 @@ enableValidation({
   submitButtonSelector: ".modal__submit-button",
   inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__input_error",
-  errorClass: "modal__error_visible"
+  errorClass: "modal__error_visible",
+  spanSelector: ".modal__error"
 }); 

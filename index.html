@@ -79,13 +79,13 @@
       <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
       <h2 class="modal__header">New place</h2>
       <fieldset class="modal__fields modal__fields_type_add-card">
-        <input type="text" name="card-title" id="card_TitleInput" class="modal__input modal__input_type_name" value="" minlength="1" maxlength="30" required placeholder="Title">
-        <span id="modal__title_error" class="modal__error"></span>
+        <input type="text" name="card-title" id="cardTitleInput" class="modal__input modal__input_type_name" value="" minlength="1" maxlength="30" required placeholder="Title">
+        <span id="modal__span__title_error" class="modal__error">Please fill out this field.</span>
 
-        <input type="url" name="card-image-link" id="card_LinkInput" value="" class="modal__input modal__input_type_link" minlength="2" maxlength="200" required placeholder="Image link">
-        <span id="modal__url_error" class="modal__error"></span>
+        <input type="url" name="card-image-link" id="cardLinkInput" value="" class="modal__input modal__input_type_link" minlength="2" maxlength="200" required placeholder="Image link">
+        <span id="modal__span__url_error" class="modal__error">Please enter a web address.</span>
 
-        <button class="modal__submit-button" id="btn" type="submit" disabled="true">Create</button>
+        <button class="modal__submit-button modal__submit-button_disabled" id="btn" type="submit" disabled="true">Create</button>
       </fieldset>
     </form>
   </div>
