@@ -1,28 +1,13 @@
 const showInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const titleSpan = document.getElementById('modal__span__title_error');
-  const urlSpan = document.getElementById('modal__span__url_error');
+  const error = formSelector.querySelector(`#${input.id}_error`);
   input.classList.add(inputErrorClass);
-
-  if (input.id === 'cardTitleInput') {
-    titleSpan.classList.add(errorClass);
-  }
-  if(input.id === 'cardLinkInput'){
-    urlSpan.classList.add(errorClass)
-  }
+  error.classList.add(errorClass);
 };
 
 const hideInputError = (formSelector, input, {errorClass, inputErrorClass, ...rest}) => {
-  const titleSpan = document.getElementById('modal__span__title_error');
-  const urlSpan = document.getElementById('modal__span__url_error');
+  const error = formSelector.querySelector(`#${input.id}_error`);
   input.classList.remove(inputErrorClass);
-
-  if (input.id === 'cardTitleInput') {
-    titleSpan.classList.remove(errorClass);
-  }
-  if(input.id === 'cardLinkInput'){
-    urlSpan.classList.remove(errorClass)
-  }
-  console.log("Active");
+  error.classList.remove(errorClass);
 };
 
 const isValid = (form, input, rest) => {
@@ -56,9 +41,15 @@ function enableValidation ({formSelector, inputSelector, submitButtonSelector, .
     const button = form.querySelector(submitButtonSelector);
 
     inputs.forEach((input) => {
-      input.addEventListener("keyup", () => {
+      input.addEventListener("input", () => {
         isValid(form, input, rest);
         toggleButtonState(button, inputs, rest);
+      });
+      inputs.forEach((input) => {
+        input.addEventListener("click", () => {
+          isValid(form, input, rest);
+          toggleButtonState(button, inputs, rest);
+        });
     });
   });
 });
@@ -70,6 +61,5 @@ enableValidation({
   submitButtonSelector: ".modal__submit-button",
   inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__input_error",
-  errorClass: "modal__error_visible",
-  spanSelector: ".modal__error"
+  errorClass: "modal__error_visible"
 }); 
