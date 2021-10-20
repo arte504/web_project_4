@@ -40,8 +40,8 @@ export class Card {
     {this._openBigImage(event);});
   }
   /* Card like button toggle */
-  _likeCard(evt) {
-    evt.preventDefault();
+  _likeCard(event) {
+    event.preventDefault();
     const button = evt.target;
     button.classList.toggle("card__like-button_active");
   }
@@ -53,7 +53,7 @@ export class Card {
     parentItem = null;
   }
   _openBigImage(event){
-    evt.preventDefault();
+    event.preventDefault();
     const target = event.target;
     const link = target.src;
     const name = target.alt;

@@ -21,6 +21,9 @@ import{
   addCardForm,
   addCardFormTitel,
   addCardFormLink,
+  /* Big image consts */
+  cardBigModal,
+  cardBigModalCloseIcon,
   /* General consts */
   formConfig,
   cardList
@@ -58,24 +61,23 @@ editButton.addEventListener('click', () => {
 // --- Input submition --- // 
 profileModal.addEventListener('submit', (submit) => {
   submit.preventDefault();
-
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closeModal(profileModal);
 });
 // --- Close on 'X' button press --- //
-editCloseButton.addEventListener('click', () => { closeModal(profileModal); });
+editCloseButton.addEventListener('click', () => {closeModal(profileModal);});
+
 // +++++ 'Add-Card' Modal +++++ //
 // --- Open on add button press --- //
-openAddCardModal.addEventListener('click', () => {
-  openModal(addCardModal);
-});
+openAddCardModal.addEventListener('click', () => {openModal(addCardModal);});
 // --- Input submition --- // 
 addCardModal.addEventListener('submit', submitNewCard);
 // --- Close on 'X' button press --- //
-addCardCloseButton.addEventListener('click', () => {
-  closeModal(addCardModal);
-});
+addCardCloseButton.addEventListener('click', () => {closeModal(addCardModal);});
+
+// +++++ 'Big-Image' Modal +++++ //
+cardBigModalCloseIcon.addEventListener('click', () => {closeModal(cardBigModal);});
 
 // ===== Enable validation ===== //
 // --- Creating list/array of forms --- //

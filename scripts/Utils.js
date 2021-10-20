@@ -19,14 +19,12 @@ export const addCardFormLink = addCardForm.elements.link;
 // --- General const --- //
 export const submitButton = document.querySelector('.modal__submit-button');
 export const cardList = document.querySelector('.cards__grid');
-
-/* Big image modal consts */
+// --- Big image modal consts --- //
 export const cardBigModal = document.querySelector('.modal_type_big-image');
 export const cardBigModalImage = document.querySelector('.modal__big-image');
 export const cardBigModalText = document.querySelector('.modal__image-caption');
 export const cardBigModalCloseIcon = document.querySelector('.modal__close-button_type_big-image');
-
-
+// --- Form config consts --- //
 export const formConfig = {
   formSelector: ".modal__container",
   inputSelector: ".modal__input",

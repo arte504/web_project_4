@@ -11,15 +11,15 @@ export function closeModal(modalWindow) {
   document.removeEventListener("click", closeModalOnOverlay);
 }
 /* Close modal on "escape" keydown */
-export function closeModalOnEsc(evt) {
-  if (evt.key === 'Escape') {  
+export function closeModalOnEsc(event) {
+  if (event.key === 'Escape') {  
     const opendModal = document.querySelector('.modal_visible');
     closeModal(opendModal);
   }
 }
 /* Close modal on overlay "click" */
-export function closeModalOnOverlay(evt) {
-  if(evt.target.classList.contains('modal_visible')) {
-    closeModal(evt.target);
+export function closeModalOnOverlay(event) {
+  if(event.target.classList.contains('modal_visible')) {
+    closeModal(event.target);
   }
 }
