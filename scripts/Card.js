@@ -42,7 +42,7 @@ export class Card {
   /* Card like button toggle */
   _likeCard(event) {
     event.preventDefault();
-    const button = evt.target;
+    const button = event.target;
     button.classList.toggle("card__like-button_active");
   }
   /* Card deleting */
