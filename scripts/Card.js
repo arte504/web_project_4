@@ -30,15 +30,14 @@ export class Card {
   /* Set events listeners for every card we create! */
   _setEventListeners() {
     /* Add event listener for like button */
-    this._elem.querySelector(".card__like-button").addEventListener("click", (evt) => {
-      this._likeCard(evt);
-    });
+    this._elem.querySelector(".card__like-button").addEventListener("click", (event) =>
+    {this._likeCard(event);});
     /* Add event listener for delete button */
-    this._elem.querySelector(".card__delete-button").addEventListener("click", (evt) => {
-      this._deleteCard(evt);
-    });
+    this._elem.querySelector(".card__delete-button").addEventListener("click", (event) => 
+    {this._deleteCard(event);});
     /* Add event listener for Big-Image Modal opening on click the card image */
-    this._cardImage.addEventListener("click", (evt) => this._openBigImage(evt));
+    this._cardImage.addEventListener("click", (event) => 
+    {this._openBigImage(event);});
   }
   /* Card like button toggle */
   _likeCard(evt) {
@@ -47,15 +46,15 @@ export class Card {
     button.classList.toggle("card__like-button_active");
   }
   /* Card deleting */
-  _deleteCard(evt){
-    evt.preventDefault();
-    let parentItem = evt.currentTarget.closest(".card__template");
+  _deleteCard(event){
+    event.preventDefault();
+    let parentItem = event.currentTarget.closest(".card");
     parentItem.remove();
     parentItem = null;
   }
-  _openBigImage(evt){
+  _openBigImage(event){
     evt.preventDefault();
-    const target = evt.target;
+    const target = event.target;
     const link = target.src;
     const name = target.alt;
     openModal(cardBigModal);
