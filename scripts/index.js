@@ -1,101 +1,89 @@
-import initCards from '../scripts/initCards.js';
-import {toggleModal} from '../scripts/utils.js';
-// -- 'Edit profile' consts -- //
-const editButton = document.querySelector('.profile__edit-button');
-const profileModal = document.querySelector('.modal_type_edit')
-const profileName = document.querySelector('.profile__title');
-const profileJob = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.modal__input_type_title');
-const jobInput = document.querySelector('.modal__input_type_subtitle');
-const editCloseButton = document.querySelector('.modal__close-button_type_edit');
-// -- 'Add-card' consts -- //
-const cards = document.querySelector('.cards__grid');
-const cardTemplate = document.querySelector('#card__template').content;
-const cardSelector = cardTemplate.querySelector('.card');
-const openAddCardModal = document.querySelector('.profile__add-button');
-const addCardCloseButton = document.querySelector('.modal__close-button_type_add-card');
-const cardInputTitle = document.querySelector('.modal__input_type_name');
-const cardInputLink = document.querySelector('.modal__input_type_link');
-const addCardModal = document.querySelector('.modal_type_add-card');
-// --- 'Big image' consts --- //
-const cardBigModal = document.querySelector('.modal_type_big-image');
-const cardBigModalFigure = document.querySelector('.modal__image');
-const cardBigModalCloseIcon = document.querySelector('.modal__close-button_type_big-image');
-// --- Initial cards array adding to page --- //
-initCards.slice().forEach((card) => {
-  addCard(card.name, card.link);
+import { Card } from './Card.js';
+import { openModal, closeModal } from './Modal.js';
+import { FormValidator } from './FormValidator.js';
+import { initCards } from './InitCards.js'
+
+import{
+  /* 'Edit' consts import */
+  editButton,
+  profileModal,
+  profileName,
+  profileJob,
+  nameInput,
+  jobInput,
+  editCloseButton,
+  /* 'Add-Card' consts import */
+  openAddCardModal,
+  addCardModal,
+  cardInputTitle,
+  cardInputLink,
+  addCardCloseButton,
+  addCardForm,
+  addCardFormTitel,
+  addCardFormLink,
+  /* General consts */
+  formConfig,
+  cardList
+}from './Utils.js';
+
+// ===== Card manipulation functions ===== //
+// --- Creating new card function --- //
+function createNewCard(name, link, cardSelector) {
+  const newCard = new Card(name, link, cardSelector);
+  const card = newCard.createCard();
+
+  return card;
+}
+// --- Submit card info for creation --- //
+function submitNewCard(e){
+  e.preventDefault();
+  const name = addCardFormTitel.value;
+  const link = addCardFormLink.value;
+  cardList.append(createNewCard(name, link, ".card__template"));
+  closeModal(addCardModal);
+}
+// --- Initial pre-entred cards array --- //
+initCards.forEach((card) => { cardList
+  .append(createNewCard(card.name, card.link, ".card__template"));
 });
-// --- Adding card function --- //
-function addCard(name, link) {
-  const newCard = createCard(name, link);
-  renderCard(newCard);
-}
-// --- Card creation function --- //
-function createCard(name, link) {
-  const newCard = cardSelector.cloneNode(true);
-  const newCardImg = newCard.querySelector('.card__image');
-  newCardImg.alt = name;
-  newCardImg.src = link;
-  newCard.querySelector('.card__title').textContent = name;
 
-  newCardImg.addEventListener('click', () => {
-    const bigImage = cardBigModalFigure.querySelector('.modal__big-image');
-    const bigImageCaption = cardBigModalFigure.querySelector('.modal__image-caption');
-
-    bigImage.src = newCardImg.src;
-    bigImage.alt = newCardImg.alt;
-    bigImageCaption.textContent = newCardImg.alt;
-
-    toggleModal(cardBigModal);
-  });
-
-  newCard.querySelector('.card__like-button').addEventListener('click', (event) => {
-    event.target.classList.toggle('card__like-button_active');
-  });
-
-  newCard.querySelector('.card__delete-button').addEventListener('click', () => {
-    newCard.remove();
-  });
-
-  return newCard;
-}
-// --- Card render to page function --- //
-function renderCard(newCard) {
-  cards.prepend(newCard);
-}
-// --- Open/close 'Edit' modal on edit button press --- //
-editCloseButton.addEventListener('click', () => { toggleModal(profileModal); });
-// --- 'Edit' modal open up with pre-entered info --- //
+// ===== Event listeners ===== //
+// +++++ 'Edit' Modal +++++ //
+// --- Open up with pre-entered info --- //
 editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  toggleModal(profileModal);
+  openModal(profileModal);
 });
-// --- 'Edit' modal input submition --- // 
+// --- Input submition --- // 
 profileModal.addEventListener('submit', (submit) => {
   submit.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  toggleModal(profileModal);
+  closeModal(profileModal);
 });
-// --- 'Add card' modal all in one event --- //
+// --- Close on 'X' button press --- //
+editCloseButton.addEventListener('click', () => { closeModal(profileModal); });
+// +++++ 'Add-Card' Modal +++++ //
+// --- Open on add button press --- //
 openAddCardModal.addEventListener('click', () => {
-  toggleModal(addCardModal);
+  openModal(addCardModal);
 });
-addCardModal.addEventListener('submit', (submit) => {
-  submit.preventDefault();
-  const submitButton = document.getElementById('btn');
-
-  addCard(cardInputTitle.value, cardInputLink.value);
-  cardInputTitle.value = "";
-  cardInputLink.value = "";
-  toggleModal(addCardModal);
-  submitButton.setAttribute("disabled", "true");
-  submitButton.classList.add("modal__submit-button_disabled");
-});
+// --- Input submition --- // 
+addCardModal.addEventListener('submit', submitNewCard);
+// --- Close on 'X' button press --- //
 addCardCloseButton.addEventListener('click', () => {
-  toggleModal(addCardModal);
+  closeModal(addCardModal);
 });
-// --- 'Big image' ---//
-cardBigModalCloseIcon.addEventListener('click', () => toggleModal(cardBigModal));
+
+// ===== Enable validation ===== //
+// --- Creating list/array of forms --- //
+const formList = Array.from(
+  document.querySelectorAll(formConfig.formSelector)
+);
+// --- Adding validation for any form on page --- //
+formList.forEach((form) => {
+  const validateForm = new FormValidator(formConfig, form);
+  validateForm.enableValidation()
+})
