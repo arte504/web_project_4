@@ -42,7 +42,7 @@ function submitNewCard(e){
   e.preventDefault();
   const name = addCardFormTitel.value;
   const link = addCardFormLink.value;
-  cardList.append(createNewCard(name, link, ".card__template"));
+  cardList.prepend(createNewCard(name, link, ".card__template"));
   closeModal(addCardModal);
 }
 // --- Initial pre-entred cards array --- //
