@@ -1,4 +1,4 @@
-# ***[Project: Around The U.S.](https://arte504.github.io/web_project_4/)***
+# ***Project: Around The U.S.***
 
   
 
