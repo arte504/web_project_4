@@ -18,7 +18,7 @@
 
   
 
-You can visit the site [here](https://arte504.github.io/web_project_4/)
+You will be able to visit the site [here](https://arte504.github.io/web_project_4/) when I'll end up with the work on webpack and server side of the page!
 
   
 
