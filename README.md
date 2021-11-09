@@ -4,8 +4,6 @@
 
 ## Overview
 
-![Logo](https://github.com/arte504/web_project_4/blob/main/images/R.PNG)
-
 * Site
 
 * Intro

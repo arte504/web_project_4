@@ -7,7 +7,6 @@ import {
   addCardButton,
   addCardModal,
   initCards,
-  cardList,
   formConfig
 } from "../scripts/Utils.js";
 import ModalWithImage from "../scripts/ModalWithImage.js";
@@ -69,6 +68,7 @@ editButton.addEventListener("click", () => {
 // --- Form creation method --- //
 const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
   var newCard = addCardForm.getInputValues();
+  console.log(newCard);
   cardsSection.prependItem(createCard(newCard));
   addCardForm.close();
 });
