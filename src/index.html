@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Around the U.S.</title>
   <meta name="author" content="Artiom Shlyusberg">
   <link rel="icon" type="image/ico" href="https://code.s3.yandex.net/web-code/rules-favicon.ico">
@@ -16,7 +15,7 @@
   <!-- 'Header' starts -->
   <header class="header">
     <a href="#" target="_self">
-      <img class="header__logo" src="./images/logo.svg" alt="Site logo">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Site logo">
     </a>
   </header>
   <!-- 'Header' ends -->
@@ -25,7 +24,7 @@
   <main class="content">
     <!-- 'Profile' starts -->
     <section class="profile">
-      <img class="profile__image" src="./images/profileImg.jpg" alt="Profile image" />
+      <img class="profile__image" src="<%=require('./images/profileImg.jpg')%>" alt="Profile image" />
 
       <div class="profile__info">
         <div class="profile__text">
@@ -58,17 +57,17 @@
 
   <!-- Edit profile modal starts -->
   <div class="modal modal_type_edit">
-    <form class="modal__container modal__container_type_form" method="POST" id="modalFormTypeEdit" novalidate>
+    <form name="profile" class="modal__container modal__container_type_form" method="POST" id="modalFormTypeEdit" novalidate>
       <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
       <h2 class="modal__header">Edit profile</h2>
       <fieldset class="modal__fields modal__fields_type_edit">
-        <input type="text" class="modal__input modal__input_type_title" id="nameInput" name="author-name" placeholder="Name" minlength="2" maxlength="40" required>
+        <input type="name" class="modal__input modal__input_type_title" id="nameInput" name="name" placeholder="Name" minlength="2" maxlength="40" required>
         <span id="nameInput_error" class="modal__error modal__span">Please fill out this field.</span>
 
-        <input type="text" class="modal__input modal__input_type_subtitle" id="jobInput" name="author-job" placeholder="Job" minlength="2" maxlength="200" required>
+        <input type="job" class="modal__input modal__input_type_subtitle" id="jobInput" name="job" placeholder="Job" minlength="2" maxlength="200" required>
         <span id="jobInput_error" class="modal__error modal__span">Please fill out this field.</span>
       </fieldset>
-      <input class="modal__submit-button" id="button" type="submit" value="Save">
+      <input class="modal__submit-button" id="button" type="submit" value="Save" disabled="true">
     </form>
   </div>
   <!-- Edit profile modal ends -->
@@ -80,7 +79,7 @@
       <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
       <h2 class="modal__header">New place</h2>
       <fieldset class="modal__fields modal__fields_type_add-card">
-        <input type="text" name="title" id="cardTitleInput" 
+        <input type="text" name="name" id="cardTitleInput" 
                class="modal__input modal__input_type_name" value="" 
                minlength="1" maxlength="30" required placeholder="Title">
         <span id="cardTitleInput_error" class="modal__error modal__span">
@@ -122,13 +121,6 @@
         </li>
     </template>
   <!-- Card template ends -->
-
-  <!-- JS script/s import -->
-  <script type="module" src="./scripts/Index.js"></script>
-  <script type="module" src="./scripts/Utils.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
-  <script type="module" src="./scripts/Modal.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
 
 </body>
 
