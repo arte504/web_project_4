@@ -1,6 +1,6 @@
-import { Card } from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import Section from "../scripts/Section.js";
+import { Card } from "../components/scripts/Card.js";
+import FormValidator from "../components/scripts/FormValidator.js";
+import Section from "../components/scripts/Section.js";
 import {
   editButton,
   profileModal,
@@ -8,10 +8,10 @@ import {
   addCardModal,
   initCards,
   formConfig
-} from "../scripts/Utils.js";
-import ModalWithImage from "../scripts/ModalWithImage.js";
-import ModalWithForm from "../scripts/ModalWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
+} from "../components/utils/constants.js";
+import ModalWithImage from "../components/scripts/ModalWithImage.js";
+import ModalWithForm from "../components/scripts/ModalWithForm.js";
+import UserInfo from "../components/scripts/UserInfo.js";
 import "./index.css";
 
 // --- ModalWithImage instance --- //
@@ -23,7 +23,7 @@ bigImageModal.setEventListeners();
 const createCard = (newCard) => {
   const card = new Card(newCard, ".card__template", (event) => {
     // --- Open 'big image' modal method --- //
-    bigImageModal.open(event);
+    bigImageModal.openup(event);
   });
   const renderedCard = card.generateCard();
   return renderedCard;
@@ -35,14 +35,14 @@ const cardsSection = new Section(
     items: initCards,
     // --- Itterating cards from recived list --- //
     renderer: (data) => {
-      cardsSection.addCard(createCard(data));
+      cardsSection.addItem(createCard(data));
     }
   },
   // --- Container selector, where the cards will be added --- //
   ".cards__grid",
 );
 // --- Render cards from initCards list --- //
-cardsSection.renderCards();
+cardsSection.renderItems();
 
 // +++++ 'User Info' +++++ //
 // --- UserInfo instance --- //
@@ -67,8 +67,7 @@ editButton.addEventListener("click", () => {
 // === 'Add card' form === //
 // --- Form creation method --- //
 const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
-  var newCard = addCardForm.getInputValues();
-  console.log(newCard);
+  const newCard = addCardForm.getInputValues();
   cardsSection.prependItem(createCard(newCard));
   addCardForm.close();
 });

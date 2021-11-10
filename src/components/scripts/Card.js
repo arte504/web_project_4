@@ -32,17 +32,20 @@ export class Card {
   _setEventListeners() {
     this._item
       .querySelector(".card__like-button")
-      .addEventListener("click", (event) =>
-      {this._likeCard(event);});
+      .addEventListener("click", (event) => {
+        this._likeCard(event);
+      });
 
     this._item
       .querySelector(".card__delete-button")
-      .addEventListener("click", (event) => 
-      {this._deleteCard(event);});
+      .addEventListener("click", (event) => {
+        this._deleteCard(event);
+      });
 
     this._cardImage
-      .addEventListener("click", (event) => 
-      {this._onCardClick(event);});
+      .addEventListener("click", (event) => {
+        this._onCardClick(event);
+      });
   }
   // --- Toggle like button method --- //
   _likeCard(event) {
@@ -53,8 +56,7 @@ export class Card {
   // --- Card deleting method --- //
   _deleteCard(event){
     event.preventDefault();
-    let parentItem = event.currentTarget.closest(".card");
-    parentItem.remove();
-    parentItem = null;
+    this._item.remove();
+    this._item = null 
   }
 }

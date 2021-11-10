@@ -1,9 +1,9 @@
 import Modal from "./Modal.js";
 
 export default class ModalWithForm extends Modal {
-  constructor(modalSelector, submitHandler) {
+  constructor(modalSelector, handleSubmit) {
     super(modalSelector);
-    this._submitBtnHandler = submitHandler;
+    this._handleSubmitBtn = handleSubmit;
     this._formElement = this._modalElement.querySelector(".modal__container");
   }
 
@@ -26,7 +26,7 @@ export default class ModalWithForm extends Modal {
   setEventListeners() {
     super.setEventListeners();
     this._formElement.addEventListener("submit", () => {
-      this._submitBtnHandler(this.getInputValues());
+      this._handleSubmitBtn(this.getInputValues());
       this.close();
       this._formElement.reset();
     });

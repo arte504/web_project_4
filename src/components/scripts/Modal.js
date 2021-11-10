@@ -1,8 +1,6 @@
 export default class Modal {
   constructor(modalSelector) {
     this._modalElement = document.querySelector(modalSelector);
-    this._checkForEscClose = this._checkForEscClose.bind(this);
-    this.open = this.open.bind(this);
   }
   // --- Close modal on ESC method --- //
   _checkForEscClose = (event) => {
@@ -11,7 +9,7 @@ export default class Modal {
     }
   }
   // --- Open modal method --- // 
-  open() {
+  open = () => {
     this._modalElement.classList.add("modal_visible");
     document.addEventListener("keyup", this._checkForEscClose);
   }

@@ -4,7 +4,7 @@
   "description": "![Logo](https://github.com/arte504/web_project_4/blob/main/images/R.PNG)",
   "main": "Index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack --mode production",
+    "build": "rimraf dist && webpack --mode production",
     "dev": "webpack server --mode development"
   },
   "repository": {
