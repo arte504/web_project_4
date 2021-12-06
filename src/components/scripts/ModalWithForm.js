@@ -23,12 +23,24 @@ export default class ModalWithForm extends Modal {
     inputList.forEach((input) => {input.value = values[input.name];})
   }
 
+  saving(isSaving) {
+    if (isSaving) {
+      this._formElement.querySelector(
+        ".modal__submit-button"
+      ).textContent = "Saving...";
+    } 
+    else {
+      this._formElement.querySelector(
+        ".modal__submit-button"
+      ).textContent = "Save";
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._formElement.addEventListener("submit", () => {
       this._handleSubmitBtn(this.getInputValues());
       this.close();
-      this._formElement.reset();
     });
   }
 
