@@ -7,9 +7,7 @@ import {
   profileModal,
   addCardButton,
   addCardModal,
-  initCards,
-  formConfig,
-  cardList
+  formConfig
 } from "../components/utils/constants.js";
 import ModalWithImage from "../components/scripts/ModalWithImage.js";
 import ModalWithForm from "../components/scripts/ModalWithForm.js";
@@ -37,11 +35,11 @@ function renderCard (initCard, user, selector) {
     isOwner: (owner) => {
       return (user._id === owner);
     },
-    clickCardHandler: (cardInfo) => {
-      imagePopup.open(cardInfo);
+    onCardClick: (cardInfo) => {
+      bigImageModal.open(cardInfo);
     },
     deleteCardHandler: (id, card) => {
-      const deleteConfirm = new PopupDeleteConfirm('.delete-card', () => {
+      const deleteConfirm = new ModalDeleteConfirmation('.delete-card', () => {
         api.removeCard(id)
           .then(res => card.removeCard())
           .catch((err) => console.log(err))
@@ -51,7 +49,7 @@ function renderCard (initCard, user, selector) {
       });
       deleteConfirm.open();
     },
-    likeCardHandler: (cardInfo) => {
+    likeHandler: (cardInfo) => {
       if (cardInfo._likes.find(item => item._id === user._id) !== undefined) {
         api.removeLike(cardInfo)
           .then(res => {
@@ -101,9 +99,9 @@ api.getAppInfo()
         });
     });
 
-    btnAddCard.addEventListener('click', () => {
-      popupAddCard.open();
-      addCardValidator.changeStateSubmit();
+    addCardButton.addEventListener('click', () => {
+      addCardFormValidation.resetValidation();
+      modalAddCard.open();
     });
   })
   .catch((err) => console.log(err));
@@ -141,11 +139,6 @@ const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
 });
 // --- Set event listeners for 'add card' modal --- //
 addCardForm.setEventListeners();
-// --- Open the form --- //
-addCardButton.addEventListener("click", () => {
-  addCardFormValidation.resetValidation();
-  addCardForm.open();
-});
 
 // +++++ Validation +++++ //
 // --- 'Edit profile' form validation adding --- //
