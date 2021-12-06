@@ -1,3 +1,12 @@
+const firstCall = (url, headers) => {
+    return fetch(url, headers).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      Promise.reject(`ERROR: ${res.statusText}`);
+    });
+  };
+
 class Api {
   constructor(baseUrl, headers) {
     this.baseUrl = baseUrl;
@@ -83,18 +92,12 @@ class Api {
 
 }
 
-export const api = new Api("https://around.nomoreparties.co/v1/group-12", {
-  authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-  "Content-Type": "application/json"
+const api = new Api({
+    baseUrl: 'https://around.nomoreparties.co/v1/group-2',
+    headers: {
+        authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
+        "Content-Type": "application/json"
+    }
 });
 
 console.log(api);
-
-const firstCall = (url, headers) => {
-    return fetch(url, headers).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      Promise.reject(`ERROR: ${res.statusText}`);
-    });
-  };

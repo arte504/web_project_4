@@ -5,6 +5,7 @@ export const nameInput = profileModal.elements.name;
 export const jobInput = profileModal.elements.job;
 export const editCloseButton = document.querySelector('.modal__close-button_type_edit');
 // --- 'Avatar" modal consts --- //
+export const avatarEditButton = document.querySelector('.profile__image-edit');
 export const avatarModal = document.querySelector('.modal_type_avatar');
 export const avatarModalInput = document.querySelector('.modal__input_type_avatar');
 export const avatarCloseButton = document.querySelector('.modal__close-button_type_avatar')

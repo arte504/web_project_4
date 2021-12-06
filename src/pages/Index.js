@@ -8,6 +8,7 @@ import {
   addCardButton,
   addCardModal,
   avatarModal,
+  avatarEditButton,
   formConfig
 } from "../components/utils/constants.js";
 import ModalWithImage from "../components/scripts/ModalWithImage.js";
@@ -119,6 +120,19 @@ editButton.addEventListener("click", () => {
   editProfileForm.setInputValues(userInfoValues.getUserInfo())
   profileFormValidation.resetValidation();
   editProfileForm.open();
+});
+
+// === 'Avatar' edit form === //
+const avatarForm = new ModalWithForm(".modal_type_avatar", () => {
+  
+});
+
+// --- Set event lesteners to the form --- //
+avatarForm.addEventListener();
+
+avatarEditButton.addEventListener("click", () => {
+  avatarFormValidation.resetValidation();
+  avatarForm.open();
 });
 
 // === 'Add card' form === //
