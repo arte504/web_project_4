@@ -15,103 +15,93 @@ import ModalDeleteConfirmation from "../components/scripts/ModalDeleteConfirmati
 import UserInfo from "../components/scripts/UserInfo.js";
 import "./index.css";
 
+// --- Big image modal instance --- //
+const bigImageModal = new ModalWithImage(".modal_type_big-image");
+
+// --- Delete card modal instance and events --- //
+const deleteCardModal = new ModalWithForm(".modal_type_delete-card");
+deleteCardModal.setEventListeners();
+
 // +++++ Card Section +++++ //
-const cardSelector = '#card';
 // --- Card render function --- //
-function renderCard (initCard, user, selector) {
-  return new Card({
-    cardData: initCard,
-    isLiked: (listLikes) => {
-      return (listLikes.find(item => item._id === user._id) !== undefined);
+function createCard(data) {
+  const card = new Card({
+    data: data,
+    user: userId,
+    cardSelector: ".cards__grid",
+    handleCardClick: (evt) => {
+      // --- Open big image modal --- //
+      evt.preventDefault();
+      const target = evt.target;
+      const link = target.src;
+      const name = target.alt;
+      bigImageModal.open(link, name);
+      bigImageModal.setEventListeners();
     },
-    isOwner: (owner) => {
-      return (user._id === owner);
-    },
-    onCardClick: (cardInfo) => {
-      bigImageModal.open(cardInfo);
-    },
-    deleteCardHandler: (id, card) => {
-      const deleteConfirm = new ModalDeleteConfirmation('.delete-card', () => {
-        api.removeCard(id)
-          .then(res => card.removeCard())
-          .catch((err) => console.log(err))
-          .finally(function () {
-            deleteConfirm.close();
-          });
-      });
-      deleteConfirm.open();
-    },
-    likeHandler: (cardInfo) => {
-      if (cardInfo._likes.find(item => item._id === user._id) !== undefined) {
-        api.removeLike(cardInfo)
-          .then(res => {
-            cardInfo._likes = res.likes;
-            cardInfo.setLikes(res.likes.length);
-          });
-      } 
-      else {
-        api.addLike(cardInfo)
-          .then(res => {
-            cardInfo._likes = res.likes;
-            cardInfo.setLikes(res.likes.length);
-        });
-      }
-    }
-  },
-  cardSelector);
-}
-
-api.getAppInfo()
-  .then(([initialCards, userInfo]) => {
-    const cardsSection = new Section({
-      data: initialCards,
-      renderer: function (initialCard) {
-        const card = renderCard(initialCard, userInfo, cardSelector);
-        cardsSection.addItem(card.generateCard());
-      }
-    }, '.cards__grid');
-    cardsSection.renderItems();
-
-    user.setUserInfo({
-      name: userInfo.name,
-      job: userInfo.about
-    });
-
-    user.setUserAvatar({
-      avatar: userInfo.avatar
-    });
-
-    const modalAddCard = new ModalWithForm('.add-card', (cardData) => {
-      api.addCard({ name: cardData.name, link: cardData.link })
-        .then((res) => {
-          const newCard = renderCard(res, userInfo, cardSelector);
-          cardsSection.addItem(newCard.generateCard());
+    handleDeleteCard: (cardId) => {
+      ModalDeleteConfirmation.open();
+      ModalDeleteConfirmation.setAction(() =>
+        api.deleteCard(cardId).then((res) => {
+          card.deleteCard();
+          ModalDeleteConfirmation.close();
         })
         .catch((err) => console.log(err))
-        .finally(function () {
-          modalAddCard.close();
-        });
-    });
+      );
+    },
+    handleLikes: (cardId) => {
+      const isLiked = card.isLiked();
+      if (isLiked) {
+        api.dislike(cardId).then((res) => {
+          card.updateLikes(res.likes);
+        })
+        .catch((err) => console.log(err))
+      } 
+      else {
+        api.addLike(cardId).then((res) => {
+          card.updateLikes(res.likes);
+        })
+        .catch((err) => console.log(err))
+      }
+    },
+  });
+  // --- Clone from template --- //
+  const cardsItem = card.generateCard();
+  return cardsItem;
+}
 
-    addCardButton.addEventListener('click', () => {
-      addCardFormValidation.resetValidation();
-      modalAddCard.open();
-    });
-  })
-  .catch((err) => console.log(err));
-
-// --- ModalWithImage instance --- //
-const bigImageModal = new ModalWithImage(".modal_type_big-image");
-bigImageModal.setEventListeners();
+const cardsSection = new Section(
+  (item) => {
+    cardsSection.addItem(createCard(item));
+  },
+  ".cards__grid"
+);
 
 // +++++ 'User Info' +++++ //
 // --- UserInfo instance --- //
-const userInfoValues = new UserInfo(".profile__title", ".profile__subtitle");
+const userInfoValues = new UserInfo({
+  name: ".profile__title",
+  about: ".profile__subtitle",
+  avatar: ".profile__image",
+});
+// --- UserInfo init --- //
+api.getUserInfo().then((res) => {
+  userInfoValues.setUserInfo(res);
+  userId = res._id;
+  userInfoValues.setAvatar(res.avatar);
+})
+.catch((err) => console.log(err));
+
+// +++++ Card list +++++ //
+// --- Cards init --- //
+api.getInitialCards().then((res) => {
+  cardsSection.renderItems(res);
+})
+.catch((err) => console.log(err));
 
 // +++++ Forms +++++ //
 // === 'Edit profile' form === //
 // --- Form creation method --- //
-const editProfileForm = new ModalWithForm(".modal_type_edit", (data) => {
+const editProfileForm = new ModalWithForm(".modal_type_edit", () => {
   userInfoValues.setUserInfo(editProfileForm.getInputValues());
   editProfileForm.close();
 });
@@ -143,3 +133,5 @@ avatarFormValidation.enableValidation();
 // --- 'Add card' form validation adding --- //
 const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
+
+let userId;
