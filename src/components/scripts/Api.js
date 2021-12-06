@@ -21,6 +21,7 @@ class Api {
     });
   }
 
+
   // --- Fetch UserInfo from the server --- //
   getUserInfo() {
     return firstCall(`${this._baseUrl}/users/me`, {
@@ -94,10 +95,8 @@ class Api {
 
 const api = new Api({
     baseUrl: 'https://around.nomoreparties.co/v1/group-2',
-    headers: {
-        authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-        "Content-Type": "application/json"
-    }
+    headers: { authorization: "709a0d9d-db06-4890-a594-b07e7309a353" }
 });
 
-console.log(api);
+console.log(getInitialCards);
+console.log(getUserInfo);
