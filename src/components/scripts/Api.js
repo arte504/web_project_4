@@ -1,11 +1,11 @@
-const firstCall = (url, headers) => {
-  return fetch(url, headers).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    Promise.reject(`ERROR: ${res.statusText}`);
-  });
-};
+function firstCall(url, headers) {
+    return fetch(url, headers).then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+        Promise.reject(`ERROR: ${res.statusText}`);
+    });
+}
 
 class Api {
   constructor(baseUrl, headers) {

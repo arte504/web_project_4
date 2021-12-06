@@ -42,26 +42,29 @@ function createCard(data) {
     handleDeleteCard: (cardId) => {
       ModalDeleteConfirmation.open();
       ModalDeleteConfirmation.setAction(() =>
-        api.deleteCard(cardId).then((res) => {
-          card.deleteCard();
-          ModalDeleteConfirmation.close();
-        })
-        .catch((err) => console.log(err))
+        api.deleteCard(cardId)
+          .then((res) => {
+            card.deleteCard();
+            ModalDeleteConfirmation.close();
+          })
+          .catch((err) => console.log(err))
       );
     },
     handleLikes: (cardId) => {
       const isLiked = card.isLiked();
       if (isLiked) {
-        api.removeLike(cardId).then((res) => {
-          card.updateLikes(res.likes);
-        })
-        .catch((err) => console.log(err))
+        api.removeLike(cardId)
+          .then((res) => {
+            card.updateLikes(res.likes);
+          })
+          .catch((err) => console.log(err))
       } 
       else {
-        api.addLike(cardId).then((res) => {
-          card.updateLikes(res.likes);
-        })
-        .catch((err) => console.log(err))
+        api.addLike(cardId)
+          .then((res) => {
+            card.updateLikes(res.likes);
+          })
+          .catch((err) => console.log(err))
       }
     },
   });
@@ -85,12 +88,13 @@ const userInfoValues = new UserInfo({
   avatar: ".profile__image",
 });
 // --- UserInfo init --- //
-api.getUserInfo().then((res) => {
-  userInfoValues.setUserInfo(res);
-  userId = res._id;
-  userInfoValues.setUserAvatar(res.avatar);
-})
-.catch((err) => console.log(err));
+api.getUserInfo()
+  .then((res) => {
+    userInfoValues.setUserInfo(res);
+    userId = res._id;
+    userInfoValues.setUserAvatar(res.avatar);
+  })
+  .catch((err) => console.log(err));
 
 // +++++ Card list +++++ //
 // --- Cards init --- //
