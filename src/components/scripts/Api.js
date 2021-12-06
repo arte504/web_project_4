@@ -85,8 +85,11 @@ class Api {
 
 export const api = new Api("https://around.nomoreparties.co/v1/group-12", {
   authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-  "Content-Type": "application/json"}
-);
+  "Content-Type": "application/json"})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
 
 const firstCall = (url, headers) => {
     return fetch(url, headers).then((res) => {
