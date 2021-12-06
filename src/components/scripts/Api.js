@@ -110,7 +110,10 @@ export default class Api {
     return fetch(this.baseUrl + "/users/me", {
       headers: this.headers,
       method: "PATCH",
-      body: JSON.stringify({name,about})
+      body: JSON.stringify({
+          name,
+          about
+        })
     })
     .then((res) => {
       if (res.ok) {

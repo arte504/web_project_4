@@ -21,7 +21,7 @@ const api = new Api({
     authorization: '709a0d9d-db06-4890-a594-b07e7309a353',
     'Content-Type': 'application/json'
   }
-}); 
+});
 
 // +++++ Card Section +++++ //
 const cardSelector = '#card';
@@ -56,10 +56,12 @@ function renderCard (initCard, user, selector) {
             cardInfo._likes = res.likes;
             cardInfo.setLikes(res.likes.length);
           });
-      } else {
-        api.addLike(cardInfo).then(res => {
-          cardInfo._likes = res.likes;
-          cardInfo.setLikes(res.likes.length);
+      } 
+      else {
+        api.addLike(cardInfo)
+          .then(res => {
+            cardInfo._likes = res.likes;
+            cardInfo.setLikes(res.likes.length);
         });
       }
     }
@@ -109,11 +111,6 @@ api.getAppInfo()
 // --- ModalWithImage instance --- //
 const bigImageModal = new ModalWithImage(".modal_type_big-image");
 bigImageModal.setEventListeners();
-
-// +++++ 'User Info' +++++ //
-// --- UserInfo instance --- //
-const userInfoValues = new UserInfo(".profile__title", ".profile__subtitle");
-userInfoValues.setUserInfo({ name: "Artiom Shlyusberg", job: "Junior Web Dev" });
 
 // +++++ Forms +++++ //
 // === 'Edit profile' form === //
