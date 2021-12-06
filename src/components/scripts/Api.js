@@ -1,136 +1,98 @@
-export default class Api {
-  constructor({ baseUrl, headers }) {
+const firstCall = (url, headers) => {
+  return fetch(url, headers).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    Promise.reject(`ERROR: ${res.statusText}`);
+  });
+};
+
+class Api {
+  constructor(baseUrl, headers) {
     this.baseUrl = baseUrl;
     this.headers = headers;
   }
 
-  // --- GET https://around.nomoreparties.co/v1/group-12/cards --- //
+  // +++++ Fetching +++++ //
+  // --- Fetch InitialCards from the server --- //
   getInitialCards() {
-    return fetch(this.baseUrl + "/cards", {
-      headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
+    return firstCall(`${this._baseUrl}/cards`, {
+      headers: this._headers,
     });
   }
 
-  // --- GET https://around.nomoreparties.co/v1/group-12/users/me --- //
+  // --- Fetch UserInfo from the server --- //
   getUserInfo() {
-    return fetch(this.baseUrl + "/users/me", {
-      headers: this.headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
+    return firstCall(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
     });
   }
 
-  // --- POST https://around.nomoreparties.co/v1/group-12/cards --- //
-  addCard({ name, link }) {
-    return fetch(this.baseUrl + "/cards", {
-      headers: this.headers,
-      method: "POST",
-      body: JSON.stringify({ name, link }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
-  }
-
-  // --- DELETE https://around.nomoreparties.co/v1/group-12/cards/cardID --- //
-  removeCard(cardID) {
-    return fetch(this.baseUrl + "/cards/" + cardID, {
-      headers: this.headers,
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
-  }
-
-  getAppInfo() {
-    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
-  }
-
-  // --- Add/remove likes --- //
-  // --- PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId --- //
-  addLike(card) {
-    return fetch(this.baseUrl + "/cards/likes/" + card.getId(), {
-      headers: this.headers,
-      method: "PUT",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
-  }
-
-  // --- DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId --- //
-  removeLike(card) {
-    return fetch(this.baseUrl + "/cards/likes/" + card.getId(), {
-      headers: this.headers,
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
-  }
-
-  // --- Editing Profile info --- //
-  // --- PATCH https://around.nomoreparties.co/v1/groupId/users/me --- //
-  updateUserInfo({ name, about }) {
-    return fetch(this.baseUrl + "/users/me", {
-      headers: this.headers,
+  // +++++ Adding/Editing/Removing data +++++ //
+  // ===== Profile ===== //
+  // --- Set/Update user avatar --- //
+  setUserAvatar(data) {
+    return firstCall(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
+      headers: this._headers,
       body: JSON.stringify({
-        name,
-        about,
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
+        avatar: data.link,
+      })
     });
   }
 
-  // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
-  setUserAvatar({ avatar }) {
-    return fetch(this.baseUrl + "/users/me/avatar", {
-      headers: this.headers,
+  // --- Set/Update user info --- //
+  sendNewData(profile) {
+    return firstCall(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      body: JSON.stringify({ avatar }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
+      headers: this._headers,
+      body: JSON.stringify({
+        name: profile.name,
+        job: profile.job,
+      }),
     });
   }
+
+  // ===== Cards ===== //
+  // --- Creating a new card --- //
+  createNewCard(card) {
+    return firstCall(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: card.name,
+        link: card.link,
+      }),
+    });
+  }
+
+  // --- Removing/Deleting card --- //
+  removeCard(cardId) {
+    return firstCall(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  }
+
+  // --- Add like to a card --- //
+  addLike(cardId) {
+    return firstCall(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    });
+  }
+
+  // --- Remove like from a card --- //
+  removeLike(cardId) {
+    return firstCall(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  }
+
 }
 
-export const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  headers: {
-    authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-    "Content-Type": "application/json",
-  },
+export const api = new Api("https://around.nomoreparties.co/v1/group-12", {
+  authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
+  "Content-Type": "application/json",
 });

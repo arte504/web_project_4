@@ -51,7 +51,7 @@ function createCard(data) {
     handleLikes: (cardId) => {
       const isLiked = card.isLiked();
       if (isLiked) {
-        api.dislike(cardId).then((res) => {
+        api.removeLike(cardId).then((res) => {
           card.updateLikes(res.likes);
         })
         .catch((err) => console.log(err))
@@ -87,7 +87,7 @@ const userInfoValues = new UserInfo({
 api.getUserInfo().then((res) => {
   userInfoValues.setUserInfo(res);
   userId = res._id;
-  userInfoValues.setAvatar(res.avatar);
+  userInfoValues.setUserAvatar(res.avatar);
 })
 .catch((err) => console.log(err));
 
