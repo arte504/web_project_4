@@ -1,4 +1,4 @@
-export default class Api {
+class Api {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
@@ -7,13 +7,11 @@ export default class Api {
   // --- GET https://around.nomoreparties.co/v1/group-12/cards --- //
   getInitialCards() {
     return fetch(this.baseUrl + "/cards", {
-      headers: this.headers
-    })
-    .then((res) => {
+      headers: this.headers,
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -22,13 +20,11 @@ export default class Api {
   // --- GET https://around.nomoreparties.co/v1/group-12/users/me --- //
   getUserInfo() {
     return fetch(this.baseUrl + "/users/me", {
-      headers: this.headers
-    })
-    .then((res) => {
+      headers: this.headers,
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -39,13 +35,11 @@ export default class Api {
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
       method: "POST",
-      body: JSON.stringify({name,link})
-    })
-    .then((res) => {
+      body: JSON.stringify({ name, link }),
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -55,13 +49,11 @@ export default class Api {
   removeCard(cardID) {
     return fetch(this.baseUrl + "/cards/" + cardID, {
       headers: this.headers,
-      method: "DELETE"
-    })
-    .then((res) => {
+      method: "DELETE",
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -71,18 +63,16 @@ export default class Api {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
 
-// --- Add/remove likes --- //
+  // --- Add/remove likes --- //
   // --- PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId --- //
   addLike(card) {
     return fetch(this.baseUrl + "/cards/likes/" + card.getId(), {
       headers: this.headers,
-      method: "PUT"
-    })
-    .then((res) => {
+      method: "PUT",
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -92,30 +82,27 @@ export default class Api {
   removeLike(card) {
     return fetch(this.baseUrl + "/cards/likes/" + card.getId(), {
       headers: this.headers,
-      method: "DELETE"
-    })
-    .then((res) => {
+      method: "DELETE",
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
   }
 
-// --- Editing Profile info --- //
+  // --- Editing Profile info --- //
   // --- PATCH https://around.nomoreparties.co/v1/groupId/users/me --- //
   updateUserInfo({ name, about }) {
     return fetch(this.baseUrl + "/users/me", {
       headers: this.headers,
       method: "PATCH",
       body: JSON.stringify({
-          name,
-          about
-        })
-    })
-    .then((res) => {
+        name,
+        about,
+      }),
+    }).then((res) => {
       if (res.ok) {
         return res.json();
       } else {
@@ -129,13 +116,11 @@ export default class Api {
     return fetch(this.baseUrl + "/users/me/avatar", {
       headers: this.headers,
       method: "PATCH",
-      body: JSON.stringify({avatar})
-    })
-    .then((res) => {
+      body: JSON.stringify({ avatar }),
+    }).then((res) => {
       if (res.ok) {
         return res.json();
-      } 
-      else {
+      } else {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
@@ -147,5 +132,5 @@ export const api = new Api({
   headers: {
     authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
     "Content-Type": "application/json",
-  }
+  },
 });
