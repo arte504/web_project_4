@@ -76,7 +76,7 @@ api.getAppInfo()
         cardsSection.addItem(card.generateCard());
       }
     }, '.cards__grid');
-    cardsSection.setItems();
+    cardsSection.renderItems();
 
     user.setUserInfo({
       name: userInfo.name,
