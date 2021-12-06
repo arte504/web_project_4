@@ -124,7 +124,9 @@ editButton.addEventListener("click", () => {
 
 // === 'Avatar' edit form === //
 const avatarForm = new ModalWithForm(".modal_type_avatar", () => {
-  
+  const newAvatar = avatarForm.getInputValues();
+  setUserAvatar(newAvatar);
+  avatarForm.close();
 });
 
 // --- Set event lesteners to the form --- //
