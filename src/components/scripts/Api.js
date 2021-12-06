@@ -4,7 +4,7 @@ export default class Api {
     this.headers = headers;
   }
 
-  // --- GET https://around.nomoreparties.co/v1/group-42/cards --- //
+  // --- GET https://around.nomoreparties.co/v1/group-12/cards --- //
   getInitialCards() {
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers
@@ -19,7 +19,7 @@ export default class Api {
     });
   }
 
-  // --- GET https://around.nomoreparties.co/v1/group-42/users/me --- //
+  // --- GET https://around.nomoreparties.co/v1/group-12/users/me --- //
   getUserInfo() {
     return fetch(this.baseUrl + "/users/me", {
       headers: this.headers
@@ -34,7 +34,7 @@ export default class Api {
     });
   }
 
-  // --- POST https://around.nomoreparties.co/v1/group-42/cards --- //
+  // --- POST https://around.nomoreparties.co/v1/group-12/cards --- //
   addCard({ name, link }) {
     return fetch(this.baseUrl + "/cards", {
       headers: this.headers,
@@ -51,7 +51,7 @@ export default class Api {
     });
   }
 
-  // --- DELETE https://around.nomoreparties.co/v1/group-42/cards/cardID --- //
+  // --- DELETE https://around.nomoreparties.co/v1/group-12/cards/cardID --- //
   removeCard(cardID) {
     return fetch(this.baseUrl + "/cards/" + cardID, {
       headers: this.headers,

@@ -16,7 +16,7 @@ import UserInfo from "../components/scripts/UserInfo.js";
 import "./index.css";
 
 const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-42',
+  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
   headers: {
     authorization: '709a0d9d-db06-4890-a594-b07e7309a353',
     'Content-Type': 'application/json'
