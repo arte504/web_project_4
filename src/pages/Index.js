@@ -112,6 +112,10 @@ api.getAppInfo()
 const bigImageModal = new ModalWithImage(".modal_type_big-image");
 bigImageModal.setEventListeners();
 
+// +++++ 'User Info' +++++ //
+// --- UserInfo instance --- //
+const userInfoValues = new UserInfo(".profile__title", ".profile__subtitle");
+
 // +++++ Forms +++++ //
 // === 'Edit profile' form === //
 // --- Form creation method --- //
