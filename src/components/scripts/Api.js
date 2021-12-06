@@ -7,7 +7,7 @@ const firstCall = (url, headers) => {
     });
   };
 
-export class Api {
+export default class Api {
   constructor(baseUrl, headers) {
     this.baseUrl = baseUrl;
     this.headers = headers;
