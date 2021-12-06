@@ -1,4 +1,4 @@
-import Api from "../components/scripts/Api.js";
+import api from "../components/scripts/Api.js";
 import { Card } from "../components/scripts/Card.js";
 import FormValidator from "../components/scripts/FormValidator.js";
 import Section from "../components/scripts/Section.js";
@@ -14,14 +14,6 @@ import ModalWithForm from "../components/scripts/ModalWithForm.js";
 import ModalDeleteConfirmation from "../components/scripts/ModalDeleteConfirmation.js";
 import UserInfo from "../components/scripts/UserInfo.js";
 import "./index.css";
-
-const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
-  headers: {
-    authorization: '709a0d9d-db06-4890-a594-b07e7309a353',
-    'Content-Type': 'application/json'
-  }
-});
 
 // +++++ Card Section +++++ //
 const cardSelector = '#card';
@@ -135,7 +127,7 @@ editButton.addEventListener("click", () => {
 // --- Form creation method --- //
 const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
   const newCard = addCardForm.getInputValues();
-  cardsSection.prependItem(createCard(newCard));
+  cardsSection.addItem(generateCard(newCard));
   addCardForm.close();
 });
 // --- Set event listeners for 'add card' modal --- //
@@ -145,6 +137,9 @@ addCardForm.setEventListeners();
 // --- 'Edit profile' form validation adding --- //
 const profileFormValidation = new FormValidator(formConfig, profileModal);
 profileFormValidation.enableValidation();
+// ---  --- //
+const avatarFormValidation = new FormValidator(formConfig, avatarModal);
+avatarFormValidation.enableValidation();
 // --- 'Add card' form validation adding --- //
 const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
