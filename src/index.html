@@ -63,10 +63,14 @@
       <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
       <h2 class="modal__header">Edit profile</h2>
       <fieldset class="modal__fields modal__fields_type_edit">
-        <input type="name" class="modal__input modal__input_type_title" id="nameInput" name="name" placeholder="Name" minlength="2" maxlength="40" required>
+        <input type="name" class="modal__input modal__input_type_title" 
+               id="nameInput" name="name" placeholder="Name" 
+               minlength="2" maxlength="40" required>
         <span id="nameInput_error" class="modal__error modal__span">Please fill out this field.</span>
 
-        <input type="job" class="modal__input modal__input_type_subtitle" id="jobInput" name="job" placeholder="Job" minlength="2" maxlength="200" required>
+        <input type="job" class="modal__input modal__input_type_subtitle" 
+               id="jobInput" name="job" placeholder="Job" 
+               minlength="2" maxlength="200" required>
         <span id="jobInput_error" class="modal__error modal__span">Please fill out this field.</span>
       </fieldset>
       <input class="modal__submit-button" id="button" type="submit" value="Save" disabled="true">
@@ -81,9 +85,11 @@
         <input type="url" name="link" id="profileAvatarInput"
                class="modal__input modal__input_type_avatar" value=""
                minlength="2" maxlength="200" required placeholder="Image link">
-        <span id="profileAvatarInput_error" class="modal__error modal Span">Please enter a web address.</span>
+        <span id="profileAvatarInput_error" class="modal__error modal__span">
+          Please enter a web address.</span>
+
+          <button class="modal__submit-button modal__submit-button_disabled" type="submit" disabled="true">Save</button>
       </fieldset>
-      <input class="modal__submit-button" id="button" type="submit" value="Save" disabled="true">
     </form>
   </div>
   <!-- Edit profile avatar modal ends-->

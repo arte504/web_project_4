@@ -7,6 +7,7 @@ import {
   profileModal,
   addCardButton,
   addCardModal,
+  avatarModal,
   formConfig
 } from "../components/utils/constants.js";
 import ModalWithImage from "../components/scripts/ModalWithImage.js";
@@ -105,14 +106,17 @@ const editProfileForm = new ModalWithForm(".modal_type_edit", () => {
   userInfoValues.setUserInfo(editProfileForm.getInputValues());
   editProfileForm.close();
 });
+
 // --- Set event listeners for the form --- //
 editProfileForm.setEventListeners();
+
 // --- Set values and open the form --- //
 editButton.addEventListener("click", () => {
   editProfileForm.setInputValues(userInfoValues.getUserInfo())
   profileFormValidation.resetValidation();
   editProfileForm.open();
 });
+
 // === 'Add card' form === //
 // --- Form creation method --- //
 const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
@@ -120,18 +124,28 @@ const addCardForm = new ModalWithForm(".modal_type_add-card", () => {
   cardsSection.addItem(generateCard(newCard));
   addCardForm.close();
 });
+
 // --- Set event listeners for 'add card' modal --- //
 addCardForm.setEventListeners();
+
+// --- Open 'Add Card' form --- //
+addCardButton.addEventListener("click", () => {
+  addCardFormValidation.resetValidation();
+  addCardForm.open();
+});
 
 // +++++ Validation +++++ //
 // --- 'Edit profile' form validation adding --- //
 const profileFormValidation = new FormValidator(formConfig, profileModal);
 profileFormValidation.enableValidation();
-// ---  --- //
+
+// --- 'Avatar' form validation adding --- //
 const avatarFormValidation = new FormValidator(formConfig, avatarModal);
 avatarFormValidation.enableValidation();
+
 // --- 'Add card' form validation adding --- //
 const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
 
+// --- Store user ID --- //
 let userId;
