@@ -17,13 +17,11 @@ import ModalDeleteConfirmation from "../components/scripts/ModalDeleteConfirmati
 import UserInfo from "../components/scripts/UserInfo.js";
 import "./index.css";
 
-const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-2',
-  headers: { 
+const api = new Api('https://around.nomoreparties.co/v1/group-2', { 
       authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
       'Content-Type': 'application/json' 
-  }
-});
+    }
+);
 
 // --- Big image modal instance --- //
 const bigImageModal = new ModalWithImage(".modal_type_big-image");
