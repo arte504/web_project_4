@@ -130,7 +130,7 @@ const avatarForm = new ModalWithForm(".modal_type_avatar", () => {
 });
 
 // --- Set event lesteners to the form --- //
-avatarForm.addEventListener();
+avatarForm.setEventListeners();
 
 avatarEditButton.addEventListener("click", () => {
   avatarFormValidation.resetValidation();
