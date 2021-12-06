@@ -3,18 +3,19 @@ export default class Section {
     this._items = items;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
-    this.renderer = renderer;
   }
 
   addItem(element) {
-    this._container.append(element);
-  }
-
-  prependItem(element) {
     this._container.prepend(element);
   }
 
+  clear () {
+    this._container.innerHTML = '';
+  }
+
   renderItems() {
+    this.clear();
+    
     this._items.forEach((card) => {
       this._renderer(card);
     });
