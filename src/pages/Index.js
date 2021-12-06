@@ -1,4 +1,4 @@
-import api from "../components/scripts/Api.js";
+import { api } from "../components/scripts/Api.js";
 import { Card } from "../components/scripts/Card.js";
 import FormValidator from "../components/scripts/FormValidator.js";
 import Section from "../components/scripts/Section.js";
