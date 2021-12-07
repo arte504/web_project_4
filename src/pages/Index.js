@@ -149,20 +149,20 @@ api.getAppInfo().then(([userData, cardListData]) => {
 // ===== Avatar ===== //
 // --- 'Avatar' form functional --- //
 function handleAvatarEdit(data) {
-  loadingModal(true, editAvatarModal);
+  loadingModal(true, avatarModal);
   api.setUserAvatar({
     avatar: data.avatarURL
   })
   .then(res => {
     avatarImage.src = res.avatar;
-    loadingModal(false, editAvatarModal);
+    loadingModal(false, avatarModal);
     editAvatar.close();
   })
   .catch(err => console.log(err));
 }
 // --- 'Avatar' form creation --- //
 const editAvatar = new ModalWithForm({
-  modalSelector: editAvatarModal,
+  modalSelector: avatarModal,
   modalSubmition: (data) => {
     handleAvatarEdit(data)
   }
