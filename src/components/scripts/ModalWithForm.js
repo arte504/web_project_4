@@ -1,38 +1,45 @@
 import Modal from "./Modal.js";
 
 export default class ModalWithForm extends Modal {
-  constructor({modalSelector, handleSubmit}) {
-    super(modalSelector);
-    this._handleSubmitBtn = handleSubmit;
-    this._formElement = this._modalSelector.querySelector(".modal__container");
+  constructor({modal, handleSubmit}) {
+    super(modal);
+    this._handleSubmit = handleSubmit;
+    this._form = document.querySelector('.modal__container_type_form');
+    this._formElement = this._form.querySelectorAll('.modal__input');
   }
 
-  getInputValues() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(".modal__input")
-    );
-    const inputValues = {};
-    inputList.forEach((input) => {inputValues[input.name] = input.value;});
+  _getInputValues() {
+    this._formInputValues = {};
+    inputList.forEach((input) => {
+      this._formInputValues[input.name] = input.value;
+    });
+
     return inputValues;
-  }
-
-  setInputValues(values) {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(".modal__input")
-    );
-    inputList.forEach((input) => {input.value = values[input.name];})
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._formElement.addEventListener("submit", () => {
-      this._handleSubmitBtn(this.getInputValues());
-      this.close();
-    });
+    this._form.addEventListener('submit', this.handleSubmit);
+  }
+
+  removeEventListeners() {
+    super.removeEventListeners();
+    this._form.removeEventListener('submit', this.handleSubmit);
+  }
+
+  handleSubmit = (event) =>{
+    event.preventDefault();
+    const inputValues = this._handleSubmit(this._getInputValues);
+
+    return inputValues;
+  }
+
+  handleRemove(handle) {
+    this._handleSubmit = handle;
   }
 
   close() {
     super.close();
-    this._formElement.reset();
+    this._form.reset();
   }
 }

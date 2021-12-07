@@ -35,12 +35,13 @@ export default class Api {
   }
   // --- Check if all info fetched --- //
   getAppInfo() {
-    return Promise.all([this.getUserInfo(), this.getCardList()]);
+    return Promise.all([this.getCardList(), this.getUserInfo()]);
   }
 
   // === Adding/Removing/Editing === //
   // --- Adding new card --- //
-  addCard({ name, link }) {
+  addCard(data) {
+    const {name, link} = data;
     return fetch(this._baseUrl + "/cards", {
       headers: this._headers,
       method: "POST",
@@ -66,7 +67,7 @@ export default class Api {
     );
   }
   // --- Like a card --- //
-  addLike(cardId) {
+  likeCard(cardId) {
     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
       headers: this._headers,
       method: "PUT",
@@ -79,7 +80,7 @@ export default class Api {
     });
   }
   // --- Unlike a card --- //
-  removeLike(cardId) {
+  unlikeCard(cardId) {
     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
       headers: this._headers,
       method: "DELETE",
@@ -88,7 +89,8 @@ export default class Api {
     );
   }
   // --- Setting user profile info --- //
-  setUserInfo({ name, job }) {
+  setUserInfo( userInfo ) {
+    const { name, job } = userInfo;
     return (
       fetch(this._baseUrl + "/users/me", {
         headers: this._headers,
@@ -118,7 +120,8 @@ export default class Api {
     );
   }
   // --- Updating/Editing user profile info --- //
-  updateUserInfo({ name, job }) {
+  updateUserInfo(userInfo) {
+    const { name, job } = userInfo;
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
       method: "PATCH",

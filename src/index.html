@@ -60,7 +60,7 @@
   <!-- Edit profile modal starts -->
   <div class="modal modal_type_edit">
     <form name="profile" class="modal__container modal__container_type_form" 
-          method="POST" id="modalFormTypeEdit" novalidate>
+          method="get" id="modalFormTypeEdit" novalidate action="/">
       <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
       <h2 class="modal__header">Edit profile</h2>
       <fieldset class="modal__fields modal__fields_type_edit">
@@ -82,7 +82,9 @@
   <!-- Edit profile avatar modal starts -->
   <div class="modal modal_type_avatar">
     <form name="avatar" class="modal__container modal__container_type_form" 
-          method="POST" id="modalFormTypeAvatar" novalidate>
+          method="get" id="modalFormTypeAvatar" novalidate action="/">
+      <button class="modal__close-button modal__close-button_type_avatar" type="reset"></button>
+      <h2 class="modal__header">Change profile picture</h2>
       <fieldset class="modal__fields modal__fields_type_avatar">
         <input type="url" name="link" id="profileAvatarInput"
                class="modal__input modal__input_type_avatar" value=""
@@ -98,7 +100,7 @@
 
   <!-- Add card modal starts -->
   <div class="modal modal_type_add-card">
-    <form name="add" id="modalFormTypeAddCard" method="POST"
+    <form name="add" id="modalFormTypeAddCard" action="/"
           class="modal__container modal__container_type_form" novalidate>
       <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
       <h2 class="modal__header">New place</h2>
@@ -135,7 +137,7 @@
 
   <!-- Delete card confirmation modal starts -->
   <div class="modal modal_type_delete-card">
-    <form name="deleteCard" method="POST" id="modalFormTypeDeleteCard"
+    <form name="deleteCard" method="get" id="modalFormTypeDeleteCard" action="/"
           class="modal__container modal__container_type_delete-card" novalidate>
       <button class="modal__close-button modal__close-button_type_delete-card"></button>
       <h2 class="modal__header">Are you sure?</h2>
@@ -145,7 +147,7 @@
   <!-- Delete card confirmation modal ends -->
 
   <!-- Card template starts -->
-  <template class="card__template" id="card__template">
+  <template id="card__template">
         <li class="card">
             <img src="#" alt="default" class="card__image">
             <button type="button" class="card__delete-button" onclick=""></button>

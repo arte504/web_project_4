@@ -8,9 +8,12 @@ import Section from "../components/scripts/Section.js";
 import UserInfo from "../components/scripts/UserInfo.js";
 import {
   profileName,
+  nameInput,
   profileJob,
+  jobInput,
   editButton,
   profileModal,
+  cardTemplate,
   addCardButton,
   addCardModal,
   avatarModal,
@@ -26,7 +29,9 @@ import {
 const bigImage = new ModalWithImage(cardBigModal);
 bigImage.setEventListeners();
 // --- Delete card modal instance and events --- //
-const deleteCardModal = new ModalWithForm(deleteCard);
+const deleteCardModal = new ModalWithForm({
+  modal: deleteCard
+});
 deleteCardModal.setEventListeners();
 // --- UX for modals --- //
 function loadingModal(isLoading, modal) {
@@ -45,106 +50,133 @@ const api = new Api({
   }
 });
 // --- GetAppInfo method --- //
-api.getAppInfo().then(([userData, cardListData]) => {
-  // --- Cards section creation --- //
-  const cardsList = new Section({
-    items: cardListData,
-    renderer: addingNewCard
-  }, '.cards__grid')
-  // --- Fetching and setting user profile info --- //
-  api.getUserInfo().then(res => {
-    profileInfo.setUserInfo( res.name, res.job, res.avatar)
-  })
-  // --- Render cards --- //
-  cardsList.renderItems();
-  // --- 'Add new card' modal instance --- //
-  const addNewCardModal = new ModalWithForm({
-    modalSelector: addCardModal,
-    modalSubmition: (data) => {
-      loadingModal(true, addImageModal);
-      api
-        .addCard(data)
-        .then((res) => {
-          console.log(res);
-          addingNewCard(res);
-          addNewCardModal.close();
-          loadingModal(false, addImageModal);
-        })
-        .catch((err) => console.log(err));
-    },
-  });
-  // --- Add card button functional adding --- //
-  addCardButton.addEventListener("click", () => {
-    addNewCardModal.open();
-    loadingModal(false, addImageModal);
-  });
-  addNewCardModal.setEventListeners();
-  // --- New card adding --- //
-  function addingNewCard(data){
-    const cardInstance = new Card({data, 
-      handleCardClick: ({name, link}) => {
-        bigImage.open(link, name)}, 
-      handleDeleteClick: (cardId) => {
-        deleteCardModal.open(cardId);
-        deleteCardModal.setSubmitHandler(() => {
-          api.removeCard(cardId)
-            .then(() => {
-              cardInstance.deleteCardModal();
-              deleteCardModal.close();
-            })
-            .catch(err => console.log(err));
-        });
-      },
-      likeHandler: (cardId) =>{ 
-        if(cardElement.querySelector('.card__like-button').classList.contains('card__like-button_active')) { 
-          api.deleteLike(cardId).then(res => { 
-            cardElement.querySelector('.card__like-button').classList.remove('card__like-button_active');
-            cardInstance.showLikes(res.likes.length) 
-            cardInstance._likes = res.likes; })
-          .catch(err => console.log(err)) 
+api
+  .getAppInfo()
+  .then( ([cardList, userData]) => {
+    // --- 'Profile' info editing --- //
+    const profile = new UserInfo(profileName, profileJob, avatarImage);
+    profile.setUserInfo(userData);
+    // --- New card adding --- //
+    const addingNewCard = (data) =>{
+      const cardInstance = new Card(data, cardTemplate, userData._id, {
+        onCardClick: ({name, link}) => {
+          bigImage.open(link, name);
+        },
+        removeHandler: (cardId) => {
+          deleteCardModal.open();
+          deleteCardModal.handleRemove(() => {
+            api
+              .removeCard(cardId)
+              .then(() => {
+                cardInstance.deleteCardModal();
+                deleteCardModal.close();
+              })
+              .catch(err => console.log(err));
+          });
+        },
+        likeHandler: (cardId) =>{
+          const likeToggle = cardInstance.isLiked();
+          if(likeToggle) {
+            api
+              .unlikeCard(cardId)
+              .then((count) => {
+                cardInstance.unlikeCard();
+                cardInstance.showLikes(count.likes.lenght);
+              });
+          }
+          else {
+            api
+              .likeCard(cardId)
+              .then((count) => {
+                cardInstance.unlikeCard();
+                cardInstance.showLikes(count.likes.lenght);
+              })
+              .catch((err) => console.log(err));
+          }
         }
-        else { 
-          cardInstance._cardElement.classList.toggle("card__like-button_active"); 
-          api.addLike(cardId).then(res => { 
-            cardElement.querySelector('.card__like-button').classList.add('card__like-button_active'); 
-            cardInstance.showLikes(res.likes.length) 
-            cardInstance._likes = res.likes;})
-          .catch(err => console.log(err)) 
-        } 
+      });
+      return cardInstance;
+    };
+    // --- Cards section creation --- //
+    const cardsList = new Section({
+      items: cardList,
+      renderer: (data) => {
+        cardsList.addItem(addingNewCard(data).generateCard());
       }
-    },
-    userData._id,'.card__template') 
-    const cardElement = cardInstance.generateCard(); 
-    cardsList.addItem(cardElement) 
-    loadingModal(true, addImageModal);
-  }
-  // --- 'Profile' info editing --- //
-  const profileInfo = new UserInfo( profileName, profileJob, avatarImage);
-  const profileForm = new ModalWithForm({
-    modalSelector: editProfileModal, 
-    modalSubmition: (data) => {
-      loadingModal(true, editProfileModal);
-      api.setUserInfos({name: data.title, about:data.desc})
-      .then(res => {
-        loadingModal(false, editProfileModal)
-        profileInfo.setUserInfo(res.name, res.about)
-        profileForm.close();
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-    }
-  })
-  // --- 'Profile' form handler --- //
-  profileForm.setEventListeners();
-  // --- Open 'Profile' form with current values as inputs --- //
-  editButton.addEventListener('click', () => {
-    profileForm.open();
-    const user = profileInfo.getUserInfo();
-    inputName.value = user.title;
-    inputJob.value = user.job;
-  })
+    }, 
+    '.cards__grid');
+    console.log(cardList);
+    // --- Render cards --- //
+    cardsList.renderer();
+    // --- New card adding form --- //
+    const addCardForm = new ModalWithForm({
+      modal: addCardModal,
+      handleSubmit: (data) =>{
+        loadingModal(true, addCardModal);
+        api
+          .addCard(data)
+          .then((res) => {
+            cardsList.prependItem(addingNewCard(res).generateCard());
+          })
+          .then(() => {
+            addCardForm.close();
+          })
+          .catch((err) => console.log(err))
+          .finally(() => loadingModal(false, addCardModal));
+      },
+    });
+    // --- Add card button functional adding --- //
+    addCardButton.addEventListener("click", () => {
+      addCardFormValidation.resetValidation();
+      addNewCardModal.open();
+    });
+    addCardForm.setEventListeners();
+    // --- Profile edit form --- //
+    const profileForm = new ModalWithForm({
+      modal: profileModal, 
+      handleSubmit: (userInfo) => {
+        loadingModal(true, profileModal);
+        api
+        .updateUserInfo(UserInfo)
+        .then((res) => {
+          profile.setUserInfo(res)
+        })
+        .then(() => {
+          profileForm.close()
+        })
+        .catch((err) => console.log(err))
+        .finally(() => loadingModal(false,profileModal))
+      }
+    });
+    // --- Open 'Profile' form with current values as inputs --- //
+    editButton.addEventListener('click', () => {
+      profileFormValidation.resetValidation();
+      const { name, job } = profile.getUserInfo();
+      nameInput.value = name;
+      jobInput.value = job;
+      profileForm.open();
+    });
+    // --- 'Avatar' edit/update form --- //
+    const avatarForm = new ModalWithForm({
+      modal: avatarModal,
+      handleSubmit: (imgLink) => {
+        loadingModal(true, avatarModal);
+        api
+          .updateUserInfo(imgLink.avatar)
+          .then((res) => {
+            profile.setUserInfo(res);
+          })
+          .then(() => {
+            avatarForm.close();
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            loadingModal(false, avatarModal);
+          });
+      },
+    });
 })
-.catch(err => console.log(err));
+.catch((err) => console.log(err));
 
 // ===== Avatar ===== //
 // --- 'Avatar' form functional --- //
