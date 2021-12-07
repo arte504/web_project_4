@@ -3,6 +3,8 @@ import { Card } from "../components/scripts/Card.js";
 import FormValidator from "../components/scripts/FormValidator.js";
 import Section from "../components/scripts/Section.js";
 import {
+  profileName,
+  profileJob,
   editButton,
   profileModal,
   addCardButton,

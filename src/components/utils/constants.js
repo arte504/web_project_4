@@ -1,7 +1,9 @@
 // --- 'Edit profile' modal consts --- //
 export const editButton = document.querySelector('.profile__edit-button');
 export const profileModal = document.forms.profile;
+export const profileName = document.querySelector('.profile__title');
 export const nameInput = profileModal.elements.name;
+export const profileJob = document.querySelector('.profile__subtitle');
 export const jobInput = profileModal.elements.job;
 export const editCloseButton = document.querySelector('.modal__close-button_type_edit');
 // --- 'Avatar" modal consts --- //
