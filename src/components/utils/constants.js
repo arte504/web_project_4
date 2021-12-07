@@ -7,6 +7,7 @@ export const profileJob = document.querySelector('.profile__subtitle');
 export const jobInput = profileModal.elements.job;
 export const editCloseButton = document.querySelector('.modal__close-button_type_edit');
 // --- 'Avatar" modal consts --- //
+export const avatarImage = document.querySelector('.profile__image');
 export const avatarEditButton = document.querySelector('.profile__image-edit');
 export const avatarModal = document.forms.avatar;
 export const avatarModalInput = avatarModal.elements.link;

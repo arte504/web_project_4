@@ -10,6 +10,7 @@ import {
   addCardButton,
   addCardModal,
   avatarModal,
+  avatarImage,
   avatarEditButton,
   cardBigModal,
   deleteCardModal,
