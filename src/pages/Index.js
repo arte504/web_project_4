@@ -37,7 +37,7 @@ function loadingModal(isLoading, modal) {
 // ===== API ===== //
 // --- Setting the default fetching url and token --- //
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-6",
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
   headers: 
   {
     authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
