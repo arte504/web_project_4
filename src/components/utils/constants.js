@@ -18,6 +18,10 @@ export const addCardModal = document.forms.add;
 export const cardInputTitle = addCardForm.elements.title;;
 export const cardInputLink = addCardForm.elements.link;;
 export const addCardCloseButton = document.querySelector('.modal__close-button_type_add-card');
+// --- 'Add-Card' form consts --- //
+export const addCardForm = document.forms.add;
+export const addCardFormTitel = addCardForm.elements.title;
+export const addCardFormLink = addCardForm.elements.link;
 // --- General const --- //
 export const submitButton = document.querySelector('.modal__submit-button');
 export const cardList = document.querySelector('.cards__grid');
