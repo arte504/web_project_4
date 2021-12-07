@@ -1,8 +1,11 @@
-window.addEventListener('load', (event) => {
-import Api from "../components/scripts/Api.js"
-import { Card } from "../components/scripts/Card.js";
+import "./index.css";
 import FormValidator from "../components/scripts/FormValidator.js";
+import Card from "../components/scripts/Card.js";
+import ModalWithImage from "../components/scripts/ModalWithImage.js";
+import ModalWithForm from "../components/scripts/ModalWithForm.js";
+import Api from "../components/scripts/Api.js"
 import Section from "../components/scripts/Section.js";
+import UserInfo from "../components/scripts/UserInfo.js";
 import {
   profileName,
   profileJob,
@@ -17,10 +20,6 @@ import {
   deleteCard,
   formConfig
 } from "../components/utils/constants.js";
-import ModalWithImage from "../components/scripts/ModalWithImage.js";
-import ModalWithForm from "../components/scripts/ModalWithForm.js";
-import UserInfo from "../components/scripts/UserInfo.js";
-import "./index.css";
 
 // ===== Modals ===== //
 // --- Big image modal instance --- //
@@ -187,4 +186,3 @@ const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
 
 export { profileName, profileJob, bigImage, avatarImage }
-});
