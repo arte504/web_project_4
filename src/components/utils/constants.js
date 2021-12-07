@@ -14,9 +14,9 @@ export const avatarModalInput = avatarModal.elements.link;
 export const avatarCloseButton = document.querySelector('.modal__close-button_type_avatar')
 // --- 'Add-card' modal consts --- //
 export const addCardButton = document.querySelector('.profile__add-button');
-export const addCardModal = document.forms.add;
-export const cardInputTitle = addCardForm.elements.title;;
-export const cardInputLink = addCardForm.elements.link;;
+export const addCardModal = document.querySelector('.modal_type_add-card');
+export const cardInputTitle = document.querySelector('.modal__input_type_name');
+export const cardInputLink = document.querySelector('.modal__input_type_link');
 export const addCardCloseButton = document.querySelector('.modal__close-button_type_add-card');
 // --- 'Add-Card' form consts --- //
 export const addCardForm = document.forms.add;
