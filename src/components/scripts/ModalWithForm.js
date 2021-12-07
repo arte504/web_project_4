@@ -1,7 +1,7 @@
 import Modal from "./Modal.js";
 
 export default class ModalWithForm extends Modal {
-  constructor(modalSelector, handleSubmit) {
+  constructor({modalSelector, handleSubmit}) {
     super(modalSelector);
     this._handleSubmitBtn = handleSubmit;
     this._formElement = this._modalSelector.querySelector(".modal__container");
@@ -21,19 +21,6 @@ export default class ModalWithForm extends Modal {
       this._formElement.querySelectorAll(".modal__input")
     );
     inputList.forEach((input) => {input.value = values[input.name];})
-  }
-
-  saving(isSaving) {
-    if (isSaving) {
-      this._formElement.querySelector(
-        ".modal__submit-button"
-      ).textContent = "Saving...";
-    } 
-    else {
-      this._formElement.querySelector(
-        ".modal__submit-button"
-      ).textContent = "Save";
-    }
   }
 
   setEventListeners() {
