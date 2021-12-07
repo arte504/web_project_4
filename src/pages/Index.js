@@ -1,3 +1,4 @@
+window.addEventListener('load', (event) => {
 import Api from "../components/scripts/Api.js"
 import { Card } from "../components/scripts/Card.js";
 import FormValidator from "../components/scripts/FormValidator.js";
@@ -186,3 +187,4 @@ const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
 
 export { profileName, profileJob, bigImage, avatarImage }
+});
