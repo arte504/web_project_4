@@ -26,8 +26,8 @@ import "./index.css";
 const bigImage = new ModalWithImage(cardBigModal);
 bigImage.setEventListeners();
 // --- Delete card modal instance and events --- //
-const deleteCard = new ModalWithForm(deleteCardModal);
-deleteCard.setEventListeners();
+const deleteCardModal = new ModalWithForm(deleteCard);
+deleteCardModal.setEventListeners();
 // --- UX for modals --- //
 function loadingModal(isLoading, modal) {
   if (isLoading) { modal.querySelector(".modal__submit-button").textContent = "Saving..."; } 
@@ -85,12 +85,12 @@ api.getAppInfo().then(([userData, cardListData]) => {
       handleCardClick: ({name, link}) => {
         bigImage.open(link, name)}, 
       handleDeleteClick: (cardId) => {
-        deleteCard.open(cardId);
-        deleteCard.setSubmitHandler(() => {
+        deleteCardModal.open(cardId);
+        deleteCardModal.setSubmitHandler(() => {
           api.removeCard(cardId)
             .then(() => {
-              cardInstance.deleteCard();
-              deleteCard.close();
+              cardInstance.deleteCardModal();
+              deleteCardModal.close();
             })
             .catch(err => console.log(err));
         });
