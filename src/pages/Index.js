@@ -13,7 +13,7 @@ import {
   avatarImage,
   avatarEditButton,
   cardBigModal,
-  deleteCardModal,
+  deleteCard,
   formConfig
 } from "../components/utils/constants.js";
 import ModalWithImage from "../components/scripts/ModalWithImage.js";

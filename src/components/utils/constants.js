@@ -31,7 +31,7 @@ export const cardBigModalImage = document.querySelector('.modal__big-image');
 export const cardBigModalText = document.querySelector('.modal__image-caption');
 export const cardBigModalCloseIcon = document.querySelector('.modal__close-button_type_big-image');
 // --- 'Delete card' modal consts --- //
-export const deleteCardModal = document.querySelector(".modal_type_delete-card");
+export const deleteCard = document.querySelector(".modal_type_delete-card");
 // --- Form config consts --- //
 export const formConfig = {
   formSelector: ".modal__container",
