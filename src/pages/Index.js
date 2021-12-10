@@ -191,7 +191,7 @@ const avatarEditModal = new ModalWithForm (
   ({ avatarModalInput:avatar }) => 
   {
     api
-      .setUserAvatar({avatar})
+      .updateUserAvatar({avatar})
       .then((data) => {
         profile.setUserInfo(data);
         avatarEditModal.close();
