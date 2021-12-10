@@ -90,7 +90,7 @@
       <h2 class="modal__header">
         Change profile picture</h2>
       <fieldset class="modal__fields modal__fields_type_avatar">
-        <input type="url" name="link" id="profileAvatarInput"
+        <input type="url" name="link" id="link"
                class="modal__input modal__input_type_avatar" value=""
                minlength="2" maxlength="200" required placeholder="Image link">
         <span id="profileAvatarInput_error" class="modal__error modal__span">
@@ -133,7 +133,10 @@
     <div class="modal__container modal__container_type_big-image">
       <button class="modal__close-button modal__close-button_type_big-image"></button>
       <figure class="modal__image">
-        <img src="#" alt="default" class="modal__big-image">
+        <img 
+          src="https://code.s3.yandex.net/web-code/yosemite.jpg" 
+          alt="Full size image of the image the user clicked on." 
+          class="modal__big-image">
         <figcaption class="modal__image-caption"></figcaption>
       </figure>
     </div>

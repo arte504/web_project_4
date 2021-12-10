@@ -1,5 +1,5 @@
 export default class Card {
-  constructor( {data, onCardClick, removeHandler, likeHandler }, template, userId ) 
+  constructor( data, onCardClick, removeHandler, likeHandler, template, userId ) 
   {
     this._name = data.name;
     this._link = data.link;
@@ -75,9 +75,11 @@ export default class Card {
         this._removeHandler(this._id);
       });
 
-    this._cardElement.addEventListener("click", (event) => {
-      this._onCardClick(event);
-    });
+    this._cardElement
+      .querySelector('.card__image')
+      .addEventListener("click", () => {
+        this._onCardClick(this._name, this._link);
+      });
   }
 
   _showDeleteIcon() {

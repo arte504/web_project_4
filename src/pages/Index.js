@@ -24,7 +24,6 @@ import {
   avatarModalInput,
   userAvatar,
   avatarEditButton,
-  bigImageModal,
   bigImageSelector,
   bigImage,
   bigImageTitle,
@@ -76,6 +75,15 @@ api
     api
       .getCardList()
       .then((data) => {
+        // --- On card click handler --- //
+        const onCardClick = ( name, link ) => {
+          console.log(link);
+          bigImageModal.open(name, link);
+          /* {
+            text: name,
+            url: link
+          })*/
+        };
         const userInfo = profile.getUserInfo();
         // --- Delete card button handler --- //
         const deleteCardHandler = (card) => {
@@ -103,23 +111,13 @@ api
               .catch(apiErr);
           }
         };
-        // --- On card click handler --- //
-        const onCardClick = (name, link) => {
-          bigImageModal.open(
-          {
-            url: name,
-            text: link
-          });
-        };
         // --- New card instance adding --- //
         const newCardInstance = (data) => { 
           const cardInstance = new Card(
-            {
-              data,
-              onCardClick,
-              deleteCardHandler,
-              likeButtonClickHandler
-            },
+            data,
+            onCardClick,
+            deleteCardHandler,
+            likeButtonClickHandler,
             cardTemplate
           );
           return cardInstance;
@@ -225,12 +223,11 @@ const deleteCardModal = new ModalWithForm(
       .catch(apiErr);
   }
 );
-
 // --- Big image modal instance --- //
-const imageModal = new ModalWithImage(
+const bigImageModal = new ModalWithImage(
   bigImageSelector,
   checkForEscPressed,
   bigImage,
   bigImageTitle
 );
-imageModal.setEventListeners();
+bigImageModal.setEventListeners();

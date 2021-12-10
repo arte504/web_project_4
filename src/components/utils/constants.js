@@ -28,7 +28,7 @@ export const cardList = document.querySelector('.cards__grid');
 export const cardTemplate = document.querySelector('#card__template');
 // --- Big image modal consts --- //
 export const bigImageModal = document.querySelector('.modal_type_big-image');
-export const bigImage = bigImageModal.querySelector('.modal__image');
+export const bigImage = bigImageModal.querySelector('.modal__big-image');
 export const bigImageTitle = bigImageModal.querySelector('.modal__image-caption');
 export const cardBigModalCloseIcon = document.querySelector('.modal__close-button_type_big-image');
 // --- 'Delete card' modal consts --- //
