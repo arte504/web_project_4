@@ -59,12 +59,16 @@ const apiErr = (err) => console.log(err);
 // --- Setting the default fetching method --- //
 const api = new Api(apiConfig);
 // --- Set what 'profile' will contains --- //
-const profile = new UserInfo(profileName, profileJob, userAvatar);
+const profile = new UserInfo({
+  name: '.profile__title', 
+  job: '.profile__subtitle', 
+  avatar: '.profile__image'
+});
 api
   // --- Get user info method --- //
   .getUserInfo()
-  .then((data) => {
-    profile.setUserInfo(data)
+  .then((res) => {
+    profile.setUserInfo(res)
     return profile;
   })
   // --- Use user info for creation of new cards and card section --- // 
@@ -170,8 +174,8 @@ const editProfileModal = new ModalWithForm (
   {
     api
       .updateUserInfo({name,job})
-      .then((data) => {
-        profile.setUserInfo(data);
+      .then((res) => {
+        profile.setUserInfo(res.avatar);
         editProfileModal.close();
       })
       .catch(apiErr);

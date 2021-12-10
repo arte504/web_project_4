@@ -9,13 +9,13 @@ export default class ModalWithForm extends Modal {
     this._textInButton = this._submitButton.textContent;
   }
 
-  _getInputValues() {
+  getInputValues() {
     this._inputList = this._modalElement.querySelectorAll('.modal__input');
     const formInputValues = {};
     this._inputList.forEach(
       (input) => { formInputValues[input.name] = input.value }
     );
-    
+
     return formInputValues || this._entredValue;
   }
 
@@ -29,7 +29,7 @@ export default class ModalWithForm extends Modal {
       event.preventDefault();
       // --- UX for modals --- //
       this._submitButton.textContent = "Saving...";
-      this._handleSubmit(this._getInputValues())
+      this._handleSubmit(this.getInputValues())
     })
   }
 

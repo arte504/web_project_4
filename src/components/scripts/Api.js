@@ -12,7 +12,7 @@ export default class Api {
   // --- Get card list from the server --- //
   getCardList() {
     return (
-      fetch(this._baseUrl + "/cards", {
+      fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
       })
       .then(this._response)
@@ -21,7 +21,7 @@ export default class Api {
   // --- Get user info from the server --- //
   getUserInfo() {
     return (
-      fetch(this._baseUrl + "/users/me", {
+      fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
       })
       .then(this._response)
@@ -38,7 +38,7 @@ export default class Api {
   }
   // --- Adding new card --- //
   addCard(cardData) {
-    return fetch(this._baseUrl + "/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify(cardData)
@@ -47,7 +47,7 @@ export default class Api {
   }
   // --- Removing a card --- //
   removeCard(cardId) {
-    return fetch(this._baseUrl + `/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE"
     })
@@ -55,7 +55,7 @@ export default class Api {
   }
   // --- Like a card --- //
   likeCard(cardId, userData) {
-    return fetch(this._baseUrl + `/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       headers: this._headers,
       method: "PUT",
       body: JSON.stringify(userData)
@@ -64,7 +64,7 @@ export default class Api {
   }
   // --- Unlike a card --- //
   unlikeCard(cardId) {
-    return fetch(this._baseUrl + `/cards/likes/${cardId}` , {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}` , {
       headers: this._headers,
       method: "DELETE"
     })
@@ -72,7 +72,7 @@ export default class Api {
   }
   // --- Setting user profile avatar --- //
   updateUserAvatar(avatar) {
-    return fetch(this._baseUrl + "/users/me/avatar", {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify(avatar)
