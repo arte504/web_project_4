@@ -1,6 +1,5 @@
 export default class Card {
-  constructor( data, template, userId, 
-    { onCardClick, removeHandler, likeHandler } ) 
+  constructor( {data, onCardClick, removeHandler, likeHandler }, template, userId ) 
   {
     this._name = data.name;
     this._link = data.link;
@@ -40,12 +39,26 @@ export default class Card {
   // ---  --- //
   _renderLikes () {
     this._likes.forEach((like) => 
-      like._id === this._userId ? this.likeCard() : this.unlikeCard()
+      like._id === this._userId ? this._likeCard() : this._unlikeCard()
     );
   }
   // --- Show the like amount --- //
   showLikes(count){
     this._cardElement.querySelector('.card__like-count').textContent = count;
+  }
+
+  isLiked() {
+    return this._liked;
+  }
+
+  _checkForLike(user) {
+    if (this._likes.find((like) => like._id === user)) {
+      this._liked = true;
+    } 
+    else {
+      this._liked = false;
+    }
+    return this._liked;
   }
 
   // --- Set events listeners for the cards that will be created! --- //
@@ -73,8 +86,8 @@ export default class Card {
     }
   }
 
-  isLiked() {
-    return this.likeIcon.classList.contains('card__like-button_active');
+  getCardId() {
+    return this._id;
   }
 
   // --- Creating the card and card elements --- //
@@ -82,10 +95,10 @@ export default class Card {
     this._cardElement = this._getTemplate();
     this.likeIcon = this._cardElement.querySelector('.card__like-button');
     this._setAttributes(this._cardElement.querySelector('.card__image'), {
-      src: this._image,
+      src: this._link,
       alt: this._name
     });
-    this._cardElement.querySelector('.card__title').textContent = this.name;
+    this._cardElement.querySelector('.card__title').textContent = this._name;
 
     this._showDeleteIcon();
     this.showLikes(this._likes.length);
@@ -95,11 +108,24 @@ export default class Card {
     return this._cardElement;
   }
 
-  likeCard() {
+  _likeCard() {
     this.likeIcon.classList.add('card__like-button_active');
   }
 
-  unlikeCard() {
+  _unlikeCard() {
     this.likeIcon.classList.remove('card__like-button_active');
+  }
+
+  updateCard() {
+    this._likes = data.likes;
+
+    if (this._checkForLike(user.id)) {
+      this._likeCard;
+    }
+    else {
+      this._unlikeCard;
+    }
+    this._cardElement.querySelector('.card__like-count')
+      .textContent = this._likes.length;
   }
 }

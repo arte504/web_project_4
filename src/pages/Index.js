@@ -8,213 +8,225 @@ import Section from "../components/scripts/Section.js";
 import UserInfo from "../components/scripts/UserInfo.js";
 import {
   profileName,
-  nameInput,
   profileJob,
-  jobInput,
   editButton,
+  cardListSelector,
   profileModal,
+  profileModalSelector,
   cardTemplate,
   addCardButton,
   addCardModal,
+  addCardModalSelector,
+  cardInputTitle,
+  cardInputLink,
   avatarModal,
-  avatarImage,
+  avatarModalSelector,
+  avatarModalInput,
+  userAvatar,
   avatarEditButton,
-  cardBigModal,
-  deleteCard,
+  bigImageModal,
+  bigImageSelector,
+  bigImage,
+  bigImageTitle,
+  deleteCardSelector,
+  apiConfig,
   formConfig
 } from "../components/utils/constants.js";
 
 // ===== Modals ===== //
-// --- Big image modal instance --- //
-const bigImage = new ModalWithImage(cardBigModal);
-bigImage.setEventListeners();
-// --- Delete card modal instance and events --- //
-const deleteCardModal = new ModalWithForm({
-  modal: deleteCard
-});
-deleteCardModal.setEventListeners();
-// --- UX for modals --- //
-function loadingModal(isLoading, modal) {
-  if (isLoading) { modal.querySelector(".modal__submit-button").textContent = "Saving..."; } 
-  else { modal.querySelector(".modal__submit-button").textContent = "Save"; }
+// --- 'Esc' check --- //
+const checkForEscPressed = (key) => key === "Escape";
+// --- Add modal reset input --- //
+const modalResetInputs = () => {
+  cardInputTitle.value = "";
+  cardInputLink.value = "";
 }
-
-// ===== API ===== //
-// --- Setting the default fetching url and token --- //
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  headers: 
-  {
-    authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-    'Content-Type': 'application/json' 
-  }
-});
-// --- GetAppInfo method --- //
-api
-  .getAppInfo()
-  .then( ([cardList, userData]) => {
-    // --- 'Profile' info editing --- //
-    const profile = new UserInfo(profileName, profileJob, avatarImage);
-    profile.setUserInfo(userData);
-    // --- New card adding --- //
-    const addingNewCard = (data) =>{
-      const cardInstance = new Card(data, cardTemplate, userData._id, {
-        onCardClick: ({name, link}) => {
-          bigImage.open(link, name);
-        },
-        removeHandler: (cardId) => {
-          deleteCardModal.open();
-          deleteCardModal.handleRemove(() => {
-            api
-              .removeCard(cardId)
-              .then(() => {
-                cardInstance.deleteCardModal();
-                deleteCardModal.close();
-              })
-              .catch(err => console.log(err));
-          });
-        },
-        likeHandler: (cardId) =>{
-          const likeToggle = cardInstance.isLiked();
-          if(likeToggle) {
-            api
-              .unlikeCard(cardId)
-              .then((count) => {
-                cardInstance.unlikeCard();
-                cardInstance.showLikes(count.likes.lenght);
-              });
-          }
-          else {
-            api
-              .likeCard(cardId)
-              .then((count) => {
-                cardInstance.unlikeCard();
-                cardInstance.showLikes(count.likes.lenght);
-              })
-              .catch((err) => console.log(err));
-          }
-        }
-      });
-      return cardInstance;
-    };
-    // --- Cards section creation --- //
-    const cardsList = new Section({
-      items: cardList,
-      renderer: (data) => {
-        cardsList.addItem(addingNewCard(data).generateCard());
-      }
-    }, 
-    '.cards__grid');
-    console.log(cardList);
-    // --- Render cards --- //
-    cardsList.renderer();
-    // --- New card adding form --- //
-    const addCardForm = new ModalWithForm({
-      modal: addCardModal,
-      handleSubmit: (data) =>{
-        loadingModal(true, addCardModal);
-        api
-          .addCard(data)
-          .then((res) => {
-            cardsList.prependItem(addingNewCard(res).generateCard());
-          })
-          .then(() => {
-            addCardForm.close();
-          })
-          .catch((err) => console.log(err))
-          .finally(() => loadingModal(false, addCardModal));
-      },
-    });
-    // --- Add card button functional adding --- //
-    addCardButton.addEventListener("click", () => {
-      addCardFormValidation.resetValidation();
-      addNewCardModal.open();
-    });
-    addCardForm.setEventListeners();
-    // --- Profile edit form --- //
-    const profileForm = new ModalWithForm({
-      modal: profileModal, 
-      handleSubmit: (userInfo) => {
-        loadingModal(true, profileModal);
-        api
-        .updateUserInfo(UserInfo)
-        .then((res) => {
-          profile.setUserInfo(res)
-        })
-        .then(() => {
-          profileForm.close()
-        })
-        .catch((err) => console.log(err))
-        .finally(() => loadingModal(false,profileModal))
-      }
-    });
-    // --- Open 'Profile' form with current values as inputs --- //
-    editButton.addEventListener('click', () => {
-      profileFormValidation.resetValidation();
-      const { name, job } = profile.getUserInfo();
-      nameInput.value = name;
-      jobInput.value = job;
-      profileForm.open();
-    });
-    // --- 'Avatar' edit/update form --- //
-    const avatarForm = new ModalWithForm({
-      modal: avatarModal,
-      handleSubmit: (imgLink) => {
-        loadingModal(true, avatarModal);
-        api
-          .updateUserInfo(imgLink.avatar)
-          .then((res) => {
-            profile.setUserInfo(res);
-          })
-          .then(() => {
-            avatarForm.close();
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            loadingModal(false, avatarModal);
-          });
-      },
-    });
-})
-.catch((err) => console.log(err));
-
-// ===== Avatar ===== //
-// --- 'Avatar' form functional --- //
-function handleAvatarEdit(data) {
-  loadingModal(true, avatarModal);
-  api.setUserAvatar({
-    avatar: data.avatarURL
-  })
-  .then(res => {
-    avatarImage.src = res.avatar;
-    loadingModal(false, avatarModal);
-    editAvatar.close();
-  })
-  .catch(err => console.log(err));
-}
-// --- 'Avatar' form creation --- //
-const editAvatar = new ModalWithForm({
-  modalSelector: avatarModal,
-  modalSubmition: (data) => {
-    handleAvatarEdit(data)
-  }
-});
-// --- Open avatar edit modal on click --- //
-avatarEditButton.addEventListener("click", () => {
-  editAvatar.open();
-});
-// --- 'Avatar' form handler --- //
-editAvatar.setEventListeners();
 
 // ===== Validation ===== //
-// --- 'Edit profile' form validation adding --- //
+// --- 'Edit profile' form validation --- //
 const profileFormValidation = new FormValidator(formConfig, profileModal);
 profileFormValidation.enableValidation();
-// --- 'Avatar' form validation adding --- //
+// --- 'Avatar' form validation --- //
 const avatarFormValidation = new FormValidator(formConfig, avatarModal);
 avatarFormValidation.enableValidation();
-// --- 'Add card' form validation adding --- //
+// --- 'Add card' form validation --- //
 const addCardFormValidation = new FormValidator(formConfig, addCardModal);
 addCardFormValidation.enableValidation();
 
-export { profileName, profileJob, bigImage, avatarImage }
+// ===== API & Card ===== //
+// --- API error handler --- // 
+const apiErr = (err) => console.log(err);
+// --- Setting the default fetching method --- //
+const api = new Api(apiConfig);
+// --- Set what 'profile' will contains --- //
+const profile = new UserInfo(profileName, profileJob, userAvatar);
+api
+  // --- Get user info method --- //
+  .getUserInfo()
+  .then((data) => {
+    profile.setUserInfo(data)
+    return profile;
+  })
+  // --- Use user info for creation of new cards and card section --- // 
+  .then((profile) => {
+    api
+      .getCardList()
+      .then((data) => {
+        const userInfo = profile.getUserInfo();
+        // --- Delete card button handler --- //
+        const deleteCardHandler = (card) => {
+          deleteCardModal.setInputValues(card);
+          deleteCardModal.open();
+        }
+        // --- Like button click handler --- //
+        const likeButtonClickHandler = (card) => {
+          if(card.isLiked()) 
+          {
+            api
+              .unlikeCard(card.getCardId())
+              .then((data) => {
+                card.updateCard(data, userInfo);
+              })
+              .catch(apiErr);
+          }
+          else 
+          {
+            api
+              .likeCard(card.getCardId(), profile.getUserInfo())
+              .then((data) => {
+                card.updateCard(data, userInfo);
+              })
+              .catch(apiErr);
+          }
+        };
+        // --- On card click handler --- //
+        const onCardClick = (name, link) => {
+          bigImageModal.open(
+          {
+            url: name,
+            text: link
+          });
+        };
+        // --- New card instance adding --- //
+        const newCardInstance = (data) => { 
+          const cardInstance = new Card(
+            {
+              data,
+              onCardClick,
+              deleteCardHandler,
+              likeButtonClickHandler
+            },
+            cardTemplate
+          );
+          return cardInstance;
+      };
+
+      const cardSection = new Section (
+        {
+          items: data,
+          renderer: (item) => {
+            const cardInstance = newCardInstance(item);
+            cardSection.addItem(cardInstance.generateCard(profile.id))
+          },
+        },
+        cardListSelector
+      );
+      cardSection.renderItems();
+
+      const addNewCardModal = new ModalWithForm (
+        addCardModalSelector,
+        checkForEscPressed,
+        ({ cardInputTitle: name, cardInputLink: link }) => {
+          api
+            .addCard({name, link})
+            .then((data) => {
+              const cardInstance = newCardInstance(data);
+              cardSection.addItem(cardInstance.generateCard(user.id));
+              modalResetInputs();
+              addNewCardModal.close(modalResetInputs);
+            })
+            .catch(apiErr);
+        }
+      );
+
+      addNewCardModal.setEventListeners();
+      deleteCardModal.setEventListeners();
+
+      addCardButton.addEventListener("click", () => {
+        addCardFormValidation.resetValidation();
+        addNewCardModal.open();
+      });
+    })
+    .catch(apiErr);
+})
+.catch(apiErr);
+
+// ===== 'Edit' profile ===== //
+// --- Edit profile modal --- //
+const editProfileModal = new ModalWithForm (
+  profileModalSelector,
+  checkForEscPressed,
+  ({"nameInput":name, "jobInput":job}) => 
+  {
+    api
+      .updateUserInfo({name,job})
+      .then((data) => {
+        profile.setUserInfo(data);
+        editProfileModal.close();
+      })
+      .catch(apiErr);
+  }
+)
+editProfileModal.setEventListeners();
+// --- Edit button handler --- // 
+editButton.addEventListener("click" , () => {
+  modalResetInputs();
+  profileFormValidation.resetValidation();
+  editProfileModal.open();
+});
+// --- Avatar edit modal --- //
+const avatarEditModal = new ModalWithForm (
+  avatarModalSelector,
+  checkForEscPressed,
+  ({ avatarModalInput:avatar }) => 
+  {
+    api
+      .setUserAvatar({avatar})
+      .then((data) => {
+        profile.setUserInfo(data);
+        avatarEditModal.close();
+      })
+      .catch(apiErr);
+  }
+);
+avatarEditModal.setEventListeners();
+// --- Avatar edit button --- //
+avatarEditButton.addEventListener("click", () => {
+  avatarModalInput.value = "";
+  avatarFormValidation.resetValidation();
+  avatarEditModal.open();
+})
+
+// --- Delete card modal instance and events --- //
+const deleteCardModal = new ModalWithForm(
+  deleteCardSelector,
+  checkForEscPressed,
+  (card) => {
+    api
+      .deleteCard(card.getCardId())
+      .then(() =>{
+        card.deleteCard();
+        deleteCardModal.close();
+      })
+      .catch(apiErr);
+  }
+);
+
+// --- Big image modal instance --- //
+const imageModal = new ModalWithImage(
+  bigImageSelector,
+  checkForEscPressed,
+  bigImage,
+  bigImageTitle
+);
+imageModal.setEventListeners();

@@ -62,17 +62,20 @@
     <form name="profile" class="modal__container modal__container_type_form" 
           method="get" id="modalFormTypeEdit" novalidate action="/">
       <button class="modal__close-button modal__close-button_type_edit" type="reset"></button>
-      <h2 class="modal__header">Edit profile</h2>
+      <h2 class="modal__header">
+        Edit profile</h2>
       <fieldset class="modal__fields modal__fields_type_edit">
         <input type="name" class="modal__input modal__input_type_title" 
-               id="nameInput" name="name" placeholder="Name" 
+               id="nameInput" name="nameInput" placeholder="Name" 
                minlength="2" maxlength="40" required>
-        <span id="nameInput_error" class="modal__error modal__span">Please fill out this field.</span>
+        <span id="nameInput_error" class="modal__error modal__span">
+          Please fill out this field.</span>
 
         <input type="job" class="modal__input modal__input_type_subtitle" 
-               id="jobInput" name="job" placeholder="Job" 
+               id="jobInput" name="jobInput" placeholder="Job" 
                minlength="2" maxlength="200" required>
-        <span id="jobInput_error" class="modal__error modal__span">Please fill out this field.</span>
+        <span id="jobInput_error" class="modal__error modal__span">
+          Please fill out this field.</span>
       </fieldset>
       <input class="modal__submit-button" id="button" type="submit" value="Save" disabled="true">
     </form>
@@ -84,7 +87,8 @@
     <form name="avatar" class="modal__container modal__container_type_form" 
           method="get" id="modalFormTypeAvatar" novalidate action="/">
       <button class="modal__close-button modal__close-button_type_avatar" type="reset"></button>
-      <h2 class="modal__header">Change profile picture</h2>
+      <h2 class="modal__header">
+        Change profile picture</h2>
       <fieldset class="modal__fields modal__fields_type_avatar">
         <input type="url" name="link" id="profileAvatarInput"
                class="modal__input modal__input_type_avatar" value=""
@@ -103,7 +107,8 @@
     <form name="add" id="modalFormTypeAddCard" action="/"
           class="modal__container modal__container_type_form" novalidate>
       <button class="modal__close-button modal__close-button_type_add-card" type="reset"></button>
-      <h2 class="modal__header">New place</h2>
+      <h2 class="modal__header">
+        New place</h2>
       <fieldset class="modal__fields modal__fields_type_add-card">
         <input type="text" name="name" id="cardTitleInput" 
                class="modal__input modal__input_type_name" value="" 
@@ -140,7 +145,8 @@
     <form name="deleteCard" method="get" id="modalFormTypeDeleteCard" action="/"
           class="modal__container modal__container_type_delete-card" novalidate>
       <button class="modal__close-button modal__close-button_type_delete-card"></button>
-      <h2 class="modal__header">Are you sure?</h2>
+      <h2 class="modal__header">
+        Are you sure?</h2>
       <button class="modal__submit-button" type="submit">Yes</button>
     </form>
   </div>

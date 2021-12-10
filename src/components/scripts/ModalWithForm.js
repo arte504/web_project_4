@@ -1,45 +1,41 @@
 import Modal from "./Modal.js";
 
 export default class ModalWithForm extends Modal {
-  constructor({modal, handleSubmit}) {
-    super(modal);
+  constructor(selector, checkKeyPress, handleSubmit ) {
+    super(selector, checkKeyPress);
     this._handleSubmit = handleSubmit;
-    this._form = document.querySelector('.modal__container_type_form');
-    this._formElement = this._form.querySelectorAll('.modal__input');
+    this._submitButton = this._modalElement.querySelector('.modal__submit-button');
+    this._form = document.querySelector('.modal__container');
+    this._textInButton = this._submitButton.textContent;
   }
 
   _getInputValues() {
-    this._formInputValues = {};
-    inputList.forEach((input) => {
-      this._formInputValues[input.name] = input.value;
-    });
+    this._inputList = this._modalElement.querySelectorAll('.modal__input');
+    const formInputValues = {};
+    this._inputList.forEach(
+      (input) => { formInputValues[input.name] = input.value }
+    );
+      console.log(formInputValues);
+    return formInputValues || this._entredValue;
+  }
 
-    return inputValues;
+  setInputValues(entredValue) {
+    this._entredValue = entredValue;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this.handleSubmit);
-  }
-
-  removeEventListeners() {
-    super.removeEventListeners();
-    this._form.removeEventListener('submit', this.handleSubmit);
-  }
-
-  handleSubmit = (event) =>{
-    event.preventDefault();
-    const inputValues = this._handleSubmit(this._getInputValues);
-
-    return inputValues;
-  }
-
-  handleRemove(handle) {
-    this._handleSubmit = handle;
+    this._modalElement.addEventListener("submit", (event) => {
+      event.preventDefault();
+      // --- UX for modals --- //
+      this._submitButton.textContent = "Saving...";
+      this._handleSubmit(this._getInputValues())
+    })
   }
 
   close() {
-    super.close();
+    this._submitButton.textContent = this._textInButton 
     this._form.reset();
+    super.close();
   }
 }
