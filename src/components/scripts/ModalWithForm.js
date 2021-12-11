@@ -29,12 +29,12 @@ export default class ModalWithForm extends Modal {
       event.preventDefault();
       // --- UX for modals --- //
       this._submitButton.textContent = "Saving...";
-      this._handleSubmit(this.getInputValues())
+      this._handleSubmit(this.getInputValues());
     })
   }
 
   close() {
-    this._submitButton.textContent = this._textInButton 
+    this._submitButton.textContent = this._textInButton;
     this._form.reset();
     super.close();
   }

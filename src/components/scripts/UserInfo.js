@@ -7,10 +7,8 @@ export default class UserInfo {
 
   getUserInfo() {
     return {
-      name: this._name,
-      job: this._job,
-      id: this._id,
-      avatar: this._avatar,
+      name: this._name.textContent,
+      job: this._job.textContent
     };
   }
 
@@ -18,13 +16,10 @@ export default class UserInfo {
     return this._data;
   }
 
-  setUserInfo({name, job, _id, avatar}) {
+  setUserInfo(name, job) {
     this._name = name;
     this._job = job;
-    this._id = _id;
-    this._avatar = avatar;
     this._nameElement.textContent = this._name;
     this._titleElement.textContent = this._job;
-    this._pictureElement.setAttribute("src", this._avatar);
   }
 }

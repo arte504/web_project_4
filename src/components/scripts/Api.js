@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 export default class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -28,11 +26,11 @@ export default class Api {
       .then(this._response)
   }
   // --- Updating/Editing user profile info --- //
-  updateUserInfo(userInfo) {
+  setUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-      method: "PATCH",
-      body: JSON.stringify(userInfo)
+      method: 'PATCH',
+      body: JSON.stringify({name, about})
     })
     .then(this._response)
   }
@@ -71,11 +69,11 @@ export default class Api {
     .then(this._response)
   }
   // --- Setting user profile avatar --- //
-  updateUserAvatar(data) {
+  setUserAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify({avatar: data.link})
+      body: JSON.stringify({ avatar })
     })
     .then(this._response)
   }

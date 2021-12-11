@@ -1,0 +1,15 @@
+.profile__image_overlay{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    background: rgba(0, 0, 0, .8);
+    transition: opacity 0.5s;
+}
+
+.profile__image_overlay:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

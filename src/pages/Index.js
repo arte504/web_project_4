@@ -29,7 +29,9 @@ import {
   bigImageTitle,
   deleteCardSelector,
   apiConfig,
-  formConfig
+  formConfig,
+  nameInput,
+  jobInput
 } from "../components/utils/constants.js";
 
 // ===== Modals ===== //
@@ -60,14 +62,14 @@ const api = new Api(apiConfig);
 // --- Set what 'profile' will contains --- //
 const profile = new UserInfo(
   profileName, 
-  profileJob, 
-  userAvatar
+  profileJob
 );
 api
   // --- Get user info method --- //
   .getUserInfo()
   .then((res) => {
-    profile.setUserInfo(res)
+    profile.setUserInfo(res.name, res.about);
+    userAvatar.src = res.avatar;
     return profile;
   })
   // --- Use user info for creation of new cards and card section --- // 
@@ -77,7 +79,6 @@ api
       .then((data) => {
         // --- On card click handler --- //
         const onCardClick = ( name, link ) => {
-          console.log(link);
           bigImageModal.open(name, link);
         };
         const userInfo = profile.getUserInfo();
@@ -134,21 +135,20 @@ api
       const addNewCardModal = new ModalWithForm (
         addCardModalSelector,
         checkForEscPressed,
-        ({ "nameInput": name, "linkInput": link }) => {
+        (inputs) => {
           api
-            .addCard({name, link})
-            .then((data) => {
-              const cardInstance = newCardInstance(data);
+            .addCard(inputs)
+            .then((res) => {
+              const cardInstance = newCardInstance(res);
               cardSection.addItem(cardInstance.generateCard(user.id));
               modalResetInputs();
               addNewCardModal.close(modalResetInputs);
             })
-            .catch(apiErr);
-          }
+            .catch(apiErr)
+        }
       );
       addNewCardModal.setEventListeners();
       addCardButton.addEventListener("click", () => {
-        addCardFormValidation.resetValidation();
         addNewCardModal.open();
       });
     })
@@ -162,10 +162,10 @@ api
 const editProfileModal = new ModalWithForm (
   profileModalSelector,
   checkForEscPressed,
-  ({nameInput:name, jobInput:job}) => 
+  ({name, job}) => 
   {
     api
-      .updateUserInfo({name,job})
+      .setUserInfo({name,job})
       .then((res) => {
         profile.setUserInfo(res.avatar);
         editProfileModal.close();
@@ -176,8 +176,8 @@ const editProfileModal = new ModalWithForm (
 editProfileModal.setEventListeners();
 // --- Edit button handler --- // 
 editButton.addEventListener("click" , () => {
-  modalResetInputs();
-  profileFormValidation.resetValidation();
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
   editProfileModal.open();
 });
 // --- Avatar edit modal --- //
@@ -187,7 +187,7 @@ const avatarEditModal = new ModalWithForm (
   ({ "avatarLink":avatar }) => 
   {
     api
-      .updateUserAvatar({avatar})
+      .setUserAvatar({avatar})
       .then((data) => {
         profile.setUserInfo(data);
         avatarEditModal.close();
@@ -199,7 +199,6 @@ avatarEditModal.setEventListeners();
 // --- Avatar edit button --- //
 avatarEditButton.addEventListener("click", () => {
   avatarModalInput.value = "";
-  avatarFormValidation.resetValidation();
   avatarEditModal.open();
 })
 
