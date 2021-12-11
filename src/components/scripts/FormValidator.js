@@ -2,7 +2,6 @@ export default class FormValidator {
   constructor(formConfig, formElement) {
     this._formConfig = formConfig;
     this._formElement = formElement;
-    this.inputs = Array.from(this._formElement.querySelectorAll(this._formConfig.inputSelector));
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -22,37 +21,43 @@ export default class FormValidator {
   };
 
   resetValidation() {
-    this.inputs.forEach((input) => {
+    this._inputs.forEach((input) => {
       this._hideInputError(input);
     });
     this._toggleSubmitButton();
   }
 
-  _checkInput = (inputElement) => {
+  _checkInput(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
-    } else {
+    } 
+    else {
       this._hideInputError(inputElement);
     }
   }
 
-  _checkIfFormValid = () => this.inputs.every((input) => input.validity.valid);
+  _hasInvalidInput() {
+    return this._inputs.some((input) =>{
+      return !input.validity.valid;
+    });
+  }
 
   _toggleSubmitButton() {
     const { inactiveButtonClass, submitButtonSelector } = this._formConfig;
     const buttonElement = this._formElement.querySelector(submitButtonSelector);
 
-    if (this._checkIfFormValid()) {
+    if (this._hasInvalidInput()) {
       buttonElement.disabled = false;
       buttonElement.classList.remove(inactiveButtonClass);
-    } else {
+    } 
+    else {
       buttonElement.disabled = true;
       buttonElement.classList.add(inactiveButtonClass);
     }
   }
 
   _setEventListeners = () => {
-    this.inputs.forEach((input) => {
+    this._inputs.forEach((input) => {
       input.addEventListener("input", () => {
         this._checkInput(input);
         this._toggleSubmitButton();
@@ -62,9 +67,10 @@ export default class FormValidator {
   };
 
   enableValidation() {
-    this._formElement.addEventListener("submit", (event) => {
-      event.preventDefault();
-    });
+    this._inputs = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    console.log(this._inputs);
     this._setEventListeners();
   }
 }

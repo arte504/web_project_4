@@ -29,7 +29,7 @@ export default class Api {
   }
   // --- Updating/Editing user profile info --- //
   updateUserInfo(userInfo) {
-    return fetch(`${this._baseURL}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify(userInfo)

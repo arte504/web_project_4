@@ -58,11 +58,11 @@ const apiErr = (err) => console.log(err);
 // --- Setting the default fetching method --- //
 const api = new Api(apiConfig);
 // --- Set what 'profile' will contains --- //
-const profile = new UserInfo({
-  name: '.profile__title', 
-  job: '.profile__subtitle', 
-  avatar: '.profile__image'
-});
+const profile = new UserInfo(
+  profileName, 
+  profileJob, 
+  userAvatar
+);
 api
   // --- Get user info method --- //
   .getUserInfo()
@@ -79,10 +79,6 @@ api
         const onCardClick = ( name, link ) => {
           console.log(link);
           bigImageModal.open(name, link);
-          /* {
-            text: name,
-            url: link
-          })*/
         };
         const userInfo = profile.getUserInfo();
         // --- Delete card button handler --- //
@@ -138,7 +134,7 @@ api
       const addNewCardModal = new ModalWithForm (
         addCardModalSelector,
         checkForEscPressed,
-        ({ cardInputTitle: name, cardInputLink: link }) => {
+        ({ "nameInput": name, "linkInput": link }) => {
           api
             .addCard({name, link})
             .then((data) => {
@@ -148,12 +144,9 @@ api
               addNewCardModal.close(modalResetInputs);
             })
             .catch(apiErr);
-        }
+          }
       );
-
       addNewCardModal.setEventListeners();
-      deleteCardModal.setEventListeners();
-
       addCardButton.addEventListener("click", () => {
         addCardFormValidation.resetValidation();
         addNewCardModal.open();
@@ -163,12 +156,13 @@ api
 })
 .catch(apiErr);
 
+
 // ===== 'Edit' profile ===== //
 // --- Edit profile modal --- //
 const editProfileModal = new ModalWithForm (
   profileModalSelector,
   checkForEscPressed,
-  ({"nameInput":name, "jobInput":job}) => 
+  ({nameInput:name, jobInput:job}) => 
   {
     api
       .updateUserInfo({name,job})
@@ -190,7 +184,7 @@ editButton.addEventListener("click" , () => {
 const avatarEditModal = new ModalWithForm (
   avatarModalSelector,
   checkForEscPressed,
-  ({ avatarModalInput:avatar }) => 
+  ({ "avatarLink":avatar }) => 
   {
     api
       .updateUserAvatar({avatar})
@@ -223,6 +217,7 @@ const deleteCardModal = new ModalWithForm(
       .catch(apiErr);
   }
 );
+deleteCardModal.setEventListeners();
 // --- Big image modal instance --- //
 const bigImageModal = new ModalWithImage(
   bigImageSelector,
