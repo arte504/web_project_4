@@ -29,17 +29,24 @@ export default class Api {
   setUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-      method: 'PATCH',
-      body: JSON.stringify({name, about})
+      method: "PATCH",
+      body: JSON.stringify(
+        name, 
+        about
+      )
     })
     .then(this._response)
   }
   // --- Adding new card --- //
-  addCard(cardData) {
+  addCard(data) {
+    console.log(data);
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
-      body: JSON.stringify(cardData)
+      body: JSON.stringify(
+        data.titleInput, 
+        data.linkInput
+      )
     })
     .then(this._response)
   }
@@ -52,11 +59,10 @@ export default class Api {
     .then(this._response)
   }
   // --- Like a card --- //
-  likeCard(cardId, userData) {
+  likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       headers: this._headers,
-      method: "PUT",
-      body: JSON.stringify(userData)
+      method: "PUT"
     })
     .then(this._response)
   }
@@ -73,7 +79,9 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify({ avatar })
+      body: JSON.stringify(
+          avatar
+      )
     })
     .then(this._response)
   }

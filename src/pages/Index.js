@@ -81,40 +81,28 @@ api
         const onCardClick = ( name, link ) => {
           bigImageModal.open(name, link);
         };
-        const userInfo = profile.getUserInfo();
         // --- Delete card button handler --- //
         const deleteCardHandler = (card) => {
           deleteCardModal.setInputValues(card);
           deleteCardModal.open();
         }
         // --- Like button click handler --- //
-        const likeButtonClickHandler = (card) => {
-          if(card.isLiked()) 
-          {
-            api
-              .unlikeCard(card.getCardId())
-              .then((data) => {
-                card.updateCard(data, userInfo);
-              })
-              .catch(apiErr);
-          }
-          else 
-          {
-            api
-              .likeCard(card.getCardId(), profile.getUserInfo())
-              .then((data) => {
-                card.updateCard(data, userInfo);
-              })
-              .catch(apiErr);
-          }
+        const likeAddHandler = (cardId) => {
+          api
+            .likeCard(cardId);
         };
+        const likeRemoveHandler = (cardId) => {
+          api
+            .unlikeCard(cardId);
+        }
         // --- New card instance adding --- //
         const newCardInstance = (data) => { 
           const cardInstance = new Card(
             data,
             onCardClick,
             deleteCardHandler,
-            likeButtonClickHandler,
+            likeAddHandler,
+            likeRemoveHandler,
             cardTemplate
           );
           return cardInstance;
@@ -135,11 +123,11 @@ api
       const addNewCardModal = new ModalWithForm (
         addCardModalSelector,
         checkForEscPressed,
-        (inputs) => {
+        ({titleInput:title, linkInput:link}) => {
           api
-            .addCard(inputs)
-            .then((res) => {
-              const cardInstance = newCardInstance(res);
+            .addCard({title,link})
+            .then(() => {
+              newCardInstance({title,link});
               cardSection.addItem(cardInstance.generateCard(user.id));
               modalResetInputs();
               addNewCardModal.close(modalResetInputs);
@@ -162,12 +150,11 @@ api
 const editProfileModal = new ModalWithForm (
   profileModalSelector,
   checkForEscPressed,
-  ({name, job}) => 
+  ({nameInput: name, jobInput:about}) => 
   {
     api
-      .setUserInfo({name,job})
-      .then((res) => {
-        profile.setUserInfo(res.avatar);
+      .setUserInfo({name,about})
+      .then(() => {
         editProfileModal.close();
       })
       .catch(apiErr);
@@ -184,12 +171,11 @@ editButton.addEventListener("click" , () => {
 const avatarEditModal = new ModalWithForm (
   avatarModalSelector,
   checkForEscPressed,
-  ({ "avatarLink":avatar }) => 
+  ({ avatarLinkInput:avatar }) => 
   {
     api
       .setUserAvatar({avatar})
-      .then((data) => {
-        profile.setUserInfo(data);
+      .then(() => {
         avatarEditModal.close();
       })
       .catch(apiErr);
