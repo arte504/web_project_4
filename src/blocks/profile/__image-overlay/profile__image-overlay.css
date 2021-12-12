@@ -1,4 +1,4 @@
-.profile__image_overlay{
+.profile__image-overlay{
     position: relative;
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@
     transition: opacity 0.5s;
 }
 
-.profile__image_overlay:hover {
+.profile__image-overlay:hover {
     opacity: 0.8;
     cursor: pointer;
 }
