@@ -45,6 +45,7 @@ export default class Card {
   _handelLike(likeBtn) {
     likeBtn.classList.toggle('card__like-button_active')
   }
+  // --- Check for all cards if liked or not --- //
   _likeStatus() {
     const likeBtn = this._cardElement.querySelector('.card__like-button');
     const likes = Array.from(this._likes);
@@ -78,7 +79,20 @@ export default class Card {
   getCardId() {
     return this._cardId;
   }
-
+  // --- Check if card owned by the user and add delete button --- //
+  _checkOwnership(userId) {
+    console.log(userId)
+    if( userId === this._ownerId ){
+      this._cardElement
+        .querySelector('.card__delete-button')
+        .classList.add("card__delete-button")
+    }
+    else{
+      this._cardElement
+        .querySelector('.card__delete-button')
+        .classList.add("card__delete-button_hidden")
+    }
+  }
   // --- Creating the card and card elements --- //
   generateCard(userId) {
     this._cardElement = this._getTemplate();
@@ -92,9 +106,7 @@ export default class Card {
     this._cardElement
       .querySelector('.card__title').textContent = this._name;
 
-    if(this._ownerId !== userId) {
-      this._card.querySelector('.card__delete-button_hidden');
-    }
+    this._checkOwnership(userId);
     this._likeStatus();
     // --- Show like count --- //
     this._cardElement
@@ -125,10 +137,6 @@ export default class Card {
     this._cardElement
       .querySelector('.card__like-button')
       .classList.remove("card__like-button_active");
-  }
-
-  isLiked() {
-    return this._liked;
   }
 
   refreshCard(data, userId) {

@@ -126,7 +126,7 @@ api
             renderer: (item) => {
               const cardInstance = newCardInstance(item);
               console.log();
-              cardSection.addItem(cardInstance.generateCard());
+              cardSection.addItem(cardInstance.generateCard(userID));
             },
           },
           cardListSelector
