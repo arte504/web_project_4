@@ -21,6 +21,7 @@ export default class ModalWithForm extends Modal {
 
   setInputValues(entredValue) {
     this._entredValue = entredValue;
+    console.log(entredValue);
   }
 
   setEventListeners() {

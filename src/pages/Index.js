@@ -64,12 +64,14 @@ const profile = new UserInfo(
   profileName, 
   profileJob
 );
+let userID;
 api
   // --- Get user info method --- //
   .getUserInfo()
   .then((res) => {
     profile.setUserInfo(res.name, res.about);
     userAvatar.src = res.avatar;
+    userID = res._id;
     return profile;
   })
   // --- Use user info for creation of new cards and card section --- // 
@@ -78,68 +80,81 @@ api
       .getCardList()
       .then((data) => {
         // --- On card click handler --- //
-        const onCardClick = ( name, link ) => {
+        const onCardClick = (name, link) => {
           bigImageModal.open(name, link);
-        };
+        }
         // --- Delete card button handler --- //
-        const deleteCardHandler = (card) => {
-          deleteCardModal.setInputValues(card);
+        const deleteCardHandler = (data) => {
           deleteCardModal.open();
+          deleteConfirm(data);
         }
         // --- Like button click handler --- //
-        const likeAddHandler = (cardId) => {
-          api
-            .likeCard(cardId);
-        };
-        const likeRemoveHandler = (cardId) => {
-          api
-            .unlikeCard(cardId);
+        const likeClickHandler = (card) => {
+          if (card.checkIfLiked(userID)) {
+            api
+              .unlikeCard(card.getCardId())
+              .then((data) => {
+                card.refreshCard(data, userID);
+              })
+              .catch(apiErr);
+          } 
+          else {
+            api
+              .likeCard(card.getCardId())
+              .then((data) => {
+                card.refreshCard(data, userID);
+              })
+              .catch(apiErr);
+          }
         }
         // --- New card instance adding --- //
-        const newCardInstance = (data) => { 
+        const newCardInstance = (cardData) => {
           const cardInstance = new Card(
-            data,
+            cardData,
             onCardClick,
             deleteCardHandler,
-            likeAddHandler,
-            likeRemoveHandler,
-            cardTemplate
+            likeClickHandler,
+            cardTemplate,
+            userID
           );
           return cardInstance;
-      };
+        };
 
-      const cardSection = new Section (
-        {
-          items: data,
-          renderer: (item) => {
-            const cardInstance = newCardInstance(item);
-            cardSection.addItem(cardInstance.generateCard(profile.id))
+        const cardSection = new Section(
+          {
+            items: data,
+            renderer: (item) => {
+              const cardInstance = newCardInstance(item);
+              console.log();
+              cardSection.addItem(cardInstance.generateCard());
+            },
           },
-        },
-        cardListSelector
-      );
-      cardSection.renderItems();
+          cardListSelector
+        );
+        cardSection.renderItems();
 
-      const addNewCardModal = new ModalWithForm (
-        addCardModalSelector,
-        checkForEscPressed,
-        ({titleInput:title, linkInput:link}) => {
-          api
-            .addCard({title,link})
-            .then(() => {
-              newCardInstance({title,link});
-              cardSection.addItem(cardInstance.generateCard(user.id));
-              modalResetInputs();
-              addNewCardModal.close(modalResetInputs);
-            })
-            .catch(apiErr)
-        }
-      );
-      addNewCardModal.setEventListeners();
-      addCardButton.addEventListener("click", () => {
-        addNewCardModal.open();
-      });
-    })
+        const addNewCardModal = new ModalWithForm(
+          addCardModalSelector,
+          checkForEscPressed,
+          ({ titleInput: name, linkInput: link }) => {
+            api
+              .addCard({ name, link })
+              .then((data) => {
+                const addNewCardInstance = newCardInstance(data);
+                cardSection.addItem(
+                  addNewCardInstance.generateCard(profile.id)
+                );
+                modalResetInputs();
+                addNewCardModal.close(modalResetInputs);
+              })
+              .catch(apiErr);
+          }
+        );
+        addNewCardModal.setEventListeners();
+        addCardButton.addEventListener("click", () => {
+          addNewCardModal.open();
+        });
+      })
     .catch(apiErr);
 })
 .catch(apiErr);
@@ -178,7 +193,8 @@ const avatarEditModal = new ModalWithForm (
       .then(() => {
         avatarEditModal.close();
       })
-      .catch(apiErr);
+      .catch(apiErr)
+      .finally(avatarEditModal.close())
   }
 );
 avatarEditModal.setEventListeners();
@@ -192,16 +208,19 @@ avatarEditButton.addEventListener("click", () => {
 const deleteCardModal = new ModalWithForm(
   deleteCardSelector,
   checkForEscPressed,
-  (card) => {
+  deleteConfirm
+);
+function deleteConfirm(card) {
+  addEventListener("submit", () => {
     api
-      .deleteCard(card.getCardId())
-      .then(() =>{
-        card.deleteCard();
+      .removeCard(card.getCardId())
+      .then(() => {
         deleteCardModal.close();
       })
-      .catch(apiErr);
-  }
-);
+      .catch(apiErr)
+      .finally(card.deleteCard(),deleteCardModal.close());
+  });
+}
 deleteCardModal.setEventListeners();
 // --- Big image modal instance --- //
 const bigImageModal = new ModalWithImage(

@@ -1,0 +1,13 @@
+.modal__container_type_delete-card{
+  max-width: 430px;
+  background-color: white;
+  padding: 36px 34px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+@media screen and (max-width: 400px) {
+  .modal__container_type_delete-card{
+    padding: 22px 25px;
+  }
+}
