@@ -62,7 +62,8 @@ const api = new Api(apiConfig);
 // --- Set what 'profile' will contains --- //
 const profile = new UserInfo(
   profileName, 
-  profileJob
+  profileJob,
+  userAvatar
 );
 let userID;
 api
@@ -75,7 +76,7 @@ api
     return profile;
   })
   // --- Use user info for creation of new cards and card section --- // 
-  .then((profile) => {
+  .then(() => {
     api
       .getCardList()
       .then((data) => {
@@ -85,8 +86,8 @@ api
         }
         // --- Delete card button handler --- //
         const deleteCardHandler = (data) => {
+          deleteCardModal.setInputValues(data);
           deleteCardModal.open();
-          deleteConfirm(data);
         }
         // --- Like button click handler --- //
         const likeClickHandler = (card) => {
@@ -125,7 +126,6 @@ api
             items: data,
             renderer: (item) => {
               const cardInstance = newCardInstance(item);
-              console.log();
               cardSection.addItem(cardInstance.generateCard(userID));
             },
           },
@@ -142,7 +142,7 @@ api
               .then((data) => {
                 const addNewCardInstance = newCardInstance(data);
                 cardSection.addItem(
-                  addNewCardInstance.generateCard(profile.id)
+                  addNewCardInstance.generateCard(userID)
                 );
                 modalResetInputs();
                 addNewCardModal.close(modalResetInputs);
@@ -159,7 +159,6 @@ api
 })
 .catch(apiErr);
 
-
 // ===== 'Edit' profile ===== //
 // --- Edit profile modal --- //
 const editProfileModal = new ModalWithForm (
@@ -170,6 +169,7 @@ const editProfileModal = new ModalWithForm (
     api
       .setUserInfo({name,about})
       .then(() => {
+        profile.setUserInfo(name, about);
         editProfileModal.close();
       })
       .catch(apiErr);
@@ -191,6 +191,7 @@ const avatarEditModal = new ModalWithForm (
     api
       .setUserAvatar({avatar})
       .then(() => {
+        profile.setUserAvatar(avatar);
         avatarEditModal.close();
       })
       .catch(apiErr)
@@ -208,19 +209,17 @@ avatarEditButton.addEventListener("click", () => {
 const deleteCardModal = new ModalWithForm(
   deleteCardSelector,
   checkForEscPressed,
-  deleteConfirm
-);
-function deleteConfirm(card) {
-  addEventListener("submit", () => {
+  (card) => {
     api
       .removeCard(card.getCardId())
       .then(() => {
+        card.deleteCard();
         deleteCardModal.close();
       })
       .catch(apiErr)
-      .finally(card.deleteCard(),deleteCardModal.close());
-  });
-}
+      .finally(deleteCardModal.close());
+  }
+);
 deleteCardModal.setEventListeners();
 // --- Big image modal instance --- //
 const bigImageModal = new ModalWithImage(

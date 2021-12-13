@@ -79,23 +79,11 @@ export default class Card {
   getCardId() {
     return this._cardId;
   }
-  // --- Check if card owned by the user and add delete button --- //
-  _checkOwnership(userId) {
-    console.log(userId)
-    if( userId === this._ownerId ){
-      this._cardElement
-        .querySelector('.card__delete-button')
-        .classList.add("card__delete-button")
-    }
-    else{
-      this._cardElement
-        .querySelector('.card__delete-button')
-        .classList.add("card__delete-button_hidden")
-    }
-  }
+
   // --- Creating the card and card elements --- //
   generateCard(userId) {
     this._cardElement = this._getTemplate();
+    this._setEventListeners();
     this._card = this._cardElement;
 
     this._setAttributes(this._cardElement
@@ -106,12 +94,15 @@ export default class Card {
     this._cardElement
       .querySelector('.card__title').textContent = this._name;
 
-    this._checkOwnership(userId);
+    if(this._ownerId !== userId) {
+      this._cardElement
+        .querySelector('.card__delete-button').remove();
+    }
+
     this._likeStatus();
     // --- Show like count --- //
     this._cardElement
       .querySelector('.card__like-count').textContent = this._likes.length;
-    this._setEventListeners();
 
     return this._cardElement;
   }

@@ -16,22 +16,21 @@ export default class ModalWithForm extends Modal {
       .forEach((input) => { formInputValues[input.name] = input.value }
     );
 
-    return formInputValues || this._entredValue;
+    return this._entredValue || formInputValues;
   }
 
   setInputValues(entredValue) {
     this._entredValue = entredValue;
-    console.log(entredValue);
   }
 
   setEventListeners() {
-    super.setEventListeners();
     this._modalElement.addEventListener("submit", (event) => {
       event.preventDefault();
       // --- UX for modals --- //
       this._submitButton.textContent = "Saving...";
       this._handleSubmit(this.getInputValues());
     })
+    super.setEventListeners();
   }
 
   close() {
