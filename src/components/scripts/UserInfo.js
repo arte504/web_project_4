@@ -18,11 +18,13 @@ export default class UserInfo {
     return this._data;
   }
 
-  setUserInfo(name, job) {
-    this._name = name;
-    this._job = job;
+  setUserInfo(data) {
+    this._name = data.name;
+    this._job = data.about;
+    this._avatar = data.avatar;
     this._nameElement.textContent = this._name;
     this._titleElement.textContent = this._job;
+    this._pictureElement.setAttribute("src", this._avatar);
   }
 
   setUserAvatar(avatar) {

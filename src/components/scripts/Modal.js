@@ -28,7 +28,7 @@ export default class Modal {
         if (event.target.classList.contains('modal__close-button')) {
           this.close();
         }
-        // Close modal on overlay(out of the modal) click --- ///
+        // --- Close modal on overlay(out of the modal) click --- ///
         if (event.target.classList.contains('modal_visible')) {
           this.close();
       }

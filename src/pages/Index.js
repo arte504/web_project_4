@@ -17,11 +17,8 @@ import {
   addCardButton,
   addCardModal,
   addCardModalSelector,
-  cardInputTitle,
-  cardInputLink,
   avatarModal,
   avatarModalSelector,
-  avatarModalInput,
   userAvatar,
   avatarEditButton,
   bigImageSelector,
@@ -37,11 +34,6 @@ import {
 // ===== Modals ===== //
 // --- 'Esc' check --- //
 const checkForEscPressed = (key) => key === "Escape";
-// --- Add modal reset input --- //
-const modalResetInputs = () => {
-  cardInputTitle.value = "";
-  cardInputLink.value = "";
-}
 
 // ===== Validation ===== //
 // --- 'Edit profile' form validation --- //
@@ -56,7 +48,7 @@ addCardFormValidation.enableValidation();
 
 // ===== API & Card ===== //
 // --- API error handler --- // 
-const apiErr = (err) => console.log(err);
+const handleApiErr = (err) => console.log(err);
 // --- Setting the default fetching method --- //
 const api = new Api(apiConfig);
 // --- Set what 'profile' will contains --- //
@@ -70,8 +62,7 @@ api
   // --- Get user info method --- //
   .getUserInfo()
   .then((res) => {
-    profile.setUserInfo(res.name, res.about);
-    userAvatar.src = res.avatar;
+    profile.setUserInfo(res);
     userID = res._id;
     return profile;
   })
@@ -97,7 +88,7 @@ api
               .then((data) => {
                 card.refreshCard(data, userID);
               })
-              .catch(apiErr);
+              .catch(handleApiErr);
           } 
           else {
             api
@@ -105,11 +96,11 @@ api
               .then((data) => {
                 card.refreshCard(data, userID);
               })
-              .catch(apiErr);
+              .catch(handleApiErr);
           }
         }
         // --- New card instance adding --- //
-        const newCardInstance = (cardData) => {
+        const createNewCardInstance = (cardData) => {
           const cardInstance = new Card(
             cardData,
             onCardClick,
@@ -125,7 +116,7 @@ api
           {
             items: data,
             renderer: (item) => {
-              const cardInstance = newCardInstance(item);
+              const cardInstance = createNewCardInstance(item);
               cardSection.addItem(cardInstance.generateCard(userID));
             },
           },
@@ -140,14 +131,13 @@ api
             api
               .addCard({ name, link })
               .then((data) => {
-                const addNewCardInstance = newCardInstance(data);
+                const addNewCardInstance = createNewCardInstance(data);
                 cardSection.addItem(
                   addNewCardInstance.generateCard(userID)
                 );
-                modalResetInputs();
-                addNewCardModal.close(modalResetInputs);
+                addNewCardModal.close();
               })
-              .catch(apiErr);
+              .catch(handleApiErr);
           }
         );
         addNewCardModal.setEventListeners();
@@ -155,9 +145,9 @@ api
           addNewCardModal.open();
         });
       })
-    .catch(apiErr);
+    .catch(handleApiErr);
 })
-.catch(apiErr);
+.catch(handleApiErr);
 
 // ===== 'Edit' profile ===== //
 // --- Edit profile modal --- //
@@ -168,18 +158,19 @@ const editProfileModal = new ModalWithForm (
   {
     api
       .setUserInfo({name,about})
-      .then(() => {
-        profile.setUserInfo(name, about);
+      .then((res) => {
+        profile.setUserInfo(res);
         editProfileModal.close();
       })
-      .catch(apiErr);
+      .catch(handleApiErr);
   }
 )
 editProfileModal.setEventListeners();
 // --- Edit button handler --- // 
 editButton.addEventListener("click" , () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  const userData = profile;
+  nameInput.value = userData._name;
+  jobInput.value = userData._job;
   editProfileModal.open();
 });
 // --- Avatar edit modal --- //
@@ -194,14 +185,12 @@ const avatarEditModal = new ModalWithForm (
         profile.setUserAvatar(avatar);
         avatarEditModal.close();
       })
-      .catch(apiErr)
-      .finally(avatarEditModal.close())
+      .catch(handleApiErr)
   }
 );
 avatarEditModal.setEventListeners();
 // --- Avatar edit button --- //
 avatarEditButton.addEventListener("click", () => {
-  avatarModalInput.value = "";
   avatarEditModal.open();
 })
 
@@ -216,8 +205,7 @@ const deleteCardModal = new ModalWithForm(
         card.deleteCard();
         deleteCardModal.close();
       })
-      .catch(apiErr)
-      .finally(deleteCardModal.close());
+      .catch(handleApiErr)
   }
 );
 deleteCardModal.setEventListeners();
