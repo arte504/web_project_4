@@ -7,10 +7,10 @@ export default class UserInfo {
 
   getUserInfo() {
     return {
-      name: this._name.textContent,
-      job: this._job.textContent,
-      avatar: this._avatar,
-      id: this._id
+      name: this._name,
+      job: this._job,
+      id: this._id,
+      avatar: this._avatar
     };
   }
 

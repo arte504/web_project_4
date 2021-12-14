@@ -5,7 +5,7 @@ export default class ModalWithForm extends Modal {
     super(selector, checkKeyPress);
     this._handleSubmit = handleSubmit;
     this._submitButton = this._modalElement.querySelector('.modal__submit-button');
-    this._form = document.querySelector('.modal__container');
+    this._form = this._modalElement.querySelector('.modal__container');
     this._textInButton = this._submitButton.textContent;
   }
 

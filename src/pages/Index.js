@@ -136,6 +136,7 @@ api
                   addNewCardInstance.generateCard(userID)
                 );
                 addNewCardModal.close();
+                addCardFormValidation.resetValidation();
               })
               .catch(handleApiErr);
           }
@@ -168,9 +169,9 @@ const editProfileModal = new ModalWithForm (
 editProfileModal.setEventListeners();
 // --- Edit button handler --- // 
 editButton.addEventListener("click" , () => {
-  const userData = profile;
-  nameInput.value = userData._name;
-  jobInput.value = userData._job;
+  const userData = profile.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.job;
   editProfileModal.open();
 });
 // --- Avatar edit modal --- //
